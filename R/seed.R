@@ -67,7 +67,7 @@ next_random_seed <- function(seed = get_random_seed()) {
   sample.int(n = 1L, size = 1L, replace = FALSE)
   seed_next <- get_random_seed()
 
-  stopifnot(!any(seed_next != seed))
+  stopifnot(identical(seed_next, seed))
 
   invisible(seed_next)
 }
