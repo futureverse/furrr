@@ -7,9 +7,9 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/furrr)](https://cran.r-project.org/package=furrr)
-[![R-CMD-check](https://github.com/DavisVaughan/furrr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DavisVaughan/furrr/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/futureverse/furrr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/futureverse/furrr/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/DavisVaughan/furrr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DavisVaughan/furrr?branch=main)
+coverage](https://codecov.io/gh/futureverse/furrr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/futureverse/furrr?branch=main)
 <!-- badges: end -->
 
 ## Overview
@@ -28,12 +28,12 @@ them.
 
 Every variant of the following functions has been implemented:
 
--   `map()`
--   `map2()`
--   `pmap()`
--   `walk()`
--   `imap()`
--   `modify()`
+- `map()`
+- `map2()`
+- `pmap()`
+- `walk()`
+- `imap()`
+- `modify()`
 
 This includes atomic variants like `map_dbl()` through
 `future_map_dbl()` and predicate variants like `map_at()` through
@@ -52,7 +52,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("DavisVaughan/furrr")
+remotes::install_github("futureverse/furrr")
 ```
 
 ## Learning
@@ -63,20 +63,20 @@ reference](https://furrr.futureverse.org/reference/index.html) page can
 be useful to get a general overview of the functions in the package, and
 the following vignettes are deep dives into various parts of furrr:
 
--   [Common
-    gotchas](https://furrr.futureverse.org/articles/articles/gotchas.html)
+- [Common
+  gotchas](https://furrr.futureverse.org/articles/articles/gotchas.html)
 
--   [Learn how furrr “chunks” your
-    input](https://furrr.futureverse.org/articles/articles/chunking.html)
+- [Learn how furrr “chunks” your
+  input](https://furrr.futureverse.org/articles/articles/chunking.html)
 
--   [carrier - An alternative to automatic globals
-    detection](https://furrr.futureverse.org/articles/articles/carrier.html)
+- [carrier - An alternative to automatic globals
+  detection](https://furrr.futureverse.org/articles/articles/carrier.html)
 
--   [Progress notifications with
-    progressr](https://furrr.futureverse.org/articles/articles/progress.html)
+- [Progress notifications with
+  progressr](https://furrr.futureverse.org/articles/articles/progress.html)
 
--   [Using furrr with
-    connections](https://furrr.futureverse.org/articles/articles/remote-connections.html)
+- [Using furrr with
+  connections](https://furrr.futureverse.org/articles/articles/remote-connections.html)
 
 ## Example
 

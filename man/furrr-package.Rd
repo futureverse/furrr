@@ -13,9 +13,9 @@ Implementations of the family of map() functions from 'purrr' that can be resolv
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/DavisVaughan/furrr}
+  \item \url{https://github.com/futureverse/furrr}
   \item \url{https://furrr.futureverse.org/}
-  \item Report bugs at \url{https://github.com/DavisVaughan/furrr/issues}
+  \item Report bugs at \url{https://github.com/futureverse/furrr/issues}
 }
 
 }

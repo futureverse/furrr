@@ -25,8 +25,8 @@ library(tictoc)
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/furrr)](https://cran.r-project.org/package=furrr)
-[![R-CMD-check](https://github.com/DavisVaughan/furrr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DavisVaughan/furrr/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/DavisVaughan/furrr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DavisVaughan/furrr?branch=main)
+[![R-CMD-check](https://github.com/futureverse/furrr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/futureverse/furrr/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/futureverse/furrr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/futureverse/furrr?branch=main)
 <!-- badges: end -->
 
 ## Overview
@@ -60,7 +60,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("DavisVaughan/furrr")
+remotes::install_github("futureverse/furrr")
 ```
 
 ## Learning

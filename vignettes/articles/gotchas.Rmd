@@ -159,11 +159,11 @@ t2 - t1
 
 ## Graphics devices
 
-If you use a multicore plan, you shouldn't try to generate and save plots with any graphics devices, which includes using ggplot2. This can cause an X11 fatal error because it can't be safely run in a forked environment, which can crash your R session. Instead, you should use `plan(multisession)` to avoid these issues. See [this issue](https://github.com/DavisVaughan/furrr/issues/27) for more details.
+If you use a multicore plan, you shouldn't try to generate and save plots with any graphics devices, which includes using ggplot2. This can cause an X11 fatal error because it can't be safely run in a forked environment, which can crash your R session. Instead, you should use `plan(multisession)` to avoid these issues. See [this issue](https://github.com/futureverse/furrr/issues/27) for more details.
 
 ## Package development
 
-When developing a package that imports and calls functions from furrr, you'll likely be using `devtools::load_all()` as part of your development process. It is likely that unless you install your package, you might run into issues where functions internal to your package aren't being exported to your workers (see [issue #95](https://github.com/DavisVaughan/furrr/issues/95)).
+When developing a package that imports and calls functions from furrr, you'll likely be using `devtools::load_all()` as part of your development process. It is likely that unless you install your package, you might run into issues where functions internal to your package aren't being exported to your workers (see [issue #95](https://github.com/futureverse/furrr/issues/95)).
 
 Specifically, if you do the following, you will probably have issues:
 

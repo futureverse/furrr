@@ -513,7 +513,7 @@ make_expr_out <- function(walk) {
     # sending either `.x` or the function result back to the main process.
     # We have to use the `map()` equivalent because `walk()` will force `.x` to
     # be returned back to the main process, even if each individual `.f` call
-    # returns `NULL`. https://github.com/DavisVaughan/furrr/issues/205
+    # returns `NULL`. https://github.com/futureverse/furrr/issues/205
     expr(NULL)
   } else {
     expr(...furrr_out)
