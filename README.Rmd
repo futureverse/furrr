@@ -1,6 +1,6 @@
 ---
 output: github_document
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -26,7 +26,7 @@ library(tictoc)
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/furrr)](https://cran.r-project.org/package=furrr)
 [![R-CMD-check](https://github.com/futureverse/furrr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/futureverse/furrr/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/futureverse/furrr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/futureverse/furrr?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/futureverse/furrr/graph/badge.svg)](https://app.codecov.io/gh/futureverse/furrr)
 <!-- badges: end -->
 
 ## Overview

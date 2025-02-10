@@ -9,7 +9,7 @@
 status](https://www.r-pkg.org/badges/version/furrr)](https://cran.r-project.org/package=furrr)
 [![R-CMD-check](https://github.com/futureverse/furrr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/futureverse/furrr/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/futureverse/furrr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/futureverse/furrr?branch=main)
+coverage](https://codecov.io/gh/futureverse/furrr/graph/badge.svg)](https://app.codecov.io/gh/futureverse/furrr)
 <!-- badges: end -->
 
 ## Overview
