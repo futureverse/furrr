@@ -5,5 +5,5 @@
     Condition
       Error:
       ! `future_options()` was deprecated in furrr 0.3.0 and is now defunct.
-      Please use `furrr_options()` instead.
+      i Please use `furrr_options()` instead.
 
