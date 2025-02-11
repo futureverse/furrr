@@ -69,7 +69,7 @@ is_utf8_output <- function() {
   l10n_info()$`UTF-8` && !is_latex_output()
 }
 
-is_latex_output <- function () {
+is_latex_output <- function() {
   if (!("knitr" %in% loadedNamespaces())) {
     return(FALSE)
   }

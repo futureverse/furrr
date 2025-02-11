@@ -33,11 +33,17 @@ make_seeds <- function(seed, n) {
 validate_supplied_seeds <- function(seeds, n) {
   # Finally check length of `seed` against `n`
   if (length(seeds) != n) {
-    abort(paste0(
-      "If `furrr_options(seed = )` is a list, it must have length equal ",
-      "to the common length of the inputs, ", n, ", ",
-      "not length ", length(seeds), "."
-    ))
+    abort(
+      paste0(
+        "If `furrr_options(seed = )` is a list, it must have length equal ",
+        "to the common length of the inputs, ",
+        n,
+        ", ",
+        "not length ",
+        length(seeds),
+        "."
+      )
+    )
   }
 
   # All other checks on a list `seed` were done in `furrr_options()`
@@ -121,10 +127,12 @@ as_lecyer_cmrg_seed_from_integer <- function(seed) {
     return(get_random_seed())
   }
 
-  abort(paste0(
-    "Integer `seed` must be L'Ecuyer-CMRG RNG seed as returned by ",
-    "`parallel::nextRNGStream()` or a single integer."
-  ))
+  abort(
+    paste0(
+      "Integer `seed` must be L'Ecuyer-CMRG RNG seed as returned by ",
+      "`parallel::nextRNGStream()` or a single integer."
+    )
+  )
 }
 
 is_lecyer_cmrg_seed <- function(seed) {

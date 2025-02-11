@@ -34,13 +34,15 @@
 #' # Close open connections for R CMD Check
 #' if (!inherits(plan(), "sequential")) plan(sequential)
 #' }
-future_invoke_map <- function(.f,
-                              .x = list(NULL),
-                              ...,
-                              .env = NULL,
-                              .options = furrr_options(),
-                              .env_globals = parent.frame(),
-                              .progress = FALSE) {
+future_invoke_map <- function(
+  .f,
+  .x = list(NULL),
+  ...,
+  .env = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   .env <- .env %||% parent.frame()
   .f <- as_invoke_function(.f)
 
@@ -58,13 +60,15 @@ future_invoke_map <- function(.f,
 
 #' @rdname future_invoke_map
 #' @export
-future_invoke_map_chr <- function(.f,
-                                  .x = list(NULL),
-                                  ...,
-                                  .env = NULL,
-                                  .options = furrr_options(),
-                                  .env_globals = parent.frame(),
-                                  .progress = FALSE) {
+future_invoke_map_chr <- function(
+  .f,
+  .x = list(NULL),
+  ...,
+  .env = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   .env <- .env %||% parent.frame()
   .f <- as_invoke_function(.f)
 
@@ -82,13 +86,15 @@ future_invoke_map_chr <- function(.f,
 
 #' @rdname future_invoke_map
 #' @export
-future_invoke_map_dbl <- function(.f,
-                                  .x = list(NULL),
-                                  ...,
-                                  .env = NULL,
-                                  .options = furrr_options(),
-                                  .env_globals = parent.frame(),
-                                  .progress = FALSE) {
+future_invoke_map_dbl <- function(
+  .f,
+  .x = list(NULL),
+  ...,
+  .env = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   .env <- .env %||% parent.frame()
   .f <- as_invoke_function(.f)
 
@@ -106,13 +112,15 @@ future_invoke_map_dbl <- function(.f,
 
 #' @rdname future_invoke_map
 #' @export
-future_invoke_map_int <- function(.f,
-                                  .x = list(NULL),
-                                  ...,
-                                  .env = NULL,
-                                  .options = furrr_options(),
-                                  .env_globals = parent.frame(),
-                                  .progress = FALSE) {
+future_invoke_map_int <- function(
+  .f,
+  .x = list(NULL),
+  ...,
+  .env = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   .env <- .env %||% parent.frame()
   .f <- as_invoke_function(.f)
 
@@ -130,13 +138,15 @@ future_invoke_map_int <- function(.f,
 
 #' @rdname future_invoke_map
 #' @export
-future_invoke_map_lgl <- function(.f,
-                                  .x = list(NULL),
-                                  ...,
-                                  .env = NULL,
-                                  .options = furrr_options(),
-                                  .env_globals = parent.frame(),
-                                  .progress = FALSE) {
+future_invoke_map_lgl <- function(
+  .f,
+  .x = list(NULL),
+  ...,
+  .env = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   .env <- .env %||% parent.frame()
   .f <- as_invoke_function(.f)
 
@@ -154,13 +164,15 @@ future_invoke_map_lgl <- function(.f,
 
 #' @rdname future_invoke_map
 #' @export
-future_invoke_map_raw <- function(.f,
-                                  .x = list(NULL),
-                                  ...,
-                                  .env = NULL,
-                                  .options = furrr_options(),
-                                  .env_globals = parent.frame(),
-                                  .progress = FALSE) {
+future_invoke_map_raw <- function(
+  .f,
+  .x = list(NULL),
+  ...,
+  .env = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   .env <- .env %||% parent.frame()
   .f <- as_invoke_function(.f)
 
@@ -178,13 +190,15 @@ future_invoke_map_raw <- function(.f,
 
 #' @rdname future_invoke_map
 #' @export
-future_invoke_map_dfr <- function(.f,
-                                  .x = list(NULL),
-                                  ...,
-                                  .env = NULL,
-                                  .options = furrr_options(),
-                                  .env_globals = parent.frame(),
-                                  .progress = FALSE) {
+future_invoke_map_dfr <- function(
+  .f,
+  .x = list(NULL),
+  ...,
+  .env = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   .env <- .env %||% parent.frame()
   .f <- as_invoke_function(.f)
 
@@ -202,13 +216,15 @@ future_invoke_map_dfr <- function(.f,
 
 #' @rdname future_invoke_map
 #' @export
-future_invoke_map_dfc <- function(.f,
-                                  .x = list(NULL),
-                                  ...,
-                                  .env = NULL,
-                                  .options = furrr_options(),
-                                  .env_globals = parent.frame(),
-                                  .progress = FALSE) {
+future_invoke_map_dfc <- function(
+  .f,
+  .x = list(NULL),
+  ...,
+  .env = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   .env <- .env %||% parent.frame()
   .f <- as_invoke_function(.f)
 
@@ -229,8 +245,7 @@ future_invoke_map_dfc <- function(.f,
 as_invoke_function <- function(f) {
   if (is.function(f)) {
     list(f)
-  }
-  else {
+  } else {
     f
   }
 }

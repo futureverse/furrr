@@ -1,11 +1,13 @@
 #' @rdname future_map2
 #' @export
-future_pmap <- function(.l,
-                        .f,
-                        ...,
-                        .options = furrr_options(),
-                        .env_globals = parent.frame(),
-                        .progress = FALSE) {
+future_pmap <- function(
+  .l,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_pmap_template(
     l = .l,
     fn = .f,
@@ -20,12 +22,14 @@ future_pmap <- function(.l,
 
 #' @rdname future_map2
 #' @export
-future_pmap_chr <- function(.l,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_pmap_chr <- function(
+  .l,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_pmap_template(
     l = .l,
     fn = .f,
@@ -40,12 +44,14 @@ future_pmap_chr <- function(.l,
 
 #' @rdname future_map2
 #' @export
-future_pmap_dbl <- function(.l,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_pmap_dbl <- function(
+  .l,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_pmap_template(
     l = .l,
     fn = .f,
@@ -60,12 +66,14 @@ future_pmap_dbl <- function(.l,
 
 #' @rdname future_map2
 #' @export
-future_pmap_int <- function(.l,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_pmap_int <- function(
+  .l,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_pmap_template(
     l = .l,
     fn = .f,
@@ -80,12 +88,14 @@ future_pmap_int <- function(.l,
 
 #' @rdname future_map2
 #' @export
-future_pmap_lgl <- function(.l,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_pmap_lgl <- function(
+  .l,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_pmap_template(
     l = .l,
     fn = .f,
@@ -100,12 +110,14 @@ future_pmap_lgl <- function(.l,
 
 #' @rdname future_map2
 #' @export
-future_pmap_raw <- function(.l,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_pmap_raw <- function(
+  .l,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_pmap_template(
     l = .l,
     fn = .f,
@@ -120,13 +132,15 @@ future_pmap_raw <- function(.l,
 
 #' @rdname future_map2
 #' @export
-future_pmap_dfr <- function(.l,
-                            .f,
-                            ...,
-                            .id = NULL,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_pmap_dfr <- function(
+  .l,
+  .f,
+  ...,
+  .id = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   if (!rlang::is_installed("dplyr")) {
     rlang::abort("`future_map_dfr()` requires dplyr")
   }
@@ -145,12 +159,14 @@ future_pmap_dfr <- function(.l,
 
 #' @rdname future_map2
 #' @export
-future_pmap_dfc <- function(.l,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_pmap_dfc <- function(
+  .l,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   if (!rlang::is_installed("dplyr")) {
     rlang::abort("`future_map_dfc()` requires dplyr")
   }

@@ -142,8 +142,8 @@ furrr_test_that("`.else` can be used", {
   x <- list("a", "b", "c")
 
   expect_identical(
-    future_map_if(x, ~.x %in% c("a", "c"), ~ 3, .else = ~ -1),
-    map_if(x, ~.x %in% c("a", "c"), ~ 3, .else = ~ -1)
+    future_map_if(x, ~.x %in% c("a", "c"), ~3, .else = ~-1),
+    map_if(x, ~.x %in% c("a", "c"), ~3, .else = ~-1)
   )
 })
 
@@ -178,13 +178,12 @@ furrr_test_that("globals in `.x` are found (#16)", {
 
   x <- list(c(1, 2, NA), c(2, 3, 4))
 
-  fns1 <- map(x, ~ purrr::partial(fn, x = .x))
-  fns2 <- map(x, ~ function() fn(.x))
+  fns1 <- map(x, ~purrr::partial(fn, x = .x))
+  fns2 <- map(x, ~function() fn(.x))
 
   expect_identical(future_map_dbl(fns1, ~.x()), c(3, 9))
   expect_identical(future_map_dbl(fns2, ~.x()), c(3, 9))
 })
-
 
 test_that("globals in `.x` are only exported to workers that use them", {
   plan(multisession, workers = 2)

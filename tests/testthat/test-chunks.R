@@ -20,12 +20,22 @@ test_that("can make chunks from logical `scheduling`", {
   )
 
   expect_identical(
-    make_chunks(n_x = 6L, n_workers = 2L, scheduling = FALSE, chunk_size = NULL),
+    make_chunks(
+      n_x = 6L,
+      n_workers = 2L,
+      scheduling = FALSE,
+      chunk_size = NULL
+    ),
     as.list(1:6)
   )
 
   expect_identical(
-    make_chunks(n_x = 6L, n_workers = 2L, scheduling = FALSE, chunk_size = NULL),
+    make_chunks(
+      n_x = 6L,
+      n_workers = 2L,
+      scheduling = FALSE,
+      chunk_size = NULL
+    ),
     make_chunks(n_x = 6L, n_workers = 2L, scheduling = Inf, chunk_size = NULL)
   )
 })
@@ -152,7 +162,10 @@ test_that("validates ordering", {
   expect_error(make_order(n_x = 6L, scheduling = 1L, chunk_size = x), "Unknown")
 
   x <- structure(2L, ordering = 1L)
-  expect_error(make_order(n_x = 6L, scheduling = 1L, chunk_size = x), "length equal")
+  expect_error(
+    make_order(n_x = 6L, scheduling = 1L, chunk_size = x),
+    "length equal"
+  )
 
   x <- structure(2L, ordering = 1.5)
   expect_error(make_order(n_x = 6L, scheduling = 1L, chunk_size = x))

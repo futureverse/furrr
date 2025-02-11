@@ -36,22 +36,26 @@
 #' # Close open connections for R CMD Check
 #' if (!inherits(plan(), "sequential")) plan(sequential)
 #' }
-future_modify <- function(.x,
-                          .f,
-                          ...,
-                          .options = furrr_options(),
-                          .env_globals = parent.frame(),
-                          .progress = FALSE) {
+future_modify <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   UseMethod("future_modify")
 }
 
 #' @export
-future_modify.default <- function(.x,
-                                  .f,
-                                  ...,
-                                  .options = furrr_options(),
-                                  .env_globals = parent.frame(),
-                                  .progress = FALSE) {
+future_modify.default <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   result <- future_map(
     .x = .x,
     .f = .f,
@@ -69,12 +73,14 @@ future_modify.default <- function(.x,
 }
 
 #' @export
-future_modify.character <- function (.x,
-                                     .f,
-                                     ...,
-                                     .options = furrr_options(),
-                                     .env_globals = parent.frame(),
-                                     .progress = FALSE) {
+future_modify.character <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   result <- future_map_chr(
     .x = .x,
     .f = .f,
@@ -90,12 +96,14 @@ future_modify.character <- function (.x,
 }
 
 #' @export
-future_modify.double <- function (.x,
-                                  .f,
-                                  ...,
-                                  .options = furrr_options(),
-                                  .env_globals = parent.frame(),
-                                  .progress = FALSE) {
+future_modify.double <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   result <- future_map_dbl(
     .x = .x,
     .f = .f,
@@ -111,12 +119,14 @@ future_modify.double <- function (.x,
 }
 
 #' @export
-future_modify.integer <- function (.x,
-                                   .f,
-                                   ...,
-                                   .options = furrr_options(),
-                                   .env_globals = parent.frame(),
-                                   .progress = FALSE) {
+future_modify.integer <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   result <- future_map_int(
     .x = .x,
     .f = .f,
@@ -132,12 +142,14 @@ future_modify.integer <- function (.x,
 }
 
 #' @export
-future_modify.logical <- function (.x,
-                                   .f,
-                                   ...,
-                                   .options = furrr_options(),
-                                   .env_globals = parent.frame(),
-                                   .progress = FALSE) {
+future_modify.logical <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   result <- future_map_lgl(
     .x = .x,
     .f = .f,
@@ -153,12 +165,14 @@ future_modify.logical <- function (.x,
 }
 
 #' @export
-future_modify.pairlist <- function (.x,
-                                    .f,
-                                    ...,
-                                    .options = furrr_options(),
-                                    .env_globals = parent.frame(),
-                                    .progress = FALSE) {
+future_modify.pairlist <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   result <- future_map(
     .x = .x,
     .f = .f,
@@ -175,24 +189,28 @@ future_modify.pairlist <- function (.x,
 
 #' @rdname future_modify
 #' @export
-future_modify_at <- function(.x,
-                             .at,
-                             .f,
-                             ...,
-                             .options = furrr_options(),
-                             .env_globals = parent.frame(),
-                             .progress = FALSE) {
+future_modify_at <- function(
+  .x,
+  .at,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   UseMethod("future_modify_at")
 }
 
 #' @export
-future_modify_at.default <- function(.x,
-                                     .at,
-                                     .f,
-                                     ...,
-                                     .options = furrr_options(),
-                                     .env_globals = parent.frame(),
-                                     .progress = FALSE) {
+future_modify_at.default <- function(
+  .x,
+  .at,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   where <- at_selection(names(.x), .at)
   sel <- inv_which(.x, where)
 
@@ -208,13 +226,15 @@ future_modify_at.default <- function(.x,
 }
 
 #' @export
-future_modify_at.integer <- function(.x,
-                                     .at,
-                                     .f,
-                                     ...,
-                                     .options = furrr_options(),
-                                     .env_globals = parent.frame(),
-                                     .progress = FALSE) {
+future_modify_at.integer <- function(
+  .x,
+  .at,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   where <- at_selection(names(.x), .at)
   sel <- inv_which(.x, where)
 
@@ -231,13 +251,15 @@ future_modify_at.integer <- function(.x,
 }
 
 #' @export
-future_modify_at.double <- function(.x,
-                                    .at,
-                                    .f,
-                                    ...,
-                                    .options = furrr_options(),
-                                    .env_globals = parent.frame(),
-                                    .progress = FALSE) {
+future_modify_at.double <- function(
+  .x,
+  .at,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   where <- at_selection(names(.x), .at)
   sel <- inv_which(.x, where)
 
@@ -254,13 +276,15 @@ future_modify_at.double <- function(.x,
 }
 
 #' @export
-future_modify_at.character <- function(.x,
-                                       .at,
-                                       .f,
-                                       ...,
-                                       .options = furrr_options(),
-                                       .env_globals = parent.frame(),
-                                       .progress = FALSE) {
+future_modify_at.character <- function(
+  .x,
+  .at,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   where <- at_selection(names(.x), .at)
   sel <- inv_which(.x, where)
 
@@ -277,13 +301,15 @@ future_modify_at.character <- function(.x,
 }
 
 #' @export
-future_modify_at.logical <- function(.x,
-                                     .at,
-                                     .f,
-                                     ...,
-                                     .options = furrr_options(),
-                                     .env_globals = parent.frame(),
-                                     .progress = FALSE) {
+future_modify_at.logical <- function(
+  .x,
+  .at,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   where <- at_selection(names(.x), .at)
   sel <- inv_which(.x, where)
 
@@ -303,26 +329,30 @@ future_modify_at.logical <- function(.x,
 
 #' @rdname future_modify
 #' @export
-future_modify_if <- function(.x,
-                             .p,
-                             .f,
-                             ...,
-                             .else = NULL,
-                             .options = furrr_options(),
-                             .env_globals = parent.frame(),
-                             .progress = FALSE) {
+future_modify_if <- function(
+  .x,
+  .p,
+  .f,
+  ...,
+  .else = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   UseMethod("future_modify_if")
 }
 
 #' @export
-future_modify_if.default <- function(.x,
-                                     .p,
-                                     .f,
-                                     ...,
-                                     .else = NULL,
-                                     .options = furrr_options(),
-                                     .env_globals = parent.frame(),
-                                     .progress = FALSE) {
+future_modify_if.default <- function(
+  .x,
+  .p,
+  .f,
+  ...,
+  .else = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   sel <- probe(.x, .p)
   index <- seq_along(.x)
 
@@ -364,14 +394,16 @@ future_modify_if.default <- function(.x,
 }
 
 #' @export
-future_modify_if.integer <- function(.x,
-                                     .p,
-                                     .f,
-                                     ...,
-                                     .else = NULL,
-                                     .options = furrr_options(),
-                                     .env_globals = parent.frame(),
-                                     .progress = FALSE) {
+future_modify_if.integer <- function(
+  .x,
+  .p,
+  .f,
+  ...,
+  .else = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_modify_if_variant(
     .x = .x,
     .p = .p,
@@ -386,14 +418,16 @@ future_modify_if.integer <- function(.x,
 }
 
 #' @export
-future_modify_if.double <- function(.x,
-                                    .p,
-                                    .f,
-                                    ...,
-                                    .else = NULL,
-                                    .options = furrr_options(),
-                                    .env_globals = parent.frame(),
-                                    .progress = FALSE) {
+future_modify_if.double <- function(
+  .x,
+  .p,
+  .f,
+  ...,
+  .else = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_modify_if_variant(
     .x = .x,
     .p = .p,
@@ -408,14 +442,16 @@ future_modify_if.double <- function(.x,
 }
 
 #' @export
-future_modify_if.character <- function(.x,
-                                       .p,
-                                       .f,
-                                       ...,
-                                       .else = NULL,
-                                       .options = furrr_options(),
-                                       .env_globals = parent.frame(),
-                                       .progress = FALSE) {
+future_modify_if.character <- function(
+  .x,
+  .p,
+  .f,
+  ...,
+  .else = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_modify_if_variant(
     .x = .x,
     .p = .p,
@@ -430,14 +466,16 @@ future_modify_if.character <- function(.x,
 }
 
 #' @export
-future_modify_if.logical <- function(.x,
-                                       .p,
-                                       .f,
-                                       ...,
-                                       .else = NULL,
-                                       .options = furrr_options(),
-                                       .env_globals = parent.frame(),
-                                       .progress = FALSE) {
+future_modify_if.logical <- function(
+  .x,
+  .p,
+  .f,
+  ...,
+  .else = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_modify_if_variant(
     .x = .x,
     .p = .p,
@@ -451,15 +489,17 @@ future_modify_if.logical <- function(.x,
   )
 }
 
-future_modify_if_variant <- function(.x,
-                                     .p,
-                                     .f,
-                                     ...,
-                                     .else,
-                                     .options,
-                                     .env_globals,
-                                     .progress,
-                                     .future_map_variant) {
+future_modify_if_variant <- function(
+  .x,
+  .p,
+  .f,
+  ...,
+  .else,
+  .options,
+  .env_globals,
+  .progress,
+  .future_map_variant
+) {
   sel <- probe(.x, .p)
 
   result <- .future_map_variant(

@@ -1,11 +1,13 @@
-furrr_map_template <- function(x,
-                               fn,
-                               dots,
-                               options,
-                               progress,
-                               type,
-                               map_fn,
-                               env_globals) {
+furrr_map_template <- function(
+  x,
+  fn,
+  dots,
+  options,
+  progress,
+  type,
+  map_fn,
+  env_globals
+) {
   n <- length(x)
   names <- names(x)
 
@@ -75,15 +77,17 @@ furrr_map_extract <- function(x, i) {
 
 # ------------------------------------------------------------------------------
 
-furrr_map2_template <- function(x,
-                                y,
-                                fn,
-                                dots,
-                                options,
-                                progress,
-                                type,
-                                map_fn,
-                                env_globals) {
+furrr_map2_template <- function(
+  x,
+  y,
+  fn,
+  dots,
+  options,
+  progress,
+  type,
+  map_fn,
+  env_globals
+) {
   args <- list(x, y)
 
   n <- furrr_length_common(args)
@@ -160,14 +164,16 @@ furrr_map2_extract <- function(x, i) {
 
 # ------------------------------------------------------------------------------
 
-furrr_pmap_template <- function(l,
-                                fn,
-                                dots,
-                                options,
-                                progress,
-                                type,
-                                map_fn,
-                                env_globals) {
+furrr_pmap_template <- function(
+  l,
+  fn,
+  dots,
+  options,
+  progress,
+  type,
+  map_fn,
+  env_globals
+) {
   if (is.data.frame(l)) {
     l <- as.list(l)
   }
@@ -249,18 +255,20 @@ furrr_pmap_extract <- function(x, i) {
 
 # ------------------------------------------------------------------------------
 
-furrr_template <- function(args,
-                           fn,
-                           dots,
-                           n,
-                           options,
-                           progress,
-                           type,
-                           map_fn,
-                           names,
-                           env_globals,
-                           expr,
-                           extract) {
+furrr_template <- function(
+  args,
+  fn,
+  dots,
+  n,
+  options,
+  progress,
+  type,
+  map_fn,
+  names,
+  env_globals,
+  expr,
+  extract
+) {
   fn <- purrr::as_mapper(fn)
 
   if (is.null(options$seed) || is_false(options$seed)) {
@@ -306,7 +314,7 @@ furrr_template <- function(args,
   future_globals_max_size_default <- future_globals_max_size
 
   if (is.null(future_globals_max_size_default)) {
-    future_globals_max_size_default <- 500 * 1024 ^ 2
+    future_globals_max_size_default <- 500 * 1024^2
   }
 
   # Expression adjustment for per worker max global size
@@ -315,7 +323,10 @@ furrr_template <- function(args,
 
     if (!identical(future_globals_max_size, ...furrr_globals_max_size)) {
       options(future.globals.maxSize = ...furrr_globals_max_size)
-      on.exit(options(future.globals.maxSize = future_globals_max_size), add = TRUE)
+      on.exit(
+        options(future.globals.maxSize = future_globals_max_size),
+        add = TRUE
+      )
     }
 
     !!expr
@@ -384,7 +395,10 @@ furrr_template <- function(args,
     # https://github.com/HenrikBengtsson/future.apply/issues/8
     chunk_globals["...furrr_globals_max_size"] <- list(future_globals_max_size)
     options(future.globals.maxSize = n_chunk * future_globals_max_size_default)
-    on.exit(options(future.globals.maxSize = future_globals_max_size), add = TRUE)
+    on.exit(
+      options(future.globals.maxSize = future_globals_max_size),
+      add = TRUE
+    )
 
     if (!is.null(seeds)) {
       chunk_seeds <- seeds[chunk]
@@ -526,16 +540,18 @@ make_expr_out <- function(walk) {
 
 # Required global variable hack for variables used in `expr()`.
 # Required to pass R CMD check.
-utils::globalVariables(c(
-  "...furrr_out",
-  "...furrr_chunk_args",
-  "...furrr_fn",
-  "...furrr_map_fn",
-  "...furrr_dots",
-  "...furrr_globals_max_size",
-  "...furrr_chunk_seeds",
-  "...furrr_chunk_seeds_env",
-  "...furrr_progress",
-  "...furrr_progress_file",
-  "...furrr_progress_con"
-))
+utils::globalVariables(
+  c(
+    "...furrr_out",
+    "...furrr_chunk_args",
+    "...furrr_fn",
+    "...furrr_map_fn",
+    "...furrr_dots",
+    "...furrr_globals_max_size",
+    "...furrr_chunk_seeds",
+    "...furrr_chunk_seeds_env",
+    "...furrr_progress",
+    "...furrr_progress_file",
+    "...furrr_progress_con"
+  )
+)

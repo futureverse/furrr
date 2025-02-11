@@ -19,12 +19,14 @@
 #' # Close open connections for R CMD Check
 #' if (!inherits(plan(), "sequential")) plan(sequential)
 #' }
-future_imap <- function(.x,
-                        .f,
-                        ...,
-                        .options = furrr_options(),
-                        .env_globals = parent.frame(),
-                        .progress = FALSE) {
+future_imap <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_map2(
     .x = .x,
     .y = vec_index(.x),
@@ -38,12 +40,14 @@ future_imap <- function(.x,
 
 #' @rdname future_imap
 #' @export
-future_imap_chr <- function(.x,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_imap_chr <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_map2_chr(
     .x = .x,
     .y = vec_index(.x),
@@ -57,12 +61,14 @@ future_imap_chr <- function(.x,
 
 #' @rdname future_imap
 #' @export
-future_imap_dbl <- function(.x,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_imap_dbl <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_map2_dbl(
     .x = .x,
     .y = vec_index(.x),
@@ -76,12 +82,14 @@ future_imap_dbl <- function(.x,
 
 #' @rdname future_imap
 #' @export
-future_imap_int <- function(.x,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_imap_int <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_map2_int(
     .x = .x,
     .y = vec_index(.x),
@@ -95,12 +103,14 @@ future_imap_int <- function(.x,
 
 #' @rdname future_imap
 #' @export
-future_imap_lgl <- function(.x,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_imap_lgl <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_map2_lgl(
     .x = .x,
     .y = vec_index(.x),
@@ -114,12 +124,14 @@ future_imap_lgl <- function(.x,
 
 #' @rdname future_imap
 #' @export
-future_imap_raw <- function(.x,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_imap_raw <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_map2_raw(
     .x = .x,
     .y = vec_index(.x),
@@ -133,13 +145,15 @@ future_imap_raw <- function(.x,
 
 #' @rdname future_imap
 #' @export
-future_imap_dfr <- function(.x,
-                            .f,
-                            ...,
-                            .id = NULL,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_imap_dfr <- function(
+  .x,
+  .f,
+  ...,
+  .id = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_map2_dfr(
     .x = .x,
     .y = vec_index(.x),
@@ -154,12 +168,14 @@ future_imap_dfr <- function(.x,
 
 #' @rdname future_imap
 #' @export
-future_imap_dfc <- function(.x,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_imap_dfc <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_map2_dfc(
     .x = .x,
     .y = vec_index(.x),

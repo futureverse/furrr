@@ -51,13 +51,15 @@
 #' # Close open connections for R CMD Check
 #' if (!inherits(plan(), "sequential")) plan(sequential)
 #' }
-future_map2 <- function(.x,
-                        .y,
-                        .f,
-                        ...,
-                        .options = furrr_options(),
-                        .env_globals = parent.frame(),
-                        .progress = FALSE) {
+future_map2 <- function(
+  .x,
+  .y,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map2_template(
     x = .x,
     y = .y,
@@ -73,13 +75,15 @@ future_map2 <- function(.x,
 
 #' @rdname future_map2
 #' @export
-future_map2_chr <- function(.x,
-                            .y,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_map2_chr <- function(
+  .x,
+  .y,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map2_template(
     x = .x,
     y = .y,
@@ -95,13 +99,15 @@ future_map2_chr <- function(.x,
 
 #' @rdname future_map2
 #' @export
-future_map2_dbl <- function(.x,
-                            .y,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_map2_dbl <- function(
+  .x,
+  .y,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map2_template(
     x = .x,
     y = .y,
@@ -117,13 +123,15 @@ future_map2_dbl <- function(.x,
 
 #' @rdname future_map2
 #' @export
-future_map2_int <- function(.x,
-                            .y,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_map2_int <- function(
+  .x,
+  .y,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map2_template(
     x = .x,
     y = .y,
@@ -139,13 +147,15 @@ future_map2_int <- function(.x,
 
 #' @rdname future_map2
 #' @export
-future_map2_lgl <- function(.x,
-                            .y,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_map2_lgl <- function(
+  .x,
+  .y,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map2_template(
     x = .x,
     y = .y,
@@ -161,13 +171,15 @@ future_map2_lgl <- function(.x,
 
 #' @rdname future_map2
 #' @export
-future_map2_raw <- function(.x,
-                            .y,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_map2_raw <- function(
+  .x,
+  .y,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map2_template(
     x = .x,
     y = .y,
@@ -183,14 +195,16 @@ future_map2_raw <- function(.x,
 
 #' @rdname future_map2
 #' @export
-future_map2_dfr <- function(.x,
-                            .y,
-                            .f,
-                            ...,
-                            .id = NULL,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_map2_dfr <- function(
+  .x,
+  .y,
+  .f,
+  ...,
+  .id = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   if (!rlang::is_installed("dplyr")) {
     rlang::abort("`future_map2_dfr()` requires dplyr")
   }
@@ -210,13 +224,15 @@ future_map2_dfr <- function(.x,
 
 #' @rdname future_map2
 #' @export
-future_map2_dfc <- function(.x,
-                            .y,
-                            .f,
-                            ...,
-                            .options = furrr_options(),
-                            .env_globals = parent.frame(),
-                            .progress = FALSE) {
+future_map2_dfc <- function(
+  .x,
+  .y,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   if (!rlang::is_installed("dplyr")) {
     rlang::abort("`future_map2_dfc()` requires dplyr")
   }
