@@ -255,7 +255,7 @@ can be.</p>
 <span></span>
 <span><span class="va">t2</span> <span class="op">-</span> <span class="va">t1</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   2.012   0.050   6.401</span></span></code></pre></div>
+<span><span class="co">#&gt;   1.870   0.044   6.215</span></span></code></pre></div>
 <p>The issue here is that the grouped nature of the data frame prevents
 furrr from doing what it is good at - sharding the <code>x</code> column
 into equally sized groups and sending them off to the workers to process
@@ -296,7 +296,7 @@ operate on. So <code><a href="../reference/future_map.html">future_map_dbl()</a>
 <span></span>
 <span><span class="va">t2</span> <span class="op">-</span> <span class="va">t1</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.056   0.001   0.438</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.055   0.001   0.422</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="graphics-devices">Graphics devices<a class="anchor" aria-label="anchor" href="#graphics-devices"></a>
@@ -370,13 +370,13 @@ in the function itself.</p>
 <span>  <span class="fu">my_fast_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.042   0.000   0.425</span></span>
+<span><span class="co">#&gt;    0.04    0.00    0.41</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
 <span>  <span class="fu">my_slow_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.338   0.328   1.372</span></span>
+<span><span class="co">#&gt;   0.332   0.313   1.333</span></span>
 <span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span></code></pre></div>
 <p>In the above example, <code>big</code> is captured in the function
@@ -423,7 +423,7 @@ example:</p>
 <span>  <span class="fu">my_not_so_slow_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.197   0.066   0.643</span></span>
+<span><span class="co">#&gt;   0.203   0.059   0.629</span></span>
 <span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span></code></pre></div>
 <p>Here lexical scoping is used to find <code>fn</code>, but you could
