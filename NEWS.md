@@ -1,5 +1,8 @@
 # furrr (development version)
 
+* Fixed an issue where generating random seeds could sporadically fail (#271,
+  @HenrikBengtsson).
+
 # furrr 0.3.1
 
 * Redocumented the package with roxygen2 7.2.1 to fix invalid HTML5 issues
@@ -64,7 +67,7 @@
 
 * Updated documentation examples to explicitly set the seed on the workers
   when random numbers are generated (#175).
-  
+
 * Removed an internal call to `future:::supportsMulticore()` since it is no
   longer internal (#174).
 
@@ -72,7 +75,7 @@
 
 ## Breaking changes:
 
-* All furrr functions now enforce tidyverse recycling rules (for example, 
+* All furrr functions now enforce tidyverse recycling rules (for example,
   between `.x` and `.y` in `future_map2()`). Previously this was mostly the
   case, except with size zero input. Recycling between input of size 0 and
   input of size >1 no longer recycles to size 0, and is instead an error.
@@ -82,9 +85,9 @@
   Calling `future_options()` will still work, but will trigger a once per
   session warning and will eventually be removed. This change was made to
   free up this function name in case the future package ever wants to use it.
-  
+
 * In a future version of furrr, the `.progress` argument will be deprecated
-  and removed in favor of the 
+  and removed in favor of the
   [progressr](https://CRAN.R-project.org/package=progressr)
   package. The progress bar has not yet been removed in furrr 0.2.0, however
   I would encourage you to please start using progressr if possible. It uses
@@ -139,7 +142,7 @@
 
 * All `*_raw()` variants from purrr have been added, such as
   `future_map_raw()` (#122).
-  
+
 * All furrr functions gained a new argument, `.env_globals`, which determines
   the environment in which globals for `.x` and `...` are
   looked up. It defaults to the caller environment, which is different than
@@ -147,7 +150,7 @@
   Most of the time, you should not have to touch this argument. Additionally,
   globals for `.f` are now looked up in the function environment of `.f`
   (HenrikBengtsson/future.apply#62, #153).
-  
+
 * The future specific global option `future.globals.maxSize` now scales with
   the number of elements of `.x` that get exported to each worker. This
   helps prevent some false positives about exporting objects that are too large,
@@ -167,7 +170,7 @@
 
 * `future_invoke_map()` and its variants have been marked as retired to match
   `purrr::invoke_map()`.
-  
+
 * The internals of furrr have been overhauled to unify the implementations of
   `future_map()`, `future_map2()`, `future_pmap()` and all of their variants.
   This should make furrr much easier to maintain going forward (#44).
@@ -182,7 +185,7 @@
 * future >= 1.19.1 is now required to be able to use `future::value()` instead
   of the soon to be deprecated `future::values()` and to access a few bug
   fixes (#108).
-  
+
 * purrr >= 0.3.0 is now required to gain access to various new features and
   breaking changes. For example, `map_if()` gained an `.else` argument, which
   has been added to `future_map_if()`.
@@ -197,16 +200,16 @@ Features:
 
   * `future_pmap_*()` functions have been added to mirror `pmap()`.
 
-  * The `future.*` arguments to each function have been replaced with an 
+  * The `future.*` arguments to each function have been replaced with an
   overarching `.options` argument. Use `future_options()` to create a set of options
-  suitable to be passed to `.options`. This change streamlines the interface 
+  suitable to be passed to `.options`. This change streamlines the interface
   greatly, and simplifies documentation (#8, @hadley).
-  
+
   * `future_invoke_map_*()` functions have been added to mirror `invoke_map()`.
-  
+
   * More documentation and examples have been added.
-  
-  * Added the ability to use a progress bar with `.progress = TRUE` for 
+
+  * Added the ability to use a progress bar with `.progress = TRUE` for
   multicore, multiprocess, and multisession `plan()`s.
 
 Bug Fixes:
@@ -217,4 +220,4 @@ Bug Fixes:
 
 # furrr 0.0.0
 
-* Original GitHub release of `furrr` on 2018-04-13. 
+* Original GitHub release of `furrr` on 2018-04-13.
