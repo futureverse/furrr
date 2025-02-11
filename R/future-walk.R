@@ -1,11 +1,13 @@
 #' @rdname future_map
 #' @export
-future_walk <- function(.x,
-                        .f,
-                        ...,
-                        .options = furrr_options(),
-                        .env_globals = parent.frame(),
-                        .progress = FALSE) {
+future_walk <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map_template(
     x = .x,
     fn = .f,
@@ -22,13 +24,15 @@ future_walk <- function(.x,
 
 #' @rdname future_map2
 #' @export
-future_walk2 <- function(.x,
-                         .y,
-                         .f,
-                         ...,
-                         .options = furrr_options(),
-                         .env_globals = parent.frame(),
-                         .progress = FALSE) {
+future_walk2 <- function(
+  .x,
+  .y,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map2_template(
     x = .x,
     y = .y,
@@ -46,12 +50,14 @@ future_walk2 <- function(.x,
 
 #' @rdname future_map2
 #' @export
-future_pwalk <- function(.l,
-                         .f,
-                         ...,
-                         .options = furrr_options(),
-                         .env_globals = parent.frame(),
-                         .progress = FALSE) {
+future_pwalk <- function(
+  .l,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_pmap_template(
     l = .l,
     fn = .f,
@@ -68,16 +74,19 @@ future_pwalk <- function(.l,
 
 #' @rdname future_imap
 #' @export
-future_iwalk <- function(.x,
-                         .f,
-                         ...,
-                         .options = furrr_options(),
-                         .env_globals = parent.frame(),
-                         .progress = FALSE) {
+future_iwalk <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   future_walk2(
     .x = .x,
     .y = vec_index(.x),
-    .f = .f, ...,
+    .f = .f,
+    ...,
     .options = .options,
     .env_globals = .env_globals,
     .progress = .progress

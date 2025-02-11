@@ -159,8 +159,8 @@ furrr_test_that("globals in `.x` and `.y` are found (#16)", {
 
   x <- list(c(1, 2, NA), c(2, 3, 4))
 
-  fns1 <- map(x, ~ purrr::partial(fn1, x = .x))
-  fns2 <- map(x, ~ purrr::partial(fn2, x = .x))
+  fns1 <- map(x, ~purrr::partial(fn1, x = .x))
+  fns2 <- map(x, ~purrr::partial(fn2, x = .x))
 
   expect_identical(
     future_map2(fns1, fns2, ~c(.x(), .y())),

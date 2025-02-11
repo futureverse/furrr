@@ -2,7 +2,6 @@ cat_line <- function(...) {
   cat(paste0(..., "\n", collapse = ""))
 }
 
-
 import_future <- function(name, default = NULL) {
   import_from(name, default = default, package = "future")
 }

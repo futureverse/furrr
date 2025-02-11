@@ -71,12 +71,14 @@
 #' # Close open connections for R CMD Check
 #' if (!inherits(plan(), "sequential")) plan(sequential)
 #' }
-future_map <- function(.x,
-                       .f,
-                       ...,
-                       .options = furrr_options(),
-                       .env_globals = parent.frame(),
-                       .progress = FALSE) {
+future_map <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map_template(
     x = .x,
     fn = .f,
@@ -91,12 +93,14 @@ future_map <- function(.x,
 
 #' @rdname future_map
 #' @export
-future_map_chr <- function(.x,
-                           .f,
-                           ...,
-                           .options = furrr_options(),
-                           .env_globals = parent.frame(),
-                           .progress = FALSE) {
+future_map_chr <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map_template(
     x = .x,
     fn = .f,
@@ -111,12 +115,14 @@ future_map_chr <- function(.x,
 
 #' @rdname future_map
 #' @export
-future_map_dbl <- function(.x,
-                           .f,
-                           ...,
-                           .options = furrr_options(),
-                           .env_globals = parent.frame(),
-                           .progress = FALSE) {
+future_map_dbl <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map_template(
     x = .x,
     fn = .f,
@@ -131,12 +137,14 @@ future_map_dbl <- function(.x,
 
 #' @rdname future_map
 #' @export
-future_map_int <- function(.x,
-                           .f,
-                           ...,
-                           .options = furrr_options(),
-                           .env_globals = parent.frame(),
-                           .progress = FALSE) {
+future_map_int <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map_template(
     x = .x,
     fn = .f,
@@ -151,12 +159,14 @@ future_map_int <- function(.x,
 
 #' @rdname future_map
 #' @export
-future_map_lgl <- function(.x,
-                           .f,
-                           ...,
-                           .options = furrr_options(),
-                           .env_globals = parent.frame(),
-                           .progress = FALSE) {
+future_map_lgl <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map_template(
     x = .x,
     fn = .f,
@@ -171,12 +181,14 @@ future_map_lgl <- function(.x,
 
 #' @rdname future_map
 #' @export
-future_map_raw <- function(.x,
-                           .f,
-                           ...,
-                           .options = furrr_options(),
-                           .env_globals = parent.frame(),
-                           .progress = FALSE) {
+future_map_raw <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   furrr_map_template(
     x = .x,
     fn = .f,
@@ -191,13 +203,15 @@ future_map_raw <- function(.x,
 
 #' @rdname future_map
 #' @export
-future_map_dfr <- function(.x,
-                           .f,
-                           ...,
-                           .id = NULL,
-                           .options = furrr_options(),
-                           .env_globals = parent.frame(),
-                           .progress = FALSE) {
+future_map_dfr <- function(
+  .x,
+  .f,
+  ...,
+  .id = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   if (!rlang::is_installed("dplyr")) {
     rlang::abort("`future_map_dfr()` requires dplyr")
   }
@@ -216,12 +230,14 @@ future_map_dfr <- function(.x,
 
 #' @rdname future_map
 #' @export
-future_map_dfc <- function(.x,
-                           .f,
-                           ...,
-                           .options = furrr_options(),
-                           .env_globals = parent.frame(),
-                           .progress = FALSE) {
+future_map_dfc <- function(
+  .x,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   if (!rlang::is_installed("dplyr")) {
     rlang::abort("`future_map_dfc()` requires dplyr")
   }
@@ -263,14 +279,16 @@ future_map_dfc <- function(.x,
 #' # Close open connections for R CMD Check
 #' if (!inherits(plan(), "sequential")) plan(sequential)
 #' }
-future_map_if <- function(.x,
-                          .p,
-                          .f,
-                          ...,
-                          .else = NULL,
-                          .options = furrr_options(),
-                          .env_globals = parent.frame(),
-                          .progress = FALSE) {
+future_map_if <- function(
+  .x,
+  .p,
+  .f,
+  ...,
+  .else = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   sel <- probe(.x, .p)
   out <- purrr::list_along(.x)
 
@@ -302,13 +320,15 @@ future_map_if <- function(.x,
 #' @rdname future_map_if
 #' @export
 #' @inheritParams purrr::map_at
-future_map_at <- function(.x,
-                          .at,
-                          .f,
-                          ...,
-                          .options = furrr_options(),
-                          .env_globals = parent.frame(),
-                          .progress = FALSE) {
+future_map_at <- function(
+  .x,
+  .at,
+  .f,
+  ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
   sel <- inv_which(.x, .at)
   out <- purrr::list_along(.x)
 
@@ -325,4 +345,3 @@ future_map_at <- function(.x,
 
   set_names(out, names(.x))
 }
-

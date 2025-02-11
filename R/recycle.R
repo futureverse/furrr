@@ -54,7 +54,15 @@ furrr_length2 <- function(x, y, i) {
   } else if (x == y) {
     x
   } else {
-    msg <- paste0("Can't recycle length ", x, " and length ", y, " at location ", i, ".")
+    msg <- paste0(
+      "Can't recycle length ",
+      x,
+      " and length ",
+      y,
+      " at location ",
+      i,
+      "."
+    )
     abort(msg)
   }
 }

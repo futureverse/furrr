@@ -166,10 +166,15 @@ furrr_test_that("can selectively avoid conditions", {
   }
 
   # Both warnings are shown
-  expect_warning(expect_warning(future_map(1, fn), class = "ignore_me"), class = "dont_ignore_me")
+  expect_warning(
+    expect_warning(future_map(1, fn), class = "ignore_me"),
+    class = "dont_ignore_me"
+  )
 
   # Only dont_ignore_me is shown
-  opts <- furrr_options(conditions = structure("condition", exclude = "ignore_me"))
+  opts <- furrr_options(
+    conditions = structure("condition", exclude = "ignore_me")
+  )
   expect_warning(future_map(1, fn, .options = opts), class = "dont_ignore_me")
 })
 

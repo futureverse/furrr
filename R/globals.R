@@ -1,4 +1,11 @@
-get_globals_and_packages <- function(globals, packages, map_fn, fn, dots, env_globals) {
+get_globals_and_packages <- function(
+  globals,
+  packages,
+  map_fn,
+  fn,
+  dots,
+  env_globals
+) {
   objectSize <- import_future("objectSize")
 
   packages_out <- "purrr"
@@ -45,7 +52,11 @@ get_globals_and_packages <- function(globals, packages, map_fn, fn, dots, env_gl
     env_fn <- fn_env(fn)
 
     gp_fn <- future::getGlobalsAndPackages(fn, envir = env_fn, globals = TRUE)
-    gp_dots <- future::getGlobalsAndPackages(dots, envir = env_globals, globals = TRUE)
+    gp_dots <- future::getGlobalsAndPackages(
+      dots,
+      envir = env_globals,
+      globals = TRUE
+    )
 
     globals_gp_fn <- enforce_future_globals(gp_fn$globals)
     globals_gp_dots <- enforce_future_globals(gp_dots$globals)
@@ -57,7 +68,11 @@ get_globals_and_packages <- function(globals, packages, map_fn, fn, dots, env_gl
   # Collect only explicitly selected globals,
   # but be lax about it with `mustExist = FALSE`.
   if (is.character(globals)) {
-    globals_chr <- globals::globalsByName(globals, envir = env_globals, mustExist = FALSE)
+    globals_chr <- globals::globalsByName(
+      globals,
+      envir = env_globals,
+      mustExist = FALSE
+    )
     globals_chr <- enforce_future_globals(globals_chr)
     globals_out <- c(globals_out, globals_chr)
   }

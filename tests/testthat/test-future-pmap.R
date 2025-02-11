@@ -160,7 +160,7 @@ furrr_test_that("generally can't recycle to size zero", {
 
 furrr_test_that("named arguments can be passed through", {
   vec_mean <- function(.x, .y, na.rm = FALSE) {
-    mean(c(.x,.y), na.rm = na.rm)
+    mean(c(.x, .y), na.rm = na.rm)
   }
 
   x <- list(c(NA, 1), 1:2)
@@ -174,7 +174,9 @@ furrr_test_that("named arguments can be passed through", {
 furrr_test_that("arguments can be matched by name", {
   x <- list(x = c(1, 2), y = c(3, 5))
 
-  fn <- function(y, x) {y - x}
+  fn <- function(y, x) {
+    y - x
+  }
 
   expect_identical(future_pmap_dbl(x, fn), c(2, 3))
 })
@@ -182,8 +184,12 @@ furrr_test_that("arguments can be matched by name", {
 furrr_test_that("unused components can be absorbed", {
   x <- list(c(1, 2), c(3, 5))
 
-  fn1 <- function(x) {x}
-  fn2 <- function(x, ...) {x}
+  fn1 <- function(x) {
+    x
+  }
+  fn2 <- function(x, ...) {
+    x
+  }
 
   expect_error(future_pmap_dbl(x, fn1))
   expect_identical(future_pmap_dbl(x, fn2), c(1, 2))
@@ -195,8 +201,8 @@ furrr_test_that("globals in `.x` and `.y` are found (#16)", {
 
   x <- list(c(1, 2, NA), c(2, 3, 4))
 
-  fns1 <- map(x, ~ purrr::partial(fn1, x = .x))
-  fns2 <- map(x, ~ purrr::partial(fn2, x = .x))
+  fns1 <- map(x, ~purrr::partial(fn1, x = .x))
+  fns2 <- map(x, ~purrr::partial(fn2, x = .x))
 
   expect_identical(
     future_pmap(list(fns1, fns2), ~c(.x(), .y())),

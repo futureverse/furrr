@@ -118,15 +118,17 @@
 #' @export
 #' @examples
 #' furrr_options()
-furrr_options <- function(...,
-                          stdout = TRUE,
-                          conditions = "condition",
-                          globals = TRUE,
-                          packages = NULL,
-                          seed = FALSE,
-                          scheduling = 1.0,
-                          chunk_size = NULL,
-                          prefix = NULL) {
+furrr_options <- function(
+  ...,
+  stdout = TRUE,
+  conditions = "condition",
+  globals = TRUE,
+  packages = NULL,
+  seed = FALSE,
+  scheduling = 1.0,
+  chunk_size = NULL,
+  prefix = NULL
+) {
   check_dots_empty()
 
   stdout <- validate_stdout(stdout)
@@ -173,10 +175,12 @@ print.furrr_options <- function(x, ...) {
 #' @export
 #' @examples
 #' try(future_options())
-future_options <- function(globals = TRUE,
-                           packages = NULL,
-                           seed = FALSE,
-                           scheduling = 1.0) {
+future_options <- function(
+  globals = TRUE,
+  packages = NULL,
+  seed = FALSE,
+  scheduling = 1.0
+) {
   lifecycle::deprecate_stop("0.3.0", "future_options()", "furrr_options()")
 
   furrr_options(
@@ -263,7 +267,9 @@ validate_globals <- function(x) {
     return(x)
   }
 
-  abort("`globals` must be `NULL`, a logical, a character vector, or a named list.")
+  abort(
+    "`globals` must be `NULL`, a logical, a character vector, or a named list."
+  )
 }
 
 validate_packages <- function(x) {
@@ -330,20 +336,24 @@ validate_seed_list <- function(x) {
   }
 
   if (identical(unique_lengths, 1L)) {
-    abort(paste0(
-      "All pre-generated random seed elements of a list `seed` ",
-      "must be valid `.Random.seed` seeds, which means they should be all ",
-      "integers and consists of two or more elements, not just one."
-    ))
+    abort(
+      paste0(
+        "All pre-generated random seed elements of a list `seed` ",
+        "must be valid `.Random.seed` seeds, which means they should be all ",
+        "integers and consists of two or more elements, not just one."
+      )
+    )
   }
 
   # For efficiency, just check the first seed for validity
   seed <- x[[1]]
   if (!is_valid_random_seed(seed)) {
-    abort(paste0(
-      "All pre-generated random seed elements of a list `seed` ",
-      "must be valid `.Random.seed` seeds, but the first does not seem to be."
-    ))
+    abort(
+      paste0(
+        "All pre-generated random seed elements of a list `seed` ",
+        "must be valid `.Random.seed` seeds, but the first does not seem to be."
+      )
+    )
   }
 
   x

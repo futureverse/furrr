@@ -13,7 +13,13 @@ furrr_test_that <- function(desc, code) {
         plan(strategy, workers = cores)
       }
 
-      test_desc <- paste0(desc, " / strategy - ", strategy, " / cores - ", cores)
+      test_desc <- paste0(
+        desc,
+        " / strategy - ",
+        strategy,
+        " / cores - ",
+        cores
+      )
       test_expr <- expr(
         test_that(test_desc, {
           !!test_code

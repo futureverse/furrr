@@ -18,7 +18,11 @@ compute_n_chunks_from_scheduling <- function(scheduling, n_x, n_workers) {
   }
 }
 
-compute_n_chunks_from_scheduling_logical <- function(scheduling, n_x, n_workers) {
+compute_n_chunks_from_scheduling_logical <- function(
+  scheduling,
+  n_x,
+  n_workers
+) {
   # One future per element of `x`
   if (is_false(scheduling)) {
     return(n_x)
@@ -36,7 +40,11 @@ compute_n_chunks_from_scheduling_logical <- function(scheduling, n_x, n_workers)
 # N chunks / 1 workers = scheduling
 # So:
 # N chunks = (N chunks / 1 workers) * N workers
-compute_n_chunks_from_scheduling_integer <- function(scheduling, n_x, n_workers) {
+compute_n_chunks_from_scheduling_integer <- function(
+  scheduling,
+  n_x,
+  n_workers
+) {
   if (n_workers > n_x) {
     n_workers <- n_x
   }
@@ -89,10 +97,14 @@ compute_order <- function(ordering, n_x, arg) {
   } else if (is.function(ordering)) {
     order <- ordering(n_x)
   } else {
-    abort(paste0(
-      "Unknown type of `", arg, "` attribute, `ordering`. The attribute must ",
-      "be a character string, an integer, or a function."
-    ))
+    abort(
+      paste0(
+        "Unknown type of `",
+        arg,
+        "` attribute, `ordering`. The attribute must ",
+        "be a character string, an integer, or a function."
+      )
+    )
   }
 
   if (!is.integer(order)) {
