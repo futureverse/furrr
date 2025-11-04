@@ -37,29 +37,24 @@ future_modify_if(
 )
 }
 \arguments{
-\item{.x}{A list or atomic vector.}
+\item{.x}{A vector.}
 
-\item{.f}{A function, formula, or vector (not necessarily atomic).
+\item{.f}{A function specified in the same way as the corresponding map
+function.}
 
-If a \strong{function}, it is used as is.
+\item{...}{Additional arguments passed on to the mapped function.
 
-If a \strong{formula}, e.g. \code{~ .x + 2}, it is converted to a function. There
-are three ways to refer to the arguments:
-\itemize{
-\item For a single argument function, use \code{.}
-\item For a two argument function, use \code{.x} and \code{.y}
-\item For more arguments, use \code{..1}, \code{..2}, \code{..3} etc
-}
+We now generally recommend against using \code{...} to pass additional
+(constant) arguments to \code{.f}. Instead use a shorthand anonymous function:
 
-This syntax allows you to create very compact anonymous functions.
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{# Instead of
+x |> future_map(f, 1, 2, collapse = ",")
+# do:
+x |> future_map(\\(x) f(x, 1, 2, collapse = ","))
+}\if{html}{\out{</div>}}
 
-If \strong{character vector}, \strong{numeric vector}, or \strong{list}, it is
-converted to an extractor function. Character vectors index by
-name and numeric vectors index by position; use a list to index
-by position and name at different levels. If a component is not
-present, the value of \code{.default} will be returned.}
-
-\item{...}{Additional arguments passed on to the mapped function.}
+This makes it easier to understand which arguments belong to which
+function and will tend to yield better error messages.}
 
 \item{.options}{The \code{future} specific options to use with the workers. This
 must be the result from a call to \code{\link[=furrr_options]{furrr_options()}}.}
@@ -78,11 +73,13 @@ in a future version of furrr in favor of using the more robust
 \href{https://CRAN.R-project.org/package=progressr}{progressr}
 package.}
 
-\item{.at}{A character vector of names, positive numeric vector of
-positions to include, or a negative numeric vector of positions to
-exlude. Only those elements corresponding to \code{.at} will be modified.
-If the \code{tidyselect} package is installed, you can use \code{vars()} and
-the \code{tidyselect} helpers to select elements.}
+\item{.at}{A logical, integer, or character vector giving the elements
+to select. Alternatively, a function that takes a vector of names,
+and returns a logical, integer, or character vector of elements to select.
+
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}: if the tidyselect package is
+installed, you can use \code{vars()} and tidyselect helpers to select
+elements.}
 
 \item{.p}{A single predicate function, a formula describing such a
 predicate function, or a logical vector of the same length as \code{.x}.
@@ -98,7 +95,7 @@ returns \code{FALSE}.}
 An object the same class as \code{.x}
 }
 \description{
-These functions work exactly the same as \code{\link[purrr:modify]{purrr::modify()}} functions, but
+These functions work the same as \code{\link[purrr:modify]{purrr::modify()}} functions, but
 allow you to modify in parallel.
 }
 \details{

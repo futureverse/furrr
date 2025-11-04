@@ -195,30 +195,31 @@ future_pwalk(
 )
 }
 \arguments{
-\item{.x, .y}{Vectors of the same length. A vector of length 1 will
-be recycled.}
+\item{.x, .y}{A pair of vectors, usually the same length. If not, a vector
+of length 1 will be recycled to the length of the other.}
 
-\item{.f}{A function, formula, or vector (not necessarily atomic).
-
-If a \strong{function}, it is used as is.
-
-If a \strong{formula}, e.g. \code{~ .x + 2}, it is converted to a function. There
-are three ways to refer to the arguments:
+\item{.f}{A function, specified in one of the following ways:
 \itemize{
-\item For a single argument function, use \code{.}
-\item For a two argument function, use \code{.x} and \code{.y}
-\item For more arguments, use \code{..1}, \code{..2}, \code{..3} etc
-}
+\item A named function.
+\item An anonymous function, e.g. \verb{\\(x, y) x + y} or \code{function(x, y) x + y}.
+\item A formula, e.g. \code{~ .x + .y}. Use \code{.x} to refer to the current
+element of \code{x} and \code{.y} to refer to the current element of \code{y}.
+No longer recommended.
+}}
 
-This syntax allows you to create very compact anonymous functions.
+\item{...}{Additional arguments passed on to the mapped function.
 
-If \strong{character vector}, \strong{numeric vector}, or \strong{list}, it is
-converted to an extractor function. Character vectors index by
-name and numeric vectors index by position; use a list to index
-by position and name at different levels. If a component is not
-present, the value of \code{.default} will be returned.}
+We now generally recommend against using \code{...} to pass additional
+(constant) arguments to \code{.f}. Instead use a shorthand anonymous function:
 
-\item{...}{Additional arguments passed on to the mapped function.}
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{# Instead of
+x |> future_map(f, 1, 2, collapse = ",")
+# do:
+x |> future_map(\\(x) f(x, 1, 2, collapse = ","))
+}\if{html}{\out{</div>}}
+
+This makes it easier to understand which arguments belong to which
+function and will tend to yield better error messages.}
 
 \item{.options}{The \code{future} specific options to use with the workers. This
 must be the result from a call to \code{\link[=furrr_options]{furrr_options()}}.}
@@ -244,9 +245,15 @@ variable will be created.
 
 Only applies to \verb{_dfr} variant.}
 
-\item{.l}{A list of vectors, such as a data frame. The length of \code{.l}
-determines the number of arguments that \code{.f} will be called with. List
-names will be used if present.}
+\item{.l}{A list of vectors. The length of \code{.l} determines the number of
+arguments that \code{.f} will be called with. Arguments will be supply by
+position if unnamed, and by name if named.
+
+Vectors of length 1 will be recycled to any length; all other elements
+must be have the same length.
+
+A data frame is an important special case of \code{.l}. It will cause \code{.f}
+to be called once for each row.}
 }
 \value{
 An atomic vector, list, or data frame, depending on the suffix.
@@ -257,7 +264,7 @@ If all input is length 0, the output will be length 0. If any input is
 length 1, it will be recycled to the length of the longest.
 }
 \description{
-These functions work exactly the same as \code{\link[purrr:map2]{purrr::map2()}} and its variants,
+These functions work the same as \code{\link[purrr:map2]{purrr::map2()}} and its variants,
 but allow you to map in parallel. Note that "parallel" as described in purrr
 is just saying that you are working with multiple inputs, and parallel in
 this case means that you can work on multiple inputs and process them all in

@@ -1,10 +1,15 @@
 #' Modify elements selectively via futures
 #'
-#' These functions work exactly the same as [purrr::modify()] functions, but
+#' These functions work the same as [purrr::modify()] functions, but
 #' allow you to modify in parallel.
 #'
-#' @inheritParams purrr::modify
+#' @param .x A vector.
+#'
+#' @param .f A function specified in the same way as the corresponding map
+#' function.
+#'
 #' @inheritParams future_map
+#' @inheritParams purrr::modify
 #'
 #' @details
 #' From purrr:

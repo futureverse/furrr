@@ -1,13 +1,25 @@
 #' Map over multiple inputs simultaneously via futures
 #'
-#' These functions work exactly the same as [purrr::map2()] and its variants,
+#' These functions work the same as [purrr::map2()] and its variants,
 #' but allow you to map in parallel. Note that "parallel" as described in purrr
 #' is just saying that you are working with multiple inputs, and parallel in
 #' this case means that you can work on multiple inputs and process them all in
 #' parallel as well.
 #'
+#' @inheritParams future_imap
 #' @inheritParams purrr::map2
-#' @inheritParams future_map
+#' @inheritParams purrr::pmap
+#'
+#' @param .x,.y A pair of vectors, usually the same length. If not, a vector
+#'   of length 1 will be recycled to the length of the other.
+#'
+#' @param .f A function, specified in one of the following ways:
+#'
+#'   * A named function.
+#'   * An anonymous function, e.g. `\(x, y) x + y` or `function(x, y) x + y`.
+#'   * A formula, e.g. `~ .x + .y`. Use `.x` to refer to the current
+#'     element of `x` and `.y` to refer to the current element of `y`.
+#'     No longer recommended.
 #'
 #' @return An atomic vector, list, or data frame, depending on the suffix.
 #'   Atomic vectors and lists will be named if `.x` or the first element of `.l`

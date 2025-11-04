@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' These functions work exactly the same as [purrr::invoke_map()] functions, but
+#' These functions work the same as [purrr::invoke_map()] functions, but
 #' allow you to invoke in parallel.
 #'
 #' @inheritParams purrr::invoke_map

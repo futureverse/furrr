@@ -36,27 +36,31 @@ objects, a string indicating the name of a logical element in the
 inner lists. Only those elements where \code{.p} evaluates to
 \code{TRUE} will be modified.}
 
-\item{.f}{A function, formula, or vector (not necessarily atomic).
-
-If a \strong{function}, it is used as is.
-
-If a \strong{formula}, e.g. \code{~ .x + 2}, it is converted to a function. There
-are three ways to refer to the arguments:
+\item{.f}{A function, specified in one of the following ways:
 \itemize{
-\item For a single argument function, use \code{.}
-\item For a two argument function, use \code{.x} and \code{.y}
-\item For more arguments, use \code{..1}, \code{..2}, \code{..3} etc
-}
+\item A named function, e.g. \code{mean}.
+\item An anonymous function, e.g. \verb{\\(x) x + 1} or \code{function(x) x + 1}.
+\item A formula, e.g. \code{~ .x + 1}. Use \code{.x} to refer to the first
+argument. No longer recommended.
+\item A string, integer, or list, e.g. \code{"idx"}, \code{1}, or \code{list("idx", 1)} which
+are shorthand for \verb{\\(x) pluck(x, "idx")}, \verb{\\(x) pluck(x, 1)}, and
+\verb{\\(x) pluck(x, "idx", 1)} respectively. Optionally supply \code{.default} to
+set a default value if the indexed element is \code{NULL} or does not exist.
+}}
 
-This syntax allows you to create very compact anonymous functions.
+\item{...}{Additional arguments passed on to the mapped function.
 
-If \strong{character vector}, \strong{numeric vector}, or \strong{list}, it is
-converted to an extractor function. Character vectors index by
-name and numeric vectors index by position; use a list to index
-by position and name at different levels. If a component is not
-present, the value of \code{.default} will be returned.}
+We now generally recommend against using \code{...} to pass additional
+(constant) arguments to \code{.f}. Instead use a shorthand anonymous function:
 
-\item{...}{Additional arguments passed on to the mapped function.}
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{# Instead of
+x |> future_map(f, 1, 2, collapse = ",")
+# do:
+x |> future_map(\\(x) f(x, 1, 2, collapse = ","))
+}\if{html}{\out{</div>}}
+
+This makes it easier to understand which arguments belong to which
+function and will tend to yield better error messages.}
 
 \item{.else}{A function applied to elements of \code{.x} for which \code{.p}
 returns \code{FALSE}.}
@@ -78,18 +82,20 @@ in a future version of furrr in favor of using the more robust
 \href{https://CRAN.R-project.org/package=progressr}{progressr}
 package.}
 
-\item{.at}{A character vector of names, positive numeric vector of
-positions to include, or a negative numeric vector of positions to
-exlude. Only those elements corresponding to \code{.at} will be modified.
-If the \code{tidyselect} package is installed, you can use \code{vars()} and
-the \code{tidyselect} helpers to select elements.}
+\item{.at}{A logical, integer, or character vector giving the elements
+to select. Alternatively, a function that takes a vector of names,
+and returns a logical, integer, or character vector of elements to select.
+
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}: if the tidyselect package is
+installed, you can use \code{vars()} and tidyselect helpers to select
+elements.}
 }
 \value{
 Both functions return a list the same length as \code{.x} with the
 elements conditionally transformed.
 }
 \description{
-These functions work exactly the same as \code{\link[purrr:map_if]{purrr::map_if()}} and
+These functions work the same as \code{\link[purrr:map_if]{purrr::map_if()}} and
 \code{\link[purrr:map_if]{purrr::map_at()}}, but allow you to run them in parallel.
 }
 \examples{

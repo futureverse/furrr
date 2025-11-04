@@ -1,9 +1,21 @@
 #' Apply a function to each element of a vector via futures
 #'
-#' These functions work exactly the same as [purrr::map()] and its variants, but
+#' These functions work the same as [purrr::map()] and its variants, but
 #' allow you to map in parallel.
 #'
 #' @inheritParams purrr::map
+#' @inheritParams purrr::map_dfr
+#'
+#' @param .f A function, specified in one of the following ways:
+#'
+#'   * A named function, e.g. `mean`.
+#'   * An anonymous function, e.g. `\(x) x + 1` or `function(x) x + 1`.
+#'   * A formula, e.g. `~ .x + 1`. Use `.x` to refer to the first
+#'     argument. No longer recommended.
+#'   * A string, integer, or list, e.g. `"idx"`, `1`, or `list("idx", 1)` which
+#'     are shorthand for `\(x) pluck(x, "idx")`, `\(x) pluck(x, 1)`, and
+#'     `\(x) pluck(x, "idx", 1)` respectively. Optionally supply `.default` to
+#'     set a default value if the indexed element is `NULL` or does not exist.
 #'
 #' @param .env_globals The environment to look for globals required by `.x` and
 #'   `...`. Globals required by `.f` are looked up in the function environment
@@ -21,6 +33,21 @@
 #'   in a future version of furrr in favor of using the more robust
 #'   [progressr](https://CRAN.R-project.org/package=progressr)
 #'   package.
+#'
+#' @param ... Additional arguments passed on to the mapped function.
+#'
+#'   We now generally recommend against using `...` to pass additional
+#'   (constant) arguments to `.f`. Instead use a shorthand anonymous function:
+#'
+#'   ```R
+#'   # Instead of
+#'   x |> future_map(f, 1, 2, collapse = ",")
+#'   # do:
+#'   x |> future_map(\(x) f(x, 1, 2, collapse = ","))
+#'   ```
+#'
+#'   This makes it easier to understand which arguments belong to which
+#'   function and will tend to yield better error messages.
 #'
 #' @return All functions return a vector the same length as `.x`.
 #'
@@ -258,11 +285,11 @@ future_map_dfc <- function(
 
 #' Apply a function to each element of a vector conditionally via futures
 #'
-#' These functions work exactly the same as [purrr::map_if()] and
+#' These functions work the same as [purrr::map_if()] and
 #' [purrr::map_at()], but allow you to run them in parallel.
 #'
-#' @inheritParams purrr::map_if
 #' @inheritParams future_map
+#' @inheritParams purrr::map_if
 #'
 #' @return Both functions return a list the same length as `.x` with the
 #' elements conditionally transformed.
