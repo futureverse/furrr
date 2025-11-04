@@ -125,7 +125,7 @@ plan(multisession, workers = 2)
 
 t1 <- proc.time()
 
-df %>%
+df |>
   mutate(y = future_map_dbl(x, mean))
 
 t2 <- proc.time()
@@ -146,8 +146,8 @@ plan(multisession, workers = 2)
 
 t1 <- proc.time()
 
-df %>%
-  ungroup() %>%
+df |>
+  ungroup() |>
   mutate(y = future_map_dbl(x, mean))
 
 t2 <- proc.time()

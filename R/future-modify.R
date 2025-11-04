@@ -22,18 +22,17 @@
 #'
 #' @export
 #' @examples
-#' library(magrittr)
 #' \donttest{plan(multisession, workers = 2)}
 #'
 #' # Convert each col to character, in parallel
 #' future_modify(mtcars, as.character)
 #'
-#' iris %>%
-#'  future_modify_if(is.factor, as.character) %>%
+#' iris |>
+#'  future_modify_if(is.factor, as.character) |>
 #'  str()
 #'
-#' mtcars %>%
-#'   future_modify_at(c(1, 4, 5), as.character) %>%
+#' mtcars |>
+#'   future_modify_at(c(1, 4, 5), as.character) |>
 #'   str()
 #'
 #' \dontshow{
