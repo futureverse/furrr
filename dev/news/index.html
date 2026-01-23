@@ -42,6 +42,11 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="furrr-development-version">furrr (development version)<a class="anchor" aria-label="anchor" href="#furrr-development-version"></a></h2>
 <div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<ul><li>
+<code>future_options()</code> has been removed. It has been defunct since furrr 0.3.0 (May 2022).</li>
+</ul></div>
+<div class="section level3">
 <h3 id="features--fixes-development-version">Features / Fixes<a class="anchor" aria-label="anchor" href="#features--fixes-development-version"></a></h3>
 <ul><li><p>Detangled furrr’s documentation from purrr’s to avoid some documentation inheritance issues (<a href="https://github.com/futureverse/furrr/issues/286" class="external-link">#286</a>).</p></li>
 <li><p>Fixed an issue where generating random seeds could sporadically fail (<a href="https://github.com/futureverse/furrr/issues/271" class="external-link">#271</a>, <a href="https://github.com/HenrikBengtsson" class="external-link">@HenrikBengtsson</a>).</p></li>
@@ -61,7 +66,7 @@
 <h2 class="pkg-version" data-toc-text="0.3.0" id="furrr-030">furrr 0.3.0<a class="anchor" aria-label="anchor" href="#furrr-030"></a></h2><p class="text-muted">CRAN release: 2022-05-04</p>
 <div class="section level3">
 <h3 id="breaking-changes-0-3-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-3-0"></a></h3>
-<ul><li><p><code><a href="../reference/future_options.html">future_options()</a></code> is now defunct and will be removed in the next minor release of furrr. Please use <code><a href="../reference/furrr_options.html">furrr_options()</a></code> instead (<a href="https://github.com/futureverse/furrr/issues/137" class="external-link">#137</a>).</p></li>
+<ul><li><p><code>future_options()</code> is now defunct and will be removed in the next minor release of furrr. Please use <code><a href="../reference/furrr_options.html">furrr_options()</a></code> instead (<a href="https://github.com/futureverse/furrr/issues/137" class="external-link">#137</a>).</p></li>
 <li><p>The <code>lazy</code> argument of <code><a href="../reference/furrr_options.html">furrr_options()</a></code> has been completely removed. This argument had no effect, as futures are always resolved before the corresponding furrr function returns (<a href="https://github.com/futureverse/furrr/issues/222" class="external-link">#222</a>).</p></li>
 </ul></div>
 <div class="section level3">
@@ -100,7 +105,7 @@
 <div class="section level3">
 <h3 id="breaking-changes-0-2-0">Breaking changes:<a class="anchor" aria-label="anchor" href="#breaking-changes-0-2-0"></a></h3>
 <ul><li><p>All furrr functions now enforce tidyverse recycling rules (for example, between <code>.x</code> and <code>.y</code> in <code><a href="../reference/future_map2.html">future_map2()</a></code>). Previously this was mostly the case, except with size zero input. Recycling between input of size 0 and input of size &gt;1 no longer recycles to size 0, and is instead an error. purrr will begin to do this as well in the next major release (<a href="https://github.com/futureverse/furrr/issues/134" class="external-link">#134</a>).</p></li>
-<li><p><code><a href="../reference/future_options.html">future_options()</a></code> has been deprecated in favor of <code><a href="../reference/furrr_options.html">furrr_options()</a></code>. Calling <code><a href="../reference/future_options.html">future_options()</a></code> will still work, but will trigger a once per session warning and will eventually be removed. This change was made to free up this function name in case the future package ever wants to use it.</p></li>
+<li><p><code>future_options()</code> has been deprecated in favor of <code><a href="../reference/furrr_options.html">furrr_options()</a></code>. Calling <code>future_options()</code> will still work, but will trigger a once per session warning and will eventually be removed. This change was made to free up this function name in case the future package ever wants to use it.</p></li>
 <li><p>In a future version of furrr, the <code>.progress</code> argument will be deprecated and removed in favor of the <a href="https://CRAN.R-project.org/package=progressr" class="external-link">progressr</a> package. The progress bar has not yet been removed in furrr 0.2.0, however I would encourage you to please start using progressr if possible. It uses a much more robust idea, and has been integrated with future in such a way that it can relay near real-time progress updates from sequential, multisession, and even cluster futures (meaning that remote connections can return live updates). Multicore support will come at some point as well. That said, be aware that it is a relatively new package and the API is still stabilizing. As more people use it, its place in the future ecosystem will become clearer, and tighter integration with furrr will likely be possible.</p></li>
 </ul></div>
 <div class="section level3">
@@ -138,7 +143,7 @@
 <h2 class="pkg-version" data-toc-text="0.1.0" id="furrr-010">furrr 0.1.0<a class="anchor" aria-label="anchor" href="#furrr-010"></a></h2><p class="text-muted">CRAN release: 2018-05-16</p>
 <p>Features:</p>
 <ul><li><p><code>future_pmap_*()</code> functions have been added to mirror <code><a href="https://purrr.tidyverse.org/reference/pmap.html" class="external-link">pmap()</a></code>.</p></li>
-<li><p>The <code>future.*</code> arguments to each function have been replaced with an overarching <code>.options</code> argument. Use <code><a href="../reference/future_options.html">future_options()</a></code> to create a set of options suitable to be passed to <code>.options</code>. This change streamlines the interface greatly, and simplifies documentation (<a href="https://github.com/futureverse/furrr/issues/8" class="external-link">#8</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>).</p></li>
+<li><p>The <code>future.*</code> arguments to each function have been replaced with an overarching <code>.options</code> argument. Use <code>future_options()</code> to create a set of options suitable to be passed to <code>.options</code>. This change streamlines the interface greatly, and simplifies documentation (<a href="https://github.com/futureverse/furrr/issues/8" class="external-link">#8</a>, <a href="https://github.com/hadley" class="external-link">@hadley</a>).</p></li>
 <li><p><code>future_invoke_map_*()</code> functions have been added to mirror <code><a href="https://purrr.tidyverse.org/reference/invoke.html" class="external-link">invoke_map()</a></code>.</p></li>
 <li><p>More documentation and examples have been added.</p></li>
 <li><p>Added the ability to use a progress bar with <code>.progress = TRUE</code> for multicore, multiprocess, and multisession <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan()</a></code>s.</p></li>

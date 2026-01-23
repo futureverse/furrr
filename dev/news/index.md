@@ -2,6 +2,11 @@
 
 ## furrr (development version)
 
+### Breaking changes
+
+- `future_options()` has been removed. It has been defunct since furrr
+  0.3.0 (May 2022).
+
 ### Features / Fixes
 
 - Detangled furrr’s documentation from purrr’s to avoid some
@@ -37,9 +42,8 @@ CRAN release: 2022-05-04
 
 ### Breaking changes
 
-- [`future_options()`](https://furrr.futureverse.org/dev/reference/future_options.md)
-  is now defunct and will be removed in the next minor release of furrr.
-  Please use
+- `future_options()` is now defunct and will be removed in the next
+  minor release of furrr. Please use
   [`furrr_options()`](https://furrr.futureverse.org/dev/reference/furrr_options.md)
   instead ([\#137](https://github.com/futureverse/furrr/issues/137)).
 
@@ -137,14 +141,12 @@ CRAN release: 2020-10-12
   this as well in the next major release
   ([\#134](https://github.com/futureverse/furrr/issues/134)).
 
-- [`future_options()`](https://furrr.futureverse.org/dev/reference/future_options.md)
-  has been deprecated in favor of
+- `future_options()` has been deprecated in favor of
   [`furrr_options()`](https://furrr.futureverse.org/dev/reference/furrr_options.md).
-  Calling
-  [`future_options()`](https://furrr.futureverse.org/dev/reference/future_options.md)
-  will still work, but will trigger a once per session warning and will
-  eventually be removed. This change was made to free up this function
-  name in case the future package ever wants to use it.
+  Calling `future_options()` will still work, but will trigger a once
+  per session warning and will eventually be removed. This change was
+  made to free up this function name in case the future package ever
+  wants to use it.
 
 - In a future version of furrr, the `.progress` argument will be
   deprecated and removed in favor of the
@@ -308,10 +310,9 @@ Features:
   [`pmap()`](https://purrr.tidyverse.org/reference/pmap.html).
 
 - The `future.*` arguments to each function have been replaced with an
-  overarching `.options` argument. Use
-  [`future_options()`](https://furrr.futureverse.org/dev/reference/future_options.md)
-  to create a set of options suitable to be passed to `.options`. This
-  change streamlines the interface greatly, and simplifies documentation
+  overarching `.options` argument. Use `future_options()` to create a
+  set of options suitable to be passed to `.options`. This change
+  streamlines the interface greatly, and simplifies documentation
   ([\#8](https://github.com/futureverse/furrr/issues/8),
   [@hadley](https://github.com/hadley)).
 
