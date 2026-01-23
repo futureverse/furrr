@@ -21,6 +21,9 @@
 - furrr now requires R \>=4.1.0, which is in line with the tidyverse
   ([\#285](https://github.com/futureverse/furrr/issues/285)).
 
+- lifecycle \>=1.0.5, rlang \>=1.1.7, purrr \>=1.2.1, vctrs \>=0.7.0,
+  globals \>=0.18.0, and future \>=1.69.0 are now required.
+
 ## furrr 0.3.1
 
 CRAN release: 2022-08-15
