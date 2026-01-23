@@ -36,13 +36,6 @@ furrr_map_template <- function(
     !!expr_seed_setup
     !!expr_progress_setup
 
-    ...furrr_purrr_fn <- get(
-      !!purrr_fn_name,
-      envir = asNamespace("purrr"),
-      mode = "function",
-      inherits = FALSE
-    )
-
     ...furrr_fn_wrapper <- function(...) {
       !!expr_seed_update
       !!expr_progress_update
@@ -51,6 +44,13 @@ furrr_map_template <- function(
 
       !!expr_out
     }
+
+    ...furrr_purrr_fn <- get(
+      !!purrr_fn_name,
+      envir = asNamespace("purrr"),
+      mode = "function",
+      inherits = FALSE
+    )
 
     args <- list(
       .x = ...furrr_chunk_x,
@@ -128,13 +128,6 @@ furrr_map2_template <- function(
     !!expr_seed_setup
     !!expr_progress_setup
 
-    ...furrr_purrr_fn <- get(
-      !!purrr_fn_name,
-      envir = asNamespace("purrr"),
-      mode = "function",
-      inherits = FALSE
-    )
-
     ...furrr_fn_wrapper <- function(...) {
       !!expr_seed_update
       !!expr_progress_update
@@ -143,6 +136,13 @@ furrr_map2_template <- function(
 
       !!expr_out
     }
+
+    ...furrr_purrr_fn <- get(
+      !!purrr_fn_name,
+      envir = asNamespace("purrr"),
+      mode = "function",
+      inherits = FALSE
+    )
 
     args <- list(
       .x = ...furrr_chunk_x,
@@ -226,13 +226,6 @@ furrr_pmap_template <- function(
     !!expr_seed_setup
     !!expr_progress_setup
 
-    ...furrr_purrr_fn <- get(
-      !!purrr_fn_name,
-      envir = asNamespace("purrr"),
-      mode = "function",
-      inherits = FALSE
-    )
-
     ...furrr_fn_wrapper <- function(...) {
       !!expr_seed_update
       !!expr_progress_update
@@ -241,6 +234,13 @@ furrr_pmap_template <- function(
 
       !!expr_out
     }
+
+    ...furrr_purrr_fn <- get(
+      !!purrr_fn_name,
+      envir = asNamespace("purrr"),
+      mode = "function",
+      inherits = FALSE
+    )
 
     args <- list(
       .l = ...furrr_chunk_l,
