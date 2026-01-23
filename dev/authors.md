@@ -6,7 +6,7 @@
 
 - **Matt Dancho**. Author.
 
-- **RStudio**. Copyright holder, funder.
+- **Posit Software, PBC**. Copyright holder, funder.
 
 ## Citation
 

@@ -16,7 +16,7 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Davis Vaughan <davis@rstudio.com>
+**Maintainer**: Davis Vaughan <davis@posit.co>
 
 Authors:
 
@@ -24,4 +24,4 @@ Authors:
 
 Other contributors:
 
-- RStudio \[copyright holder, funder\]
+- Posit Software, PBC \[copyright holder, funder\]
