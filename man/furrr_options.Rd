@@ -131,6 +131,41 @@ the RNG state before the call. This is true regardless of the future
 strategy / scheduling used. This is done in order to guarantee that an R
 script calling \code{future_map()} multiple times should be numerically
 reproducible given the same initial seed.
+
+Note that you cannot expect identical results between \code{map()} and
+\code{future_map()} when using a \code{.f} that calls functions that generate random
+numbers, even when calling \code{set.seed()} ahead of time. For one thing, the
+default random number generation algorithm used by R during sequential
+processing is Mersenne-Twister, different from the L'Ecuyer-CMRG seeds used
+by furrr. But even aligning the \code{\link[=RNGkind]{RNGkind()}} would not be enough. \code{map()}
+itself would have to change to use the same parallel compatible RNG strategy
+as \code{future_map()} (pre-generating the seeds, and setting them before each
+\code{.f} invocation). At the end of the day, you have to accept that the
+following will produce different sequences of random numbers, but both are
+statistically sound:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{set.seed(42)
+purrr::map(1:10, ~ rnorm(1))
+
+set.seed(42)
+furrr::future_map(1:10, ~ rnorm(1), .options = furrr_options(seed = TRUE))
+}\if{html}{\out{</div>}}
+
+But importantly, the \code{furrr::future_map()} example will always produce the
+same sequence of random numbers, regardless of the \code{plan()} you choose:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{plan(sequential)
+set.seed(42)
+furrr::future_map(1:10, ~ rnorm(1), .options = furrr_options(seed = TRUE))
+
+plan(multisession, workers = 2)
+set.seed(42)
+furrr::future_map(1:10, ~ rnorm(1), .options = furrr_options(seed = TRUE))
+
+plan(cluster, workers = workers)
+set.seed(42)
+furrr::future_map(1:10, ~ rnorm(1), .options = furrr_options(seed = TRUE))
+}\if{html}{\out{</div>}}
 }
 
 \examples{

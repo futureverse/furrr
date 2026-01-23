@@ -116,6 +116,43 @@
 #' script calling `future_map()` multiple times should be numerically
 #' reproducible given the same initial seed.
 #'
+#' Note that you cannot expect identical results between `map()` and
+#' `future_map()` when using a `.f` that calls functions that generate random
+#' numbers, even when calling `set.seed()` ahead of time. For one thing, the
+#' default random number generation algorithm used by R during sequential
+#' processing is Mersenne-Twister, different from the L'Ecuyer-CMRG seeds used
+#' by furrr. But even aligning the [RNGkind()] would not be enough. `map()`
+#' itself would have to change to use the same parallel compatible RNG strategy
+#' as `future_map()` (pre-generating the seeds, and setting them before each
+#' `.f` invocation). At the end of the day, you have to accept that the
+#' following will produce different sequences of random numbers, but both are
+#' statistically sound:
+#'
+#' ```r
+#' set.seed(42)
+#' purrr::map(1:10, ~ rnorm(1))
+#'
+#' set.seed(42)
+#' furrr::future_map(1:10, ~ rnorm(1), .options = furrr_options(seed = TRUE))
+#' ```
+#'
+#' But importantly, the `furrr::future_map()` example will always produce the
+#' same sequence of random numbers, regardless of the `plan()` you choose:
+#'
+#' ```r
+#' plan(sequential)
+#' set.seed(42)
+#' furrr::future_map(1:10, ~ rnorm(1), .options = furrr_options(seed = TRUE))
+#'
+#' plan(multisession, workers = 2)
+#' set.seed(42)
+#' furrr::future_map(1:10, ~ rnorm(1), .options = furrr_options(seed = TRUE))
+#'
+#' plan(cluster, workers = workers)
+#' set.seed(42)
+#' furrr::future_map(1:10, ~ rnorm(1), .options = furrr_options(seed = TRUE))
+#' ```
+#'
 #' @export
 #' @examples
 #' furrr_options()
