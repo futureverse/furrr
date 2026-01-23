@@ -1,9 +1,16 @@
 #' Apply a function to each element of a vector, and its index via futures
 #'
-#' These functions work exactly the same as [purrr::imap()] functions,
+#' These functions work the same as [purrr::imap()] functions,
 #' but allow you to map in parallel.
 #'
-#' @inheritParams purrr::imap
+#' @param .f A function, specified in one of the following ways:
+#'
+#'   * A named function, e.g. `paste`.
+#'   * An anonymous function, e.g. `\(x, idx) x + idx` or
+#'     `function(x, idx) x + idx`.
+#'   * A formula, e.g. `~ .x + .y`. Use `.x` to refer to the current element and
+#'     `.y` to refer to the current index. No longer recommended.
+#'
 #' @inheritParams future_map
 #'
 #' @return

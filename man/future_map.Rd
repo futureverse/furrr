@@ -97,27 +97,31 @@ future_walk(
 \arguments{
 \item{.x}{A list or atomic vector.}
 
-\item{.f}{A function, formula, or vector (not necessarily atomic).
-
-If a \strong{function}, it is used as is.
-
-If a \strong{formula}, e.g. \code{~ .x + 2}, it is converted to a function. There
-are three ways to refer to the arguments:
+\item{.f}{A function, specified in one of the following ways:
 \itemize{
-\item For a single argument function, use \code{.}
-\item For a two argument function, use \code{.x} and \code{.y}
-\item For more arguments, use \code{..1}, \code{..2}, \code{..3} etc
-}
+\item A named function, e.g. \code{mean}.
+\item An anonymous function, e.g. \verb{\\(x) x + 1} or \code{function(x) x + 1}.
+\item A formula, e.g. \code{~ .x + 1}. Use \code{.x} to refer to the first
+argument. No longer recommended.
+\item A string, integer, or list, e.g. \code{"idx"}, \code{1}, or \code{list("idx", 1)} which
+are shorthand for \verb{\\(x) pluck(x, "idx")}, \verb{\\(x) pluck(x, 1)}, and
+\verb{\\(x) pluck(x, "idx", 1)} respectively. Optionally supply \code{.default} to
+set a default value if the indexed element is \code{NULL} or does not exist.
+}}
 
-This syntax allows you to create very compact anonymous functions.
+\item{...}{Additional arguments passed on to the mapped function.
 
-If \strong{character vector}, \strong{numeric vector}, or \strong{list}, it is
-converted to an extractor function. Character vectors index by
-name and numeric vectors index by position; use a list to index
-by position and name at different levels. If a component is not
-present, the value of \code{.default} will be returned.}
+We now generally recommend against using \code{...} to pass additional
+(constant) arguments to \code{.f}. Instead use a shorthand anonymous function:
 
-\item{...}{Additional arguments passed on to the mapped function.}
+\if{html}{\out{<div class="sourceCode R">}}\preformatted{# Instead of
+x |> future_map(f, 1, 2, collapse = ",")
+# do:
+x |> future_map(\\(x) f(x, 1, 2, collapse = ","))
+}\if{html}{\out{</div>}}
+
+This makes it easier to understand which arguments belong to which
+function and will tend to yield better error messages.}
 
 \item{.options}{The \code{future} specific options to use with the workers. This
 must be the result from a call to \code{\link[=furrr_options]{furrr_options()}}.}
@@ -157,7 +161,7 @@ The output of \code{.f} will be automatically typed upwards, e.g. logical ->
 integer -> double -> character.
 }
 \description{
-These functions work exactly the same as \code{\link[purrr:map]{purrr::map()}} and its variants, but
+These functions work the same as \code{\link[purrr:map]{purrr::map()}} and its variants, but
 allow you to map in parallel.
 }
 \examples{

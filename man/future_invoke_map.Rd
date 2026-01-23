@@ -126,7 +126,7 @@ package.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-These functions work exactly the same as \code{\link[purrr:invoke]{purrr::invoke_map()}} functions, but
+These functions work the same as \code{\link[purrr:invoke]{purrr::invoke_map()}} functions, but
 allow you to invoke in parallel.
 }
 \examples{

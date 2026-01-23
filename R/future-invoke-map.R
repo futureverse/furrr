@@ -3,17 +3,24 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' These functions work exactly the same as [purrr::invoke_map()] functions, but
+#' These functions work the same as [purrr::invoke_map()] functions, but
 #' allow you to invoke in parallel.
 #'
-#' @inheritParams purrr::invoke_map
 #' @inheritParams future_map
 #'
 #' @param .f A list of functions.
+#'
 #' @param .x A list of argument-lists the same length as `.f` (or length 1). The
 #'   default argument, `list(NULL)`, will be recycled to the same length as
 #'   `.f`, and will call each function with no arguments (apart from any
 #'   supplied in `...`).
+#'
+#' @param ... Additional arguments passed to each function.
+#'
+#' @param .env Environment in which [do.call()] should
+#'   evaluate a constructed expression. This only matters if you pass
+#'   as `.f` the name of a function rather than its value, or as
+#'   `.x` symbols of objects rather than their values.
 #'
 #' @export
 #' @examples
