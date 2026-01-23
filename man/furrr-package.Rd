@@ -24,6 +24,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Henrik Bengtsson \email{henrikb@braju.com} (\href{https://orcid.org/0000-0002-7579-5165}{ORCID})
   \item Matt Dancho \email{mdancho@business-science.io}
 }
 
