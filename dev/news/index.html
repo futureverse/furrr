@@ -48,7 +48,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="features--fixes-development-version">Features / Fixes<a class="anchor" aria-label="anchor" href="#features--fixes-development-version"></a></h3>
-<ul><li><p>Fixed a rare issue where the deprecated <code>.progress</code> bar may cause an integer overflow with extremely long inputs (<a href="https://github.com/futureverse/furrr/issues/288" class="external-link">#288</a>).</p></li>
+<ul><li><p>furrr now looks up the purrr mapping function on the worker itself, rather than sending over its own copy of the function. This avoids possible issues when you have, say, purrr 1.0.0 locally but purrr 0.3.5 on the worker, where the internals of the purrr function may have changed between the two versions (<a href="https://github.com/futureverse/furrr/issues/253" class="external-link">#253</a>).</p></li>
+<li><p>Fixed a rare issue where the deprecated <code>.progress</code> bar may cause an integer overflow with extremely long inputs (<a href="https://github.com/futureverse/furrr/issues/288" class="external-link">#288</a>).</p></li>
 <li><p>Detangled furrr’s documentation from purrr’s to avoid some documentation inheritance issues (<a href="https://github.com/futureverse/furrr/issues/286" class="external-link">#286</a>).</p></li>
 <li><p>Fixed an issue where generating random seeds could sporadically fail (<a href="https://github.com/futureverse/furrr/issues/271" class="external-link">#271</a>, <a href="https://github.com/HenrikBengtsson" class="external-link">@HenrikBengtsson</a>).</p></li>
 <li><p>Updated documentation examples and vignettes to use the base R pipe (<a href="https://github.com/futureverse/furrr/issues/285" class="external-link">#285</a>, <a href="https://github.com/HenrikBengtsson" class="external-link">@HenrikBengtsson</a>).</p></li>

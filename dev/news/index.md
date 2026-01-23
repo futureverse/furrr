@@ -9,6 +9,13 @@
 
 ### Features / Fixes
 
+- furrr now looks up the purrr mapping function on the worker itself,
+  rather than sending over its own copy of the function. This avoids
+  possible issues when you have, say, purrr 1.0.0 locally but purrr
+  0.3.5 on the worker, where the internals of the purrr function may
+  have changed between the two versions
+  ([\#253](https://github.com/futureverse/furrr/issues/253)).
+
 - Fixed a rare issue where the deprecated `.progress` bar may cause an
   integer overflow with extremely long inputs
   ([\#288](https://github.com/futureverse/furrr/issues/288)).
