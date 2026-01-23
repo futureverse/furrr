@@ -15,7 +15,7 @@ furrr_test_that("future_modify() is not stable when returning `NULL`", {
   expect_identical(
     future_modify(
       list(1, 2),
-      ~if (.x == 1) {
+      ~ if (.x == 1) {
         NULL
       } else {
         .x
@@ -65,35 +65,35 @@ furrr_test_that("future_modify_at() variants works", {
 # future_modify_if()
 
 furrr_test_that("future_modify_if() default works", {
-  expect_identical(future_modify_if(list(1, 2), ~.x == 1, ~3), list(3, 2))
+  expect_identical(future_modify_if(list(1, 2), ~ .x == 1, ~3), list(3, 2))
   expect_identical(
-    future_modify_if(data.frame(x = 1, y = 2), ~.x == 1, ~3),
+    future_modify_if(data.frame(x = 1, y = 2), ~ .x == 1, ~3),
     data.frame(x = 3, y = 2)
   )
 })
 
 furrr_test_that("future_modify_if() `.else` works for default", {
   expect_identical(
-    future_modify_if(list(1, 2, 1, 4), ~.x == 1, ~3, .else = ~4),
+    future_modify_if(list(1, 2, 1, 4), ~ .x == 1, ~3, .else = ~4),
     list(3, 4, 3, 4)
   )
 })
 
 furrr_test_that("future_modify_if() variants works", {
   expect_identical(
-    future_modify_if(c(1L, 2L, 3L), ~.x == 1L, ~2L, .else = ~3L),
+    future_modify_if(c(1L, 2L, 3L), ~ .x == 1L, ~2L, .else = ~3L),
     c(2L, 3L, 3L)
   )
   expect_identical(
-    future_modify_if(c(1, 2, 3), ~.x == 1, ~2, .else = ~3),
+    future_modify_if(c(1, 2, 3), ~ .x == 1, ~2, .else = ~3),
     c(2, 3, 3)
   )
   expect_identical(
-    future_modify_if(c("a", "b", "c"), ~.x == "a", toupper, .else = ~"d"),
+    future_modify_if(c("a", "b", "c"), ~ .x == "a", toupper, .else = ~"d"),
     c("A", "d", "d")
   )
   expect_identical(
-    future_modify_if(c(TRUE, FALSE, TRUE), ~.x == TRUE, ~TRUE, .else = ~NA),
+    future_modify_if(c(TRUE, FALSE, TRUE), ~ .x == TRUE, ~TRUE, .else = ~NA),
     c(TRUE, NA, TRUE)
   )
 })
