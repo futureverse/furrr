@@ -59,16 +59,6 @@ future_invoke_map_lgl(
   .progress = FALSE
 )
 
-future_invoke_map_raw(
-  .f,
-  .x = list(NULL),
-  ...,
-  .env = NULL,
-  .options = furrr_options(),
-  .env_globals = parent.frame(),
-  .progress = FALSE
-)
-
 future_invoke_map_dfr(
   .f,
   .x = list(NULL),

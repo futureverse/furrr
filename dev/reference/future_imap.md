@@ -52,15 +52,6 @@ future_imap_lgl(
   .progress = FALSE
 )
 
-future_imap_raw(
-  .x,
-  .f,
-  ...,
-  .options = furrr_options(),
-  .env_globals = parent.frame(),
-  .progress = FALSE
-)
-
 future_imap_dfr(
   .x,
   .f,

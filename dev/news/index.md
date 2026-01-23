@@ -4,6 +4,11 @@
 
 ### Breaking changes
 
+- All `*_raw()` variants from purrr have been removed, such as
+  `future_map_raw()`. purrr 1.0.0 has deprecated these, they have
+  limited use, and as far as we can tell no packages were using them
+  ([\#298](https://github.com/futureverse/furrr/issues/298)).
+
 - `future_options()` has been removed. It has been defunct since furrr
   0.3.0 (May 2022).
 
@@ -241,7 +246,7 @@ CRAN release: 2020-10-12
   ([\#132](https://github.com/futureverse/furrr/issues/132)).
 
 - All `*_raw()` variants from purrr have been added, such as
-  [`future_map_raw()`](https://furrr.futureverse.org/dev/reference/future_map.md)
+  `future_map_raw()`
   ([\#122](https://github.com/futureverse/furrr/issues/122)).
 
 - All furrr functions gained a new argument, `.env_globals`, which

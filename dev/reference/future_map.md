@@ -52,15 +52,6 @@ future_map_lgl(
   .progress = FALSE
 )
 
-future_map_raw(
-  .x,
-  .f,
-  ...,
-  .options = furrr_options(),
-  .env_globals = parent.frame(),
-  .progress = FALSE
-)
-
 future_map_dfr(
   .x,
   .f,

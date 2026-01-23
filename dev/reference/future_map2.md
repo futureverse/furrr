@@ -60,16 +60,6 @@ future_map2_lgl(
   .progress = FALSE
 )
 
-future_map2_raw(
-  .x,
-  .y,
-  .f,
-  ...,
-  .options = furrr_options(),
-  .env_globals = parent.frame(),
-  .progress = FALSE
-)
-
 future_map2_dfr(
   .x,
   .y,
@@ -128,15 +118,6 @@ future_pmap_int(
 )
 
 future_pmap_lgl(
-  .l,
-  .f,
-  ...,
-  .options = furrr_options(),
-  .env_globals = parent.frame(),
-  .progress = FALSE
-)
-
-future_pmap_raw(
   .l,
   .f,
   ...,
