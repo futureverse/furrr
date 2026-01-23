@@ -67,8 +67,9 @@ then each future is assigned a label as \code{{prefix}-{chunk-id}}. If \code{NUL
 no labels are used.}
 }
 \description{
-These options fine tune furrr functions, such as \code{\link[=future_map]{future_map()}}. They
-are either used by furrr directly, or are passed on to \code{\link[future:future]{future::future()}}.
+\code{furrr_options()} returns an object that can be supplied as the \code{.options}
+argument for furrr functions, such as \code{\link[=future_map]{future_map()}}. The options are either
+used by furrr directly, or are passed on to \code{\link[future:future]{future::future()}}.
 }
 \section{Global variables}{
 

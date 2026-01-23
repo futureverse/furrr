@@ -1,7 +1,8 @@
 #' Options to fine tune furrr
 #'
-#' These options fine tune furrr functions, such as [future_map()]. They
-#' are either used by furrr directly, or are passed on to [future::future()].
+#' `furrr_options()` returns an object that can be supplied as the `.options`
+#' argument for furrr functions, such as [future_map()]. The options are either
+#' used by furrr directly, or are passed on to [future::future()].
 #'
 #' @param ... These dots are reserved for future extensibility and must
 #'   be empty.
