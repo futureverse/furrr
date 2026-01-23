@@ -1,6 +1,6 @@
 # Modify elements selectively via futures
 
-These functions work exactly the same as
+These functions work the same as
 [`purrr::modify()`](https://purrr.tidyverse.org/reference/modify.html)
 functions, but allow you to modify in parallel.
 
@@ -42,34 +42,28 @@ future_modify_if(
 
 - .x:
 
-  A list or atomic vector.
+  A vector.
 
 - .f:
 
-  A function, formula, or vector (not necessarily atomic).
-
-  If a **function**, it is used as is.
-
-  If a **formula**, e.g. `~ .x + 2`, it is converted to a function.
-  There are three ways to refer to the arguments:
-
-  - For a single argument function, use `.`
-
-  - For a two argument function, use `.x` and `.y`
-
-  - For more arguments, use `..1`, `..2`, `..3` etc
-
-  This syntax allows you to create very compact anonymous functions.
-
-  If **character vector**, **numeric vector**, or **list**, it is
-  converted to an extractor function. Character vectors index by name
-  and numeric vectors index by position; use a list to index by position
-  and name at different levels. If a component is not present, the value
-  of `.default` will be returned.
+  A function specified in the same way as the corresponding map
+  function.
 
 - ...:
 
   Additional arguments passed on to the mapped function.
+
+  We now generally recommend against using `...` to pass additional
+  (constant) arguments to `.f`. Instead use a shorthand anonymous
+  function:
+
+      # Instead of
+      x |> future_map(f, 1, 2, collapse = ",")
+      # do:
+      x |> future_map(\(x) f(x, 1, 2, collapse = ","))
+
+  This makes it easier to understand which arguments belong to which
+  function and will tend to yield better error messages.
 
 - .options:
 
@@ -96,11 +90,12 @@ future_modify_if(
 
 - .at:
 
-  A character vector of names, positive numeric vector of positions to
-  include, or a negative numeric vector of positions to exlude. Only
-  those elements corresponding to `.at` will be modified. If the
-  `tidyselect` package is installed, you can use `vars()` and the
-  `tidyselect` helpers to select elements.
+  A logical, integer, or character vector giving the elements to select.
+  Alternatively, a function that takes a vector of names, and returns a
+  logical, integer, or character vector of elements to select.
+
+  **\[deprecated\]**: if the tidyselect package is installed, you can
+  use `vars()` and tidyselect helpers to select elements.
 
 - .p:
 

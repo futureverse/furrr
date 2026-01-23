@@ -2,7 +2,7 @@
 
 **\[deprecated\]**
 
-These functions work exactly the same as
+These functions work the same as
 [`purrr::invoke_map()`](https://purrr.tidyverse.org/reference/invoke.html)
 functions, but allow you to invoke in parallel.
 

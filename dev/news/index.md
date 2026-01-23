@@ -2,6 +2,10 @@
 
 ## furrr (development version)
 
+- Detangled furrr’s documentation from purrr’s to avoid some
+  documentation inheritance issues
+  ([\#286](https://github.com/futureverse/furrr/issues/286)).
+
 - Fixed an issue where generating random seeds could sporadically fail
   ([\#271](https://github.com/futureverse/furrr/issues/271),
   [@HenrikBengtsson](https://github.com/HenrikBengtsson)).

@@ -1,6 +1,6 @@
 # Map over multiple inputs simultaneously via futures
 
-These functions work exactly the same as
+These functions work the same as
 [`purrr::map2()`](https://purrr.tidyverse.org/reference/map2.html) and
 its variants, but allow you to map in parallel. Note that "parallel" as
 described in purrr is just saying that you are working with multiple
@@ -188,34 +188,37 @@ future_pwalk(
 
 - .x, .y:
 
-  Vectors of the same length. A vector of length 1 will be recycled.
+  A pair of vectors, usually the same length. If not, a vector of length
+  1 will be recycled to the length of the other.
 
 - .f:
 
-  A function, formula, or vector (not necessarily atomic).
+  A function, specified in one of the following ways:
 
-  If a **function**, it is used as is.
+  - A named function.
 
-  If a **formula**, e.g. `~ .x + 2`, it is converted to a function.
-  There are three ways to refer to the arguments:
+  - An anonymous function, e.g. `\(x, y) x + y` or
+    `function(x, y) x + y`.
 
-  - For a single argument function, use `.`
-
-  - For a two argument function, use `.x` and `.y`
-
-  - For more arguments, use `..1`, `..2`, `..3` etc
-
-  This syntax allows you to create very compact anonymous functions.
-
-  If **character vector**, **numeric vector**, or **list**, it is
-  converted to an extractor function. Character vectors index by name
-  and numeric vectors index by position; use a list to index by position
-  and name at different levels. If a component is not present, the value
-  of `.default` will be returned.
+  - A formula, e.g. `~ .x + .y`. Use `.x` to refer to the current
+    element of `x` and `.y` to refer to the current element of `y`. No
+    longer recommended.
 
 - ...:
 
   Additional arguments passed on to the mapped function.
+
+  We now generally recommend against using `...` to pass additional
+  (constant) arguments to `.f`. Instead use a shorthand anonymous
+  function:
+
+      # Instead of
+      x |> future_map(f, 1, 2, collapse = ",")
+      # do:
+      x |> future_map(\(x) f(x, 1, 2, collapse = ","))
+
+  This makes it easier to understand which arguments belong to which
+  function and will tend to yield better error messages.
 
 - .options:
 
@@ -251,9 +254,15 @@ future_pwalk(
 
 - .l:
 
-  A list of vectors, such as a data frame. The length of `.l` determines
-  the number of arguments that `.f` will be called with. List names will
-  be used if present.
+  A list of vectors. The length of `.l` determines the number of
+  arguments that `.f` will be called with. Arguments will be supply by
+  position if unnamed, and by name if named.
+
+  Vectors of length 1 will be recycled to any length; all other elements
+  must be have the same length.
+
+  A data frame is an important special case of `.l`. It will cause `.f`
+  to be called once for each row.
 
 ## Value
 

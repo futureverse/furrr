@@ -1,6 +1,6 @@
 # Apply a function to each element of a vector, and its index via futures
 
-These functions work exactly the same as
+These functions work the same as
 [`purrr::imap()`](https://purrr.tidyverse.org/reference/imap.html)
 functions, but allow you to map in parallel.
 
@@ -98,30 +98,32 @@ future_iwalk(
 
 - .f:
 
-  A function, formula, or vector (not necessarily atomic).
+  A function, specified in one of the following ways:
 
-  If a **function**, it is used as is.
+  - A named function, e.g. `paste`.
 
-  If a **formula**, e.g. `~ .x + 2`, it is converted to a function.
-  There are three ways to refer to the arguments:
+  - An anonymous function, e.g. `\(x, idx) x + idx` or
+    `function(x, idx) x + idx`.
 
-  - For a single argument function, use `.`
-
-  - For a two argument function, use `.x` and `.y`
-
-  - For more arguments, use `..1`, `..2`, `..3` etc
-
-  This syntax allows you to create very compact anonymous functions.
-
-  If **character vector**, **numeric vector**, or **list**, it is
-  converted to an extractor function. Character vectors index by name
-  and numeric vectors index by position; use a list to index by position
-  and name at different levels. If a component is not present, the value
-  of `.default` will be returned.
+  - A formula, e.g. `~ .x + .y`. Use `.x` to refer to the current
+    element and `.y` to refer to the current index. No longer
+    recommended.
 
 - ...:
 
   Additional arguments passed on to the mapped function.
+
+  We now generally recommend against using `...` to pass additional
+  (constant) arguments to `.f`. Instead use a shorthand anonymous
+  function:
+
+      # Instead of
+      x |> future_map(f, 1, 2, collapse = ",")
+      # do:
+      x |> future_map(\(x) f(x, 1, 2, collapse = ","))
+
+  This makes it easier to understand which arguments belong to which
+  function and will tend to yield better error messages.
 
 - .options:
 
