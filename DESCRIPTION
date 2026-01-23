@@ -18,7 +18,6 @@ Depends:
 Imports:
     globals (>= 0.14.0),
     lifecycle (>= 1.0.1),
-    parallelly (>= 1.46.1),
     purrr (>= 0.3.4),
     rlang (>= 1.0.2),
     vctrs (>= 0.4.1)
@@ -28,6 +27,7 @@ Suggests:
     dplyr (>= 0.7.4),
     knitr,
     listenv (>= 0.6.0),
+    parallelly (>= 1.46.1),
     rmarkdown,
     testthat (>= 3.0.0),
     tidyselect,
