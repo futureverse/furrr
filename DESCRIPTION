@@ -34,8 +34,7 @@ Suggests:
     testthat (>= 3.3.2),
     tidyselect,
     withr
-Config/Needs/website:
-    progressr
+Config/Needs/website:progressr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
