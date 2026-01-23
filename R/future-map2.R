@@ -88,7 +88,7 @@ future_map2 <- function(
     options = .options,
     progress = .progress,
     type = "list",
-    map_fn = purrr::map2,
+    purrr_fn_name = "map2",
     env_globals = .env_globals
   )
 }
@@ -112,7 +112,7 @@ future_map2_chr <- function(
     options = .options,
     progress = .progress,
     type = "character",
-    map_fn = purrr::map2_chr,
+    purrr_fn_name = "map2_chr",
     env_globals = .env_globals
   )
 }
@@ -136,7 +136,7 @@ future_map2_dbl <- function(
     options = .options,
     progress = .progress,
     type = "double",
-    map_fn = purrr::map2_dbl,
+    purrr_fn_name = "map2_dbl",
     env_globals = .env_globals
   )
 }
@@ -160,7 +160,7 @@ future_map2_int <- function(
     options = .options,
     progress = .progress,
     type = "integer",
-    map_fn = purrr::map2_int,
+    purrr_fn_name = "map2_int",
     env_globals = .env_globals
   )
 }
@@ -184,7 +184,7 @@ future_map2_lgl <- function(
     options = .options,
     progress = .progress,
     type = "logical",
-    map_fn = purrr::map2_lgl,
+    purrr_fn_name = "map2_lgl",
     env_globals = .env_globals
   )
 }
@@ -208,7 +208,7 @@ future_map2_raw <- function(
     options = .options,
     progress = .progress,
     type = "raw",
-    map_fn = purrr::map2_raw,
+    purrr_fn_name = "map2_raw",
     env_globals = .env_globals
   )
 }

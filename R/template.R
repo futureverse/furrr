@@ -5,7 +5,7 @@ furrr_map_template <- function(
   options,
   progress,
   type,
-  map_fn,
+  purrr_fn_name,
   env_globals
 ) {
   n <- length(x)
@@ -22,10 +22,10 @@ furrr_map_template <- function(
   expr_progress_setup <- make_expr_progress_setup(progress)
   expr_progress_update <- make_expr_progress_update(progress)
 
-  walk <- identical(map_fn, purrr::walk)
+  walk <- identical(purrr_fn_name, "walk")
 
   if (walk) {
-    map_fn <- purrr::map
+    purrr_fn_name <- "map"
   }
 
   expr_out <- make_expr_out(walk)
@@ -45,6 +45,13 @@ furrr_map_template <- function(
       !!expr_out
     }
 
+    ...furrr_purrr_fn <- get(
+      !!purrr_fn_name,
+      envir = asNamespace("purrr"),
+      mode = "function",
+      inherits = FALSE
+    )
+
     args <- list(
       .x = ...furrr_chunk_x,
       .f = ...furrr_fn_wrapper
@@ -52,7 +59,7 @@ furrr_map_template <- function(
 
     args <- c(args, ...furrr_dots)
 
-    do.call(...furrr_map_fn, args)
+    do.call(...furrr_purrr_fn, args)
   })
 
   furrr_template(
@@ -63,7 +70,6 @@ furrr_map_template <- function(
     options = options,
     progress = progress,
     type = type,
-    map_fn = map_fn,
     names = names,
     env_globals = env_globals,
     expr = expr,
@@ -85,7 +91,7 @@ furrr_map2_template <- function(
   options,
   progress,
   type,
-  map_fn,
+  purrr_fn_name,
   env_globals
 ) {
   args <- list(x, y)
@@ -107,10 +113,10 @@ furrr_map2_template <- function(
   expr_progress_setup <- make_expr_progress_setup(progress)
   expr_progress_update <- make_expr_progress_update(progress)
 
-  walk <- identical(map_fn, purrr::walk2)
+  walk <- identical(purrr_fn_name, "walk2")
 
   if (walk) {
-    map_fn <- purrr::map2
+    purrr_fn_name <- "map2"
   }
 
   expr_out <- make_expr_out(walk)
@@ -131,6 +137,13 @@ furrr_map2_template <- function(
       !!expr_out
     }
 
+    ...furrr_purrr_fn <- get(
+      !!purrr_fn_name,
+      envir = asNamespace("purrr"),
+      mode = "function",
+      inherits = FALSE
+    )
+
     args <- list(
       .x = ...furrr_chunk_x,
       .y = ...furrr_chunk_y,
@@ -139,7 +152,7 @@ furrr_map2_template <- function(
 
     args <- c(args, ...furrr_dots)
 
-    do.call(...furrr_map_fn, args)
+    do.call(...furrr_purrr_fn, args)
   })
 
   furrr_template(
@@ -150,7 +163,6 @@ furrr_map2_template <- function(
     options = options,
     progress = progress,
     type = type,
-    map_fn = map_fn,
     names = names,
     env_globals = env_globals,
     expr = expr,
@@ -171,7 +183,7 @@ furrr_pmap_template <- function(
   options,
   progress,
   type,
-  map_fn,
+  purrr_fn_name,
   env_globals
 ) {
   if (is.data.frame(l)) {
@@ -200,10 +212,10 @@ furrr_pmap_template <- function(
   expr_progress_setup <- make_expr_progress_setup(progress)
   expr_progress_update <- make_expr_progress_update(progress)
 
-  walk <- identical(map_fn, purrr::pwalk)
+  walk <- identical(purrr_fn_name, "pwalk")
 
   if (walk) {
-    map_fn <- purrr::pmap
+    purrr_fn_name <- "pmap"
   }
 
   expr_out <- make_expr_out(walk)
@@ -223,6 +235,13 @@ furrr_pmap_template <- function(
       !!expr_out
     }
 
+    ...furrr_purrr_fn <- get(
+      !!purrr_fn_name,
+      envir = asNamespace("purrr"),
+      mode = "function",
+      inherits = FALSE
+    )
+
     args <- list(
       .l = ...furrr_chunk_l,
       .f = ...furrr_fn_wrapper
@@ -230,7 +249,7 @@ furrr_pmap_template <- function(
 
     args <- c(args, ...furrr_dots)
 
-    do.call(...furrr_map_fn, args)
+    do.call(...furrr_purrr_fn, args)
   })
 
   furrr_template(
@@ -241,7 +260,6 @@ furrr_pmap_template <- function(
     options = options,
     progress = progress,
     type = type,
-    map_fn = map_fn,
     names = names,
     env_globals = env_globals,
     expr = expr,
@@ -263,7 +281,6 @@ furrr_template <- function(
   options,
   progress,
   type,
-  map_fn,
   names,
   env_globals,
   expr,
@@ -301,7 +318,6 @@ furrr_template <- function(
   gp <- get_globals_and_packages(
     options$globals,
     options$packages,
-    map_fn,
     fn,
     dots,
     env_globals
@@ -545,7 +561,6 @@ utils::globalVariables(
     "...furrr_out",
     "...furrr_chunk_args",
     "...furrr_fn",
-    "...furrr_map_fn",
     "...furrr_dots",
     "...furrr_globals_max_size",
     "...furrr_chunk_seeds",
