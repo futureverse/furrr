@@ -20,7 +20,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Davis Vaughan \email{davis@posit.co}
+\strong{Maintainer}: Davis Vaughan \email{davis@posit.co} (\href{https://orcid.org/0000-0003-4777-038X}{ORCID})
 
 Authors:
 \itemize{
