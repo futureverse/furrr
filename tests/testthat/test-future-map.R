@@ -78,8 +78,8 @@ furrr_test_that("future_map_dfr() works", {
   x <- c("a", "b", "c")
 
   expect_identical(
-    future_map_dfr(x, ~data.frame(x = .x)),
-    map_dfr(x, ~data.frame(x = .x))
+    future_map_dfr(x, ~ data.frame(x = .x)),
+    map_dfr(x, ~ data.frame(x = .x))
   )
 })
 
@@ -87,8 +87,8 @@ furrr_test_that("future_map_dfc() works", {
   x <- c("a", "b", "c")
 
   expect_identical(
-    future_map_dfc(x, ~as.data.frame(set_names(list(1), .x))),
-    map_dfc(x, ~as.data.frame(set_names(list(1), .x)))
+    future_map_dfc(x, ~ as.data.frame(set_names(list(1), .x))),
+    map_dfc(x, ~ as.data.frame(set_names(list(1), .x)))
   )
 })
 
@@ -128,22 +128,22 @@ furrr_test_that("future_map_if() works", {
   x <- list("a", "b", "c")
 
   expect_identical(
-    future_map_if(x, ~.x %in% c("a", "c"), ~3),
-    map_if(x, ~.x %in% c("a", "c"), ~3)
+    future_map_if(x, ~ .x %in% c("a", "c"), ~3),
+    map_if(x, ~ .x %in% c("a", "c"), ~3)
   )
 })
 
 furrr_test_that("names of `.x` are retained", {
   x <- list(a = "a", b = "b", c = "c")
-  expect_named(future_map_if(x, ~.x %in% c("a", "c"), ~3), c("a", "b", "c"))
+  expect_named(future_map_if(x, ~ .x %in% c("a", "c"), ~3), c("a", "b", "c"))
 })
 
 furrr_test_that("`.else` can be used", {
   x <- list("a", "b", "c")
 
   expect_identical(
-    future_map_if(x, ~.x %in% c("a", "c"), ~3, .else = ~-1),
-    map_if(x, ~.x %in% c("a", "c"), ~3, .else = ~-1)
+    future_map_if(x, ~ .x %in% c("a", "c"), ~3, .else = ~ -1),
+    map_if(x, ~ .x %in% c("a", "c"), ~3, .else = ~ -1)
   )
 })
 
@@ -156,7 +156,7 @@ furrr_test_that("Calling `~` from within `.f` works", {
     list(c = 5, d = 7)
   )
 
-  expect_identical(future_map(x, ~map(.x, ~.x)), x)
+  expect_identical(future_map(x, ~ map(.x, ~.x)), x)
 })
 
 furrr_test_that("Calling `~` from within `.f` inside a `mutate()` works (#7, #123)", {
@@ -168,7 +168,7 @@ furrr_test_that("Calling `~` from within `.f` inside a `mutate()` works (#7, #12
   df <- dplyr::tibble(x = x)
 
   expect_identical(
-    dplyr::mutate(df, x = future_map(x, ~map(.x, ~.x))),
+    dplyr::mutate(df, x = future_map(x, ~ map(.x, ~.x))),
     df
   )
 })
@@ -178,11 +178,11 @@ furrr_test_that("globals in `.x` are found (#16)", {
 
   x <- list(c(1, 2, NA), c(2, 3, 4))
 
-  fns1 <- map(x, ~purrr::partial(fn, x = .x))
-  fns2 <- map(x, ~function() fn(.x))
+  fns1 <- map(x, ~ purrr::partial(fn, x = .x))
+  fns2 <- map(x, ~ function() fn(.x))
 
-  expect_identical(future_map_dbl(fns1, ~.x()), c(3, 9))
-  expect_identical(future_map_dbl(fns2, ~.x()), c(3, 9))
+  expect_identical(future_map_dbl(fns1, ~ .x()), c(3, 9))
+  expect_identical(future_map_dbl(fns2, ~ .x()), c(3, 9))
 })
 
 test_that("globals in `.x` are only exported to workers that use them", {
@@ -212,7 +212,7 @@ test_that("globals in `.x` are only exported to workers that use them", {
   x <- list(my_wrapper1, my_wrapper2)
 
   expect_identical(
-    future_map_lgl(.x = x, .f = ~.x(c(1, NA))),
+    future_map_lgl(.x = x, .f = ~ .x(c(1, NA))),
     c(TRUE, FALSE)
   )
 })

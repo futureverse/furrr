@@ -71,11 +71,11 @@ test_that("can selectively export packages on multisession", {
   opts <- furrr_options(packages = "dplyr")
 
   expect_error(
-    future_map(1:2, ~tibble(x = .x))
+    future_map(1:2, ~ tibble(x = .x))
   )
 
   expect_identical(
-    future_map(1:2, ~tibble(x = .x), .options = opts),
+    future_map(1:2, ~ tibble(x = .x), .options = opts),
     list(dplyr::tibble(x = 1L), dplyr::tibble(x = 2L))
   )
 })
