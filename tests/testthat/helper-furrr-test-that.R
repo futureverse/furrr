@@ -34,7 +34,7 @@ furrr_test_that <- function(desc, code) {
 supported_strategies <- function() {
   strategies <- c("sequential", "multisession", "multicore")
 
-  if (!future::supportsMulticore()) {
+  if (!parallelly::supportsMulticore()) {
     strategies <- setdiff(strategies, "multicore")
   }
 
@@ -45,6 +45,6 @@ supported_max_cores <- function(strategy) {
   if (identical(strategy, "sequential")) {
     1L
   } else {
-    min(2L, future::availableCores())
+    min(2L, parallelly::availableCores())
   }
 }

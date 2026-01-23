@@ -18,6 +18,7 @@ Depends:
 Imports:
     globals (>= 0.14.0),
     lifecycle (>= 1.0.1),
+    parallelly (>= 1.46.1),
     purrr (>= 0.3.4),
     rlang (>= 1.0.2),
     vctrs (>= 0.4.1)
