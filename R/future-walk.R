@@ -15,7 +15,7 @@ future_walk <- function(
     options = .options,
     progress = .progress,
     type = "list",
-    map_fn = purrr::walk,
+    purrr_fn_name = "walk",
     env_globals = .env_globals
   )
 
@@ -41,7 +41,7 @@ future_walk2 <- function(
     options = .options,
     progress = .progress,
     type = "list",
-    map_fn = purrr::walk2,
+    purrr_fn_name = "walk2",
     env_globals = .env_globals
   )
 
@@ -65,7 +65,7 @@ future_pwalk <- function(
     options = .options,
     progress = .progress,
     type = "list",
-    map_fn = purrr::pwalk,
+    purrr_fn_name = "pwalk",
     env_globals = .env_globals
   )
 

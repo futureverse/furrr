@@ -23,7 +23,7 @@ furrr_test_that("`future_walk()` - template returns `NULL`s (#205)", {
   .env_globals <- environment()
 
   # `map()` template returns `.f` output
-  map_fn <- purrr::map
+  purrr_fn_name <- "map"
   out <- furrr_map_template(
     x = .x,
     fn = .f,
@@ -31,13 +31,13 @@ furrr_test_that("`future_walk()` - template returns `NULL`s (#205)", {
     options = .options,
     progress = .progress,
     type = "list",
-    map_fn = map_fn,
+    purrr_fn_name = purrr_fn_name,
     env_globals = .env_globals
   )
   expect_identical(out, list(1L, 2L))
 
   # `walk()` template returns `NULL`s
-  map_fn <- purrr::walk
+  purrr_fn_name <- "walk"
   out <- furrr_map_template(
     x = .x,
     fn = .f,
@@ -45,7 +45,7 @@ furrr_test_that("`future_walk()` - template returns `NULL`s (#205)", {
     options = .options,
     progress = .progress,
     type = "list",
-    map_fn = map_fn,
+    purrr_fn_name = purrr_fn_name,
     env_globals = .env_globals
   )
   expect_identical(out, list(NULL, NULL))
@@ -60,7 +60,7 @@ furrr_test_that("`future_walk2()` - template returns `NULL`s (#205)", {
   .env_globals <- environment()
 
   # `map2()` template returns `.f` output
-  map_fn <- purrr::map2
+  purrr_fn_name <- "map2"
   out <- furrr_map2_template(
     x = .x,
     y = .y,
@@ -69,13 +69,13 @@ furrr_test_that("`future_walk2()` - template returns `NULL`s (#205)", {
     options = .options,
     progress = .progress,
     type = "list",
-    map_fn = map_fn,
+    purrr_fn_name = purrr_fn_name,
     env_globals = .env_globals
   )
   expect_identical(out, list(c(1L, 3L), c(2L, 4L)))
 
   # `walk2()` template returns `NULL`s
-  map_fn <- purrr::walk2
+  purrr_fn_name <- "walk2"
   out <- furrr_map2_template(
     x = .x,
     y = .y,
@@ -84,7 +84,7 @@ furrr_test_that("`future_walk2()` - template returns `NULL`s (#205)", {
     options = .options,
     progress = .progress,
     type = "list",
-    map_fn = map_fn,
+    purrr_fn_name = purrr_fn_name,
     env_globals = .env_globals
   )
   expect_identical(out, list(NULL, NULL))
@@ -98,7 +98,7 @@ furrr_test_that("`future_pwalk()` - template returns `NULL`s (#205)", {
   .env_globals <- environment()
 
   # `pmap()` template returns `.f` output
-  map_fn <- purrr::pmap
+  purrr_fn_name <- "pmap"
   out <- furrr_pmap_template(
     l = .l,
     fn = .f,
@@ -106,13 +106,13 @@ furrr_test_that("`future_pwalk()` - template returns `NULL`s (#205)", {
     options = .options,
     progress = .progress,
     type = "list",
-    map_fn = map_fn,
+    purrr_fn_name = purrr_fn_name,
     env_globals = .env_globals
   )
   expect_identical(out, list(c(1L, 3L, 5L), c(2L, 4L, 6L)))
 
   # `pwalk()` template returns `NULL`s
-  map_fn <- purrr::pwalk
+  purrr_fn_name <- "pwalk"
   out <- furrr_pmap_template(
     l = .l,
     fn = .f,
@@ -120,7 +120,7 @@ furrr_test_that("`future_pwalk()` - template returns `NULL`s (#205)", {
     options = .options,
     progress = .progress,
     type = "list",
-    map_fn = map_fn,
+    purrr_fn_name = purrr_fn_name,
     env_globals = .env_globals
   )
   expect_identical(out, list(NULL, NULL))
