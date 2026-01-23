@@ -1,10 +1,19 @@
 # furrr (development version)
 
+## Features / Fixes
+
 * Detangled furrr's documentation from purrr's to avoid some documentation
   inheritance issues (#286).
 
 * Fixed an issue where generating random seeds could sporadically fail (#271,
   @HenrikBengtsson).
+
+* Updated documentation examples and vignettes to use the base R pipe
+  (#285, @HenrikBengtsson).
+
+## Version requirements
+
+* furrr now requires R >=4.1.0, which is in line with the tidyverse (#285).
 
 # furrr 0.3.1
 

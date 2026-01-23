@@ -72,18 +72,17 @@
 #'
 #' @export
 #' @examples
-#' library(magrittr)
 #' \donttest{plan(multisession, workers = 2)}
 #'
-#' 1:10 %>%
-#'   future_map(rnorm, n = 10, .options = furrr_options(seed = 123)) %>%
+#' 1:10 |>
+#'   future_map(rnorm, n = 10, .options = furrr_options(seed = 123)) |>
 #'   future_map_dbl(mean)
 #'
 #' # If each element of the output is a data frame, use
 #' # `future_map_dfr()` to row-bind them together:
-#' mtcars %>%
-#'   split(.$cyl) %>%
-#'   future_map(~ lm(mpg ~ wt, data = .x)) %>%
+#' mtcars |>
+#'   split(mtcars$cyl) |>
+#'   future_map(~ lm(mpg ~ wt, data = .x)) |>
 #'   future_map_dfr(~ as.data.frame(t(as.matrix(coef(.)))))
 #'
 #'

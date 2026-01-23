@@ -41,7 +41,7 @@ Imagine that you have some models that are going to take a long time to run, and
 First, we need code to run that we want to run on the instance. For simplicity, say we want to run 3 separate linear models on mtcars, split up by `gear`.
 
 ```{r, warning=FALSE, message=FALSE}
-by_gear <- mtcars %>%
+by_gear <- mtcars |>
   group_split(gear) 
 
 models <- map(by_gear, ~lm(mpg ~ cyl + hp + wt, data = .))
