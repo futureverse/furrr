@@ -26,7 +26,6 @@ Suggests:
     covr,
     dplyr (>= 1.1.4),
     knitr,
-    listenv (>= 0.10.0),
     parallelly (>= 1.46.1),
     rmarkdown,
     testthat (>= 3.3.2),
