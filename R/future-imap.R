@@ -12,7 +12,6 @@
 #'     `.y` to refer to the current index. No longer recommended.
 #'
 #' @inheritParams future_map
-#' @inheritParams purrr::imap
 #'
 #' @return
 #' A vector the same length as .x.

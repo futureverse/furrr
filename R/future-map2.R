@@ -6,12 +6,20 @@
 #' this case means that you can work on multiple inputs and process them all in
 #' parallel as well.
 #'
-#' @inheritParams future_imap
-#' @inheritParams purrr::map2
-#' @inheritParams purrr::pmap
+#' @inheritParams future_map
 #'
 #' @param .x,.y A pair of vectors, usually the same length. If not, a vector
 #'   of length 1 will be recycled to the length of the other.
+#'
+#' @param .l A list of vectors. The length of `.l` determines the number of
+#'   arguments that `.f` will be called with. Arguments will be supply by
+#'   position if unnamed, and by name if named.
+#'
+#'   Vectors of length 1 will be recycled to any length; all other elements
+#'   must be have the same length.
+#'
+#'   A data frame is an important special case of `.l`. It will cause `.f`
+#'   to be called once for each row.
 #'
 #' @param .f A function, specified in one of the following ways:
 #'

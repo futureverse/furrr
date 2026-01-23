@@ -8,8 +8,7 @@
 #' @param .f A function specified in the same way as the corresponding map
 #' function.
 #'
-#' @inheritParams future_map
-#' @inheritParams purrr::modify
+#' @inheritParams future_map_at
 #'
 #' @details
 #' From purrr:

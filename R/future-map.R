@@ -3,8 +3,7 @@
 #' These functions work the same as [purrr::map()] and its variants, but
 #' allow you to map in parallel.
 #'
-#' @inheritParams purrr::map
-#' @inheritParams purrr::map_dfr
+#' @param .x A list or atomic vector.
 #'
 #' @param .f A function, specified in one of the following ways:
 #'
@@ -16,6 +15,28 @@
 #'     are shorthand for `\(x) pluck(x, "idx")`, `\(x) pluck(x, 1)`, and
 #'     `\(x) pluck(x, "idx", 1)` respectively. Optionally supply `.default` to
 #'     set a default value if the indexed element is `NULL` or does not exist.
+#'
+#' @param ... Additional arguments passed on to the mapped function.
+#'
+#'   We now generally recommend against using `...` to pass additional
+#'   (constant) arguments to `.f`. Instead use a shorthand anonymous function:
+#'
+#'   ```R
+#'   # Instead of
+#'   x |> future_map(f, 1, 2, collapse = ",")
+#'   # do:
+#'   x |> future_map(\(x) f(x, 1, 2, collapse = ","))
+#'   ```
+#'
+#'   This makes it easier to understand which arguments belong to which
+#'   function and will tend to yield better error messages.
+#'
+#' @param .id Either a string or `NULL`. If a string, the output will contain
+#'   a variable with that name, storing either the name (if `.x` is named) or
+#'   the index (if `.x` is unnamed) of the input. If `NULL`, the default, no
+#'   variable will be created.
+#'
+#'   Only applies to `_dfr` variant.
 #'
 #' @param .env_globals The environment to look for globals required by `.x` and
 #'   `...`. Globals required by `.f` are looked up in the function environment
@@ -33,21 +54,6 @@
 #'   in a future version of furrr in favor of using the more robust
 #'   [progressr](https://CRAN.R-project.org/package=progressr)
 #'   package.
-#'
-#' @param ... Additional arguments passed on to the mapped function.
-#'
-#'   We now generally recommend against using `...` to pass additional
-#'   (constant) arguments to `.f`. Instead use a shorthand anonymous function:
-#'
-#'   ```R
-#'   # Instead of
-#'   x |> future_map(f, 1, 2, collapse = ",")
-#'   # do:
-#'   x |> future_map(\(x) f(x, 1, 2, collapse = ","))
-#'   ```
-#'
-#'   This makes it easier to understand which arguments belong to which
-#'   function and will tend to yield better error messages.
 #'
 #' @return All functions return a vector the same length as `.x`.
 #'
@@ -289,7 +295,24 @@ future_map_dfc <- function(
 #' [purrr::map_at()], but allow you to run them in parallel.
 #'
 #' @inheritParams future_map
-#' @inheritParams purrr::map_if
+#'
+#' @param .p A single predicate function, a formula describing such a
+#'   predicate function, or a logical vector of the same length as `.x`.
+#'   Alternatively, if the elements of `.x` are themselves lists of
+#'   objects, a string indicating the name of a logical element in the
+#'   inner lists. Only those elements where `.p` evaluates to
+#'   `TRUE` will be modified.
+#'
+#' @param .else A function applied to elements of `.x` for which `.p`
+#' returns `FALSE`.
+#'
+#' @param .at A logical, integer, or character vector giving the elements
+#'   to select. Alternatively, a function that takes a vector of names,
+#'   and returns a logical, integer, or character vector of elements to select.
+#'
+#'   `r lifecycle::badge("deprecated")`: if the tidyselect package is
+#'   installed, you can use `vars()` and tidyselect helpers to select
+#'   elements.
 #'
 #' @return Both functions return a list the same length as `.x` with the
 #' elements conditionally transformed.
@@ -346,7 +369,6 @@ future_map_if <- function(
 
 #' @rdname future_map_if
 #' @export
-#' @inheritParams purrr::map_at
 future_map_at <- function(
   .x,
   .at,
