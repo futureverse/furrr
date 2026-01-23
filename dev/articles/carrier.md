@@ -227,7 +227,7 @@ system.time({
   my_slow_fn()
 })
 #>    user  system elapsed 
-#>   0.331   0.311   1.420
+#>   0.454   0.361   1.738
 ```
 
 One way to avoid this is to use carrier to crate the function, isolating
@@ -252,5 +252,5 @@ system.time({
   my_crated_fn()
 })
 #>    user  system elapsed 
-#>   0.163   0.077   0.456
+#>   0.202   0.091   0.563
 ```

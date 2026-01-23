@@ -126,7 +126,7 @@ library(tictoc)
 plan(sequential)
 
 tic()
-nothingness <- future_map(c(2, 2, 2), ~Sys.sleep(.x))
+nothingness <- future_map(c(2, 2, 2), ~ Sys.sleep(.x))
 toc()
 #> 6.08 sec elapsed
 ```
@@ -138,7 +138,7 @@ toc()
 plan(multisession, workers = 3)
 
 tic()
-nothingness <- future_map(c(2, 2, 2), ~Sys.sleep(.x))
+nothingness <- future_map(c(2, 2, 2), ~ Sys.sleep(.x))
 toc()
 #> 2.212 sec elapsed
 ```
