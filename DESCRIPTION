@@ -24,12 +24,12 @@ Imports:
 Suggests:
     carrier,
     covr,
-    dplyr (>= 0.7.4),
+    dplyr (>= 1.1.4),
     knitr,
-    listenv (>= 0.6.0),
+    listenv (>= 0.10.0),
     parallelly (>= 1.46.1),
     rmarkdown,
-    testthat (>= 3.0.0),
+    testthat (>= 3.3.2),
     tidyselect,
     withr
 Config/Needs/website:
