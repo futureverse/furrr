@@ -9,6 +9,10 @@
 
 ### Features / Fixes
 
+- Fixed a rare issue where the deprecated `.progress` bar may cause an
+  integer overflow with extremely long inputs
+  ([\#288](https://github.com/futureverse/furrr/issues/288)).
+
 - Detangled furrr’s documentation from purrr’s to avoid some
   documentation inheritance issues
   ([\#286](https://github.com/futureverse/furrr/issues/286)).
