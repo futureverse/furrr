@@ -17,6 +17,7 @@ Useful links:
 ## Author
 
 **Maintainer**: Davis Vaughan <davis@posit.co>
+([ORCID](https://orcid.org/0000-0003-4777-038X))
 
 Authors:
 

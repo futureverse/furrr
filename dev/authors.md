@@ -3,6 +3,7 @@
 ## Authors
 
 - **Davis Vaughan**. Author, maintainer.
+  [](https://orcid.org/0000-0003-4777-038X)
 
 - **Henrik Bengtsson**. Author.
   [](https://orcid.org/0000-0002-7579-5165)
