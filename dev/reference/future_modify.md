@@ -126,7 +126,6 @@ preserve the length of the input.
 ## Examples
 
 ``` r
-library(magrittr)
 plan(multisession, workers = 2)
 
 # Convert each col to character, in parallel
@@ -165,8 +164,8 @@ future_modify(mtcars, as.character)
 #> Maserati Bora         15   8   301 335 3.54  3.57  14.6  0  1    5    8
 #> Volvo 142E          21.4   4   121 109 4.11  2.78  18.6  1  1    4    2
 
-iris %>%
- future_modify_if(is.factor, as.character) %>%
+iris |>
+ future_modify_if(is.factor, as.character) |>
  str()
 #> 'data.frame':    150 obs. of  5 variables:
 #>  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
@@ -175,8 +174,8 @@ iris %>%
 #>  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
 #>  $ Species     : chr  "setosa" "setosa" "setosa" "setosa" ...
 
-mtcars %>%
-  future_modify_at(c(1, 4, 5), as.character) %>%
+mtcars |>
+  future_modify_at(c(1, 4, 5), as.character) |>
   str()
 #> 'data.frame':    32 obs. of  11 variables:
 #>  $ mpg : chr  "21" "21" "22.8" "21.4" ...

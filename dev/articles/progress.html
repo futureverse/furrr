@@ -249,8 +249,8 @@ call. For example, this doesn’t work:</p>
 dplyr is far from perfect. The only way to use them together currently
 is to wrap an entire dplyr pipeline in <code><a href="https://progressr.futureverse.org/reference/with_progress.html" class="external-link">with_progress()</a></code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cars</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">carb</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">cars</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">carb</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_nest.html" class="external-link">group_nest</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model_fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">p</span><span class="op">)</span> <span class="op">{</span></span>
@@ -271,7 +271,7 @@ expression, and then call <code><a href="../reference/future_map.html">future_ma
 <span><span class="fu"><a href="https://progressr.futureverse.org/reference/with_progress.html" class="external-link">with_progress</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://progressr.futureverse.org/reference/progressor.html" class="external-link">progressor</a></span><span class="op">(</span>steps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="va">cars2</span> <span class="op">&lt;-</span> <span class="va">cars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">cars2</span> <span class="op">&lt;-</span> <span class="va">cars</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>mod <span class="op">=</span> <span class="fu"><a href="../reference/future_map.html">future_map</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">model_fn</span>, p <span class="op">=</span> <span class="va">p</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; |================================================                    |  67%</span></span></code></pre></div>
@@ -287,7 +287,7 @@ once:</p>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu"><a href="https://progressr.futureverse.org/reference/with_progress.html" class="external-link">with_progress</a></span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="va">cars2</span> <span class="op">&lt;-</span> <span class="va">cars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">cars2</span> <span class="op">&lt;-</span> <span class="va">cars</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>mod <span class="op">=</span> <span class="fu">model_mapper</span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; |================================================                    |  67%</span></span></code></pre></div>
@@ -298,7 +298,7 @@ to <code>model_mapper()</code> will signal updates, but the second
 won’t.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://progressr.futureverse.org/reference/with_progress.html" class="external-link">with_progress</a></span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="va">cars2</span> <span class="op">&lt;-</span> <span class="va">cars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">cars2</span> <span class="op">&lt;-</span> <span class="va">cars</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>      mod1 <span class="op">=</span> <span class="fu">model_mapper</span><span class="op">(</span><span class="va">data</span><span class="op">)</span>,</span>
 <span>      mod2 <span class="op">=</span> <span class="fu">model_mapper</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
@@ -319,7 +319,7 @@ bar.</p>
 <span><span class="fu"><a href="https://progressr.futureverse.org/reference/with_progress.html" class="external-link">with_progress</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://progressr.futureverse.org/reference/progressor.html" class="external-link">progressor</a></span><span class="op">(</span>steps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="va">cars2</span> <span class="op">&lt;-</span> <span class="va">cars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">cars2</span> <span class="op">&lt;-</span> <span class="va">cars</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>      mod1 <span class="op">=</span> <span class="fu"><a href="../reference/future_map.html">future_map</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">model_fn</span>, p <span class="op">=</span> <span class="va">p</span><span class="op">)</span>,</span>
 <span>      mod2 <span class="op">=</span> <span class="fu"><a href="../reference/future_map.html">future_map</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">model_fn</span>, p <span class="op">=</span> <span class="va">p</span><span class="op">)</span></span>

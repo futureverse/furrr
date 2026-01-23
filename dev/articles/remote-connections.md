@@ -58,7 +58,7 @@ simplicity, say we want to run 3 separate linear models on mtcars, split
 up by `gear`.
 
 ``` r
-by_gear <- mtcars %>%
+by_gear <- mtcars |>
   group_split(gear) 
 
 models <- map(by_gear, ~lm(mpg ~ cyl + hp + wt, data = .))

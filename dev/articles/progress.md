@@ -205,8 +205,8 @@ them together currently is to wrap an entire dplyr pipeline in
 [`with_progress()`](https://progressr.futureverse.org/reference/with_progress.html).
 
 ``` r
-cars <- mtcars %>%
-  group_by(carb) %>%
+cars <- mtcars |>
+  group_by(carb) |>
   group_nest()
 
 model_fn <- function(data, p) {
@@ -231,7 +231,7 @@ plan(multisession, workers = 2)
 with_progress({
   p <- progressor(steps = nrow(cars))
   
-  cars2 <- cars %>%
+  cars2 <- cars |>
     mutate(mod = future_map(data, model_fn, p = p))
 })
 #> |================================================                    |  67%
@@ -251,7 +251,7 @@ model_mapper <- function(data) {
 }
 
 with_progress({
-  cars2 <- cars %>%
+  cars2 <- cars |>
     mutate(mod = model_mapper(data))
 })
 #> |================================================                    |  67%
@@ -265,7 +265,7 @@ signal updates, but the second won’t.
 
 ``` r
 with_progress({
-  cars2 <- cars %>%
+  cars2 <- cars |>
     mutate(
       mod1 = model_mapper(data),
       mod2 = model_mapper(data)
@@ -290,7 +290,7 @@ plan(multisession, workers = 2)
 with_progress({
   p <- progressor(steps = nrow(cars) * 2)
   
-  cars2 <- cars %>%
+  cars2 <- cars |>
     mutate(
       mod1 = future_map(data, model_fn, p = p),
       mod2 = future_map(data, model_fn, p = p)

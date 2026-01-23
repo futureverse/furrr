@@ -165,8 +165,7 @@ length of the input.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Convert each col to character, in parallel</span></span></span>
 <span class="r-in"><span><span class="fu">future_modify</span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">as.character</span><span class="op">)</span></span></span>
@@ -204,8 +203,8 @@ length of the input.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora         15   8   301 335 3.54  3.57  14.6  0  1    5    8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Volvo 142E          21.4   4   121 109 4.11  2.78  18.6  1  1    4    2</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span> <span class="fu">future_modify_if</span><span class="op">(</span><span class="va">is.factor</span>, <span class="va">as.character</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">iris</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span> <span class="fu">future_modify_if</span><span class="op">(</span><span class="va">is.factor</span>, <span class="va">as.character</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'data.frame':	150 obs. of  5 variables:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...</span>
@@ -214,8 +213,8 @@ length of the input.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ Species     : chr  "setosa" "setosa" "setosa" "setosa" ...</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>  <span class="fu">future_modify_at</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">future_modify_at</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'data.frame':	32 obs. of  11 variables:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ mpg : chr  "21" "21" "22.8" "21.4" ...</span>

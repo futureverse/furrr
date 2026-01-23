@@ -188,7 +188,7 @@ plan(multisession, workers = 2)
 
 t1 <- proc.time()
 
-df %>%
+df |>
   mutate(y = future_map_dbl(x, mean))
 #> # A tibble: 100 × 3
 #> # Groups:   g [100]
@@ -212,7 +212,7 @@ plan(sequential)
 
 t2 - t1
 #>    user  system elapsed 
-#>   1.055   0.029   5.592
+#>   1.087   0.029   5.629
 ```
 
 The issue here is that the grouped nature of the data frame prevents
@@ -235,8 +235,8 @@ plan(multisession, workers = 2)
 
 t1 <- proc.time()
 
-df %>%
-  ungroup() %>%
+df |>
+  ungroup() |>
   mutate(y = future_map_dbl(x, mean))
 #> # A tibble: 100 × 3
 #>        g x              y
@@ -259,7 +259,7 @@ plan(sequential)
 
 t2 - t1
 #>    user  system elapsed 
-#>   0.037   0.001   0.251
+#>   0.041   0.000   0.263
 ```
 
 ## Graphics devices
@@ -338,13 +338,13 @@ system.time(
   my_fast_fn()
 )
 #>    user  system elapsed 
-#>   0.023   0.002   0.240
+#>   0.024   0.000   0.240
 
 system.time(
   my_slow_fn()
 )
 #>    user  system elapsed 
-#>   0.379   0.335   1.456
+#>   0.340   0.298   1.277
 
 plan(sequential)
 ```
@@ -396,7 +396,7 @@ system.time(
   my_not_so_slow_fn()
 )
 #>    user  system elapsed 
-#>   0.199   0.055   0.466
+#>   0.172   0.076   0.467
 
 plan(sequential)
 ```

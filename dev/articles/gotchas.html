@@ -232,7 +232,7 @@ can be.</p>
 <span></span>
 <span><span class="va">t1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="../reference/future_map.html">future_map_dbl</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 100 × 3</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># Groups:   g [100]</span></span></span>
@@ -256,7 +256,7 @@ can be.</p>
 <span></span>
 <span><span class="va">t2</span> <span class="op">-</span> <span class="va">t1</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   1.055   0.029   5.592</span></span></code></pre></div>
+<span><span class="co">#&gt;   1.087   0.029   5.629</span></span></code></pre></div>
 <p>The issue here is that the grouped nature of the data frame prevents
 furrr from doing what it is good at - sharding the <code>x</code> column
 into equally sized groups and sending them off to the workers to process
@@ -273,8 +273,8 @@ operate on. So <code><a href="../reference/future_map.html">future_map_dbl()</a>
 <span></span>
 <span><span class="va">t1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">df</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="../reference/future_map.html">future_map_dbl</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 100 × 3</span></span></span>
 <span><span class="co">#&gt;        g x              y</span></span>
@@ -297,7 +297,7 @@ operate on. So <code><a href="../reference/future_map.html">future_map_dbl()</a>
 <span></span>
 <span><span class="va">t2</span> <span class="op">-</span> <span class="va">t1</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.037   0.001   0.251</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.041   0.000   0.263</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="graphics-devices">Graphics devices<a class="anchor" aria-label="anchor" href="#graphics-devices"></a>
@@ -371,13 +371,13 @@ in the function itself.</p>
 <span>  <span class="fu">my_fast_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.023   0.002   0.240</span></span>
+<span><span class="co">#&gt;   0.024   0.000   0.240</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
 <span>  <span class="fu">my_slow_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.379   0.335   1.456</span></span>
+<span><span class="co">#&gt;   0.340   0.298   1.277</span></span>
 <span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span></code></pre></div>
 <p>In the above example, <code>big</code> is captured in the function
@@ -424,7 +424,7 @@ example:</p>
 <span>  <span class="fu">my_not_so_slow_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.199   0.055   0.466</span></span>
+<span><span class="co">#&gt;   0.172   0.076   0.467</span></span>
 <span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span></code></pre></div>
 <p>Here lexical scoping is used to find <code>fn</code>, but you could
