@@ -3,6 +3,8 @@ Title: Apply Mapping Functions in Parallel using Futures
 Version: 0.3.1.9000
 Authors@R: c(
     person("Davis", "Vaughan", , "davis@posit.co", role = c("aut", "cre")),
+    person("Henrik", "Bengtsson", , "henrikb@braju.com", role = "aut",
+           comment = c(ORCID = "0000-0002-7579-5165")),
     person("Matt", "Dancho", , "mdancho@business-science.io", role = "aut"),
     person("Posit Software, PBC", role = c("cph", "fnd"))
   )
