@@ -171,32 +171,6 @@ future_invoke_map_lgl <- function(
 
 #' @rdname future_invoke_map
 #' @export
-future_invoke_map_raw <- function(
-  .f,
-  .x = list(NULL),
-  ...,
-  .env = NULL,
-  .options = furrr_options(),
-  .env_globals = parent.frame(),
-  .progress = FALSE
-) {
-  .env <- .env %||% parent.frame()
-  .f <- as_invoke_function(.f)
-
-  future_map2_raw(
-    .x = .f,
-    .y = .x,
-    .f = purrr::invoke,
-    ...,
-    .env = .env,
-    .options = .options,
-    .env_globals = .env_globals,
-    .progress = .progress
-  )
-}
-
-#' @rdname future_invoke_map
-#' @export
 future_invoke_map_dfr <- function(
   .f,
   .x = list(NULL),

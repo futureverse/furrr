@@ -213,28 +213,6 @@ future_map_lgl <- function(
 
 #' @rdname future_map
 #' @export
-future_map_raw <- function(
-  .x,
-  .f,
-  ...,
-  .options = furrr_options(),
-  .env_globals = parent.frame(),
-  .progress = FALSE
-) {
-  furrr_map_template(
-    x = .x,
-    fn = .f,
-    dots = list(...),
-    options = .options,
-    progress = .progress,
-    type = "raw",
-    purrr_fn_name = "map_raw",
-    env_globals = .env_globals
-  )
-}
-
-#' @rdname future_map
-#' @export
 future_map_dfr <- function(
   .x,
   .f,

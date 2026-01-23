@@ -55,15 +55,6 @@ furrr_test_that("future_invoke_map_chr() works", {
   )
 })
 
-furrr_test_that("future_invoke_map_raw() works", {
-  x <- list(list(as.raw(1)))
-
-  expect_identical(
-    future_invoke_map_raw(identity, x),
-    invoke_map_raw(identity, x)
-  )
-})
-
 furrr_test_that("names of `.x` are retained", {
   f <- list(x = mean, y = median)
   x <- list(list(1))

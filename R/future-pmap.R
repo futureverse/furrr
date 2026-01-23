@@ -110,28 +110,6 @@ future_pmap_lgl <- function(
 
 #' @rdname future_map2
 #' @export
-future_pmap_raw <- function(
-  .l,
-  .f,
-  ...,
-  .options = furrr_options(),
-  .env_globals = parent.frame(),
-  .progress = FALSE
-) {
-  furrr_pmap_template(
-    l = .l,
-    fn = .f,
-    dots = list(...),
-    options = .options,
-    progress = .progress,
-    type = "raw",
-    purrr_fn_name = "pmap_raw",
-    env_globals = .env_globals
-  )
-}
-
-#' @rdname future_map2
-#' @export
 future_pmap_dfr <- function(
   .l,
   .f,

@@ -6,7 +6,6 @@
 \alias{future_map2_dbl}
 \alias{future_map2_int}
 \alias{future_map2_lgl}
-\alias{future_map2_raw}
 \alias{future_map2_dfr}
 \alias{future_map2_dfc}
 \alias{future_pmap}
@@ -14,7 +13,6 @@
 \alias{future_pmap_dbl}
 \alias{future_pmap_int}
 \alias{future_pmap_lgl}
-\alias{future_pmap_raw}
 \alias{future_pmap_dfr}
 \alias{future_pmap_dfc}
 \alias{future_walk2}
@@ -62,16 +60,6 @@ future_map2_int(
 )
 
 future_map2_lgl(
-  .x,
-  .y,
-  .f,
-  ...,
-  .options = furrr_options(),
-  .env_globals = parent.frame(),
-  .progress = FALSE
-)
-
-future_map2_raw(
   .x,
   .y,
   .f,
@@ -139,15 +127,6 @@ future_pmap_int(
 )
 
 future_pmap_lgl(
-  .l,
-  .f,
-  ...,
-  .options = furrr_options(),
-  .env_globals = parent.frame(),
-  .progress = FALSE
-)
-
-future_pmap_raw(
   .l,
   .f,
   ...,

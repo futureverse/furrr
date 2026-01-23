@@ -6,7 +6,6 @@
 \alias{future_imap_dbl}
 \alias{future_imap_int}
 \alias{future_imap_lgl}
-\alias{future_imap_raw}
 \alias{future_imap_dfr}
 \alias{future_imap_dfc}
 \alias{future_iwalk}
@@ -49,15 +48,6 @@ future_imap_int(
 )
 
 future_imap_lgl(
-  .x,
-  .f,
-  ...,
-  .options = furrr_options(),
-  .env_globals = parent.frame(),
-  .progress = FALSE
-)
-
-future_imap_raw(
   .x,
   .f,
   ...,
