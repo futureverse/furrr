@@ -159,6 +159,48 @@ that an R script calling
 multiple times should be numerically reproducible given the same initial
 seed.
 
+Note that you cannot expect identical results between
+[`map()`](https://purrr.tidyverse.org/reference/map.html) and
+[`future_map()`](https://furrr.futureverse.org/dev/reference/future_map.md)
+when using a `.f` that calls functions that generate random numbers,
+even when calling [`set.seed()`](https://rdrr.io/r/base/Random.html)
+ahead of time. For one thing, the default random number generation
+algorithm used by R during sequential processing is Mersenne-Twister,
+different from the L'Ecuyer-CMRG seeds used by furrr. But even aligning
+the [`RNGkind()`](https://rdrr.io/r/base/Random.html) would not be
+enough. [`map()`](https://purrr.tidyverse.org/reference/map.html) itself
+would have to change to use the same parallel compatible RNG strategy as
+[`future_map()`](https://furrr.futureverse.org/dev/reference/future_map.md)
+(pre-generating the seeds, and setting them before each `.f`
+invocation). At the end of the day, you have to accept that the
+following will produce different sequences of random numbers, but both
+are statistically sound:
+
+    set.seed(42)
+    purrr::map(1:10, ~ rnorm(1))
+
+    set.seed(42)
+    furrr::future_map(1:10, ~ rnorm(1), .options = furrr_options(seed = TRUE))
+
+But importantly, the
+[`furrr::future_map()`](https://furrr.futureverse.org/dev/reference/future_map.md)
+example will always produce the same sequence of random numbers,
+regardless of the
+[`plan()`](https://future.futureverse.org/reference/plan.html) you
+choose:
+
+    plan(sequential)
+    set.seed(42)
+    furrr::future_map(1:10, ~ rnorm(1), .options = furrr_options(seed = TRUE))
+
+    plan(multisession, workers = 2)
+    set.seed(42)
+    furrr::future_map(1:10, ~ rnorm(1), .options = furrr_options(seed = TRUE))
+
+    plan(cluster, workers = workers)
+    set.seed(42)
+    furrr::future_map(1:10, ~ rnorm(1), .options = furrr_options(seed = TRUE))
+
 ## Examples
 
 ``` r

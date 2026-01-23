@@ -182,6 +182,35 @@ the RNG state before the call. This is true regardless of the future
 strategy / scheduling used. This is done in order to guarantee that an R
 script calling <code><a href="future_map.html">future_map()</a></code> multiple times should be numerically
 reproducible given the same initial seed.</p>
+<p>Note that you cannot expect identical results between <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map()</a></code> and
+<code><a href="future_map.html">future_map()</a></code> when using a <code>.f</code> that calls functions that generate random
+numbers, even when calling <code><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed()</a></code> ahead of time. For one thing, the
+default random number generation algorithm used by R during sequential
+processing is Mersenne-Twister, different from the L'Ecuyer-CMRG seeds used
+by furrr. But even aligning the <code><a href="https://rdrr.io/r/base/Random.html" class="external-link">RNGkind()</a></code> would not be enough. <code><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map()</a></code>
+itself would have to change to use the same parallel compatible RNG strategy
+as <code><a href="future_map.html">future_map()</a></code> (pre-generating the seeds, and setting them before each
+<code>.f</code> invocation). At the end of the day, you have to accept that the
+following will produce different sequences of random numbers, but both are
+statistically sound:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="fu">furrr</span><span class="fu">::</span><span class="fu"><a href="../reference/future_map.html">future_map</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, .options <span class="op">=</span> <span class="fu"><a href="../reference/furrr_options.html">furrr_options</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>But importantly, the <code><a href="future_map.html">furrr::future_map()</a></code> example will always produce the
+same sequence of random numbers, regardless of the <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan()</a></code> you choose:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="fu">furrr</span><span class="fu">::</span><span class="fu"><a href="../reference/future_map.html">future_map</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, .options <span class="op">=</span> <span class="fu"><a href="../reference/furrr_options.html">furrr_options</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="fu">furrr</span><span class="fu">::</span><span class="fu"><a href="../reference/future_map.html">future_map</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, .options <span class="op">=</span> <span class="fu"><a href="../reference/furrr_options.html">furrr_options</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">cluster</span>, workers <span class="op">=</span> <span class="va">workers</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="fu">furrr</span><span class="fu">::</span><span class="fu"><a href="../reference/future_map.html">future_map</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, .options <span class="op">=</span> <span class="fu"><a href="../reference/furrr_options.html">furrr_options</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
 
     <div class="section level2">
