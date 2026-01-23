@@ -1,5 +1,10 @@
 # furrr (development version)
 
+## Breaking changes
+
+* `future_options()` has been removed. It has been defunct since furrr 0.3.0
+  (May 2022).
+
 ## Features / Fixes
 
 * Detangled furrr's documentation from purrr's to avoid some documentation
