@@ -20,7 +20,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Davis Vaughan \email{davis@rstudio.com}
+\strong{Maintainer}: Davis Vaughan \email{davis@posit.co}
 
 Authors:
 \itemize{
@@ -29,7 +29,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item RStudio [copyright holder, funder]
+  \item Posit Software, PBC [copyright holder, funder]
 }
 
 }
