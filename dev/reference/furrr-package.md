@@ -20,6 +20,9 @@ Useful links:
 
 Authors:
 
+- Henrik Bengtsson <henrikb@braju.com>
+  ([ORCID](https://orcid.org/0000-0002-7579-5165))
+
 - Matt Dancho <mdancho@business-science.io>
 
 Other contributors:
