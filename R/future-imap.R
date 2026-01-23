@@ -131,27 +131,6 @@ future_imap_lgl <- function(
 
 #' @rdname future_imap
 #' @export
-future_imap_raw <- function(
-  .x,
-  .f,
-  ...,
-  .options = furrr_options(),
-  .env_globals = parent.frame(),
-  .progress = FALSE
-) {
-  future_map2_raw(
-    .x = .x,
-    .y = vec_index(.x),
-    .f = .f,
-    ...,
-    .options = .options,
-    .env_globals = .env_globals,
-    .progress = .progress
-  )
-}
-
-#' @rdname future_imap
-#' @export
 future_imap_dfr <- function(
   .x,
   .f,
