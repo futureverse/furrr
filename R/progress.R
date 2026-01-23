@@ -21,7 +21,10 @@ poll_progress <- function(futures, file, n_x) {
     width_max <- console_width()
     width_usable <- width_max - width_prefix - width_suffix - width_carriage
 
-    width_rule <- floor(width_usable * n_ticks / n_x)
+    # Supposedly someone has seen the multiplication integer overflow for
+    # extremely long inputs, so we `as.double()` one of the operands, but the
+    # result after division should still always fit in an integer (#288)
+    width_rule <- as.integer(floor(width_usable * as.double(n_ticks) / n_x))
     width_space <- width_usable - width_rule
 
     space <- paste0(rep(" ", times = width_space), collapse = "")
