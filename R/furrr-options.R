@@ -161,38 +161,6 @@ print.furrr_options <- function(x, ...) {
 
 # ------------------------------------------------------------------------------
 
-#' Deprecated furrr options
-#'
-#' @description
-#' `r lifecycle::badge("defunct")`
-#'
-#' As of furrr 0.3.0, `future_options()` is defunct in favor of
-#' [furrr_options()].
-#'
-#' @inheritParams furrr_options
-#'
-#' @keywords internal
-#' @export
-#' @examples
-#' try(future_options())
-future_options <- function(
-  globals = TRUE,
-  packages = NULL,
-  seed = FALSE,
-  scheduling = 1.0
-) {
-  lifecycle::deprecate_stop("0.3.0", "future_options()", "furrr_options()")
-
-  furrr_options(
-    globals = globals,
-    packages = packages,
-    seed = seed,
-    scheduling = scheduling
-  )
-}
-
-# ------------------------------------------------------------------------------
-
 assert_furrr_options <- function(x) {
   if (!is_furrr_options(x)) {
     abort("`.options` must be created from `furrr_options()`.")
@@ -325,7 +293,7 @@ validate_seed <- function(x) {
 }
 
 validate_seed_list <- function(x) {
-  seeds_are_integers <- purrr::map_lgl(x, ~typeof(.x) == "integer")
+  seeds_are_integers <- purrr::map_lgl(x, ~ typeof(.x) == "integer")
   if (!all(seeds_are_integers)) {
     abort("All elements of a list `seed` must be integers.")
   }
