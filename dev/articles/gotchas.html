@@ -125,7 +125,8 @@ frame.</p>
 exist, so we get an error.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/future_map.html">future_map</a></span><span class="op">(</span><span class="va">dfs</span>, <span class="va">filter_for_dogs</span>, col <span class="op">=</span> <span class="va">pets</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error: object 'pets' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'pets' not found</span></span></code></pre></div>
 <p>One alternative is to pass the column through as a character string,
 and to use the <code>.data</code> pronoun to retrieve the column.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -255,7 +256,7 @@ can be.</p>
 <span></span>
 <span><span class="va">t2</span> <span class="op">-</span> <span class="va">t1</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   1.906   0.035   6.258</span></span></code></pre></div>
+<span><span class="co">#&gt;   1.088   0.022   5.606</span></span></code></pre></div>
 <p>The issue here is that the grouped nature of the data frame prevents
 furrr from doing what it is good at - sharding the <code>x</code> column
 into equally sized groups and sending them off to the workers to process
@@ -296,7 +297,7 @@ operate on. So <code><a href="../reference/future_map.html">future_map_dbl()</a>
 <span></span>
 <span><span class="va">t2</span> <span class="op">-</span> <span class="va">t1</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.057   0.000   0.427</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.040   0.002   0.258</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="graphics-devices">Graphics devices<a class="anchor" aria-label="anchor" href="#graphics-devices"></a>
@@ -370,13 +371,13 @@ in the function itself.</p>
 <span>  <span class="fu">my_fast_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.039   0.000   0.410</span></span>
+<span><span class="co">#&gt;   0.023   0.002   0.239</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
 <span>  <span class="fu">my_slow_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.342   0.304   1.335</span></span>
+<span><span class="co">#&gt;   0.350   0.282   1.274</span></span>
 <span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span></code></pre></div>
 <p>In the above example, <code>big</code> is captured in the function
@@ -423,7 +424,7 @@ example:</p>
 <span>  <span class="fu">my_not_so_slow_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.189   0.072   0.627</span></span>
+<span><span class="co">#&gt;   0.192   0.061   0.469</span></span>
 <span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span></code></pre></div>
 <p>Here lexical scoping is used to find <code>fn</code>, but you could
@@ -471,7 +472,7 @@ detection</em>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

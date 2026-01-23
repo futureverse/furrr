@@ -415,12 +415,12 @@ time (this hasn’t ever happened to me).</p>
 <p>Now for the fun part. How do we tell future to first distribute our
 code over the 2 instances, and then run in parallel on each instance?
 You pass in a list of plans to <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan()</a></code>, where you also have
-the option to <code><a href="https://future.futureverse.org/reference/tweak.html" class="external-link">tweak()</a></code> each plan individually (which will be
+the option to <code><a href="https://future.futureverse.org/reference/plan.html" class="external-link">tweak()</a></code> each plan individually (which will be
 required to set the workers argument!).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  <span class="co"># The outer plan tells future to distribute over the 2 instances</span></span>
-<span>  <span class="fu"><a href="https://future.futureverse.org/reference/tweak.html" class="external-link">tweak</a></span><span class="op">(</span><span class="va">cluster</span>, workers <span class="op">=</span> <span class="va">cl_multi</span><span class="op">)</span>, </span>
+<span>  <span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">tweak</a></span><span class="op">(</span><span class="va">cluster</span>, workers <span class="op">=</span> <span class="va">cl_multi</span><span class="op">)</span>, </span>
 <span>  </span>
 <span>  <span class="co"># The inner plan says to run in parallel on each instance</span></span>
 <span>  <span class="va">multisession</span></span>
@@ -543,7 +543,7 @@ you request the result with <code><a href="https://future.futureverse.org/refere
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
