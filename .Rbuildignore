@@ -10,7 +10,7 @@
 ^_pkgdown\.yml$
 ^pkgdown$
 ^LICENSE\.md$
-^vignettes/articles$
+^vignettes$
 ^revdep$
 ^CRAN-RELEASE$
 ^CRAN-SUBMISSION$
