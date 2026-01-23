@@ -1,8 +1,9 @@
 # Options to fine tune furrr
 
-These options fine tune furrr functions, such as
+`furrr_options()` returns an object that can be supplied as the
+`.options` argument for furrr functions, such as
 [`future_map()`](https://furrr.futureverse.org/dev/reference/future_map.md).
-They are either used by furrr directly, or are passed on to
+The options are either used by furrr directly, or are passed on to
 [`future::future()`](https://future.futureverse.org/reference/future.html).
 
 ## Usage
