@@ -14,6 +14,15 @@
 
 ### Features / Fixes
 
+- New
+  [`future_map_vec()`](https://furrr.futureverse.org/dev/reference/future_map.md),
+  [`future_map2_vec()`](https://furrr.futureverse.org/dev/reference/future_map2.md),
+  [`future_pmap_vec()`](https://furrr.futureverse.org/dev/reference/future_map2.md),
+  and
+  [`future_imap_vec()`](https://furrr.futureverse.org/dev/reference/future_imap.md)
+  to align with purrr
+  ([\#261](https://github.com/futureverse/furrr/issues/261)).
+
 - furrr now looks up the purrr mapping function on the worker itself,
   rather than sending over its own copy of the function. This avoids
   possible issues when you have, say, purrr 1.0.0 locally but purrr

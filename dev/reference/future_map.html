@@ -94,6 +94,16 @@ allow you to map in parallel.</p>
 <span>  .progress <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">future_map_vec</span><span class="op">(</span></span>
+<span>  <span class="va">.x</span>,</span>
+<span>  <span class="va">.f</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .ptype <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .options <span class="op">=</span> <span class="fu"><a href="furrr_options.html">furrr_options</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  .env_globals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  .progress <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">future_map_dfr</span><span class="op">(</span></span>
 <span>  <span class="va">.x</span>,</span>
 <span>  <span class="va">.f</span>,</span>
@@ -175,6 +185,12 @@ a progress bar will not be displayed.</p>
 in a future version of furrr in favor of using the more robust
 <a href="https://CRAN.R-project.org/package=progressr" class="external-link">progressr</a>
 package.</p></dd>
+
+
+<dt id="arg--ptype">.ptype<a class="anchor" aria-label="anchor" href="#arg--ptype"></a></dt>
+<dd><p>If <code>NULL</code>, the default, the output type is the common type of
+the elements of the result. Otherwise, supply a "prototype" giving the
+desired type of output.</p></dd>
 
 
 <dt id="arg--id">.id<a class="anchor" aria-label="anchor" href="#arg--id"></a></dt>

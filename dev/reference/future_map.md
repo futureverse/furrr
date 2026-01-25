@@ -52,6 +52,16 @@ future_map_lgl(
   .progress = FALSE
 )
 
+future_map_vec(
+  .x,
+  .f,
+  ...,
+  .ptype = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+)
+
 future_map_dfr(
   .x,
   .f,
@@ -142,6 +152,12 @@ future_walk(
   **Warning:** The `.progress` argument will be deprecated and removed
   in a future version of furrr in favor of using the more robust
   [progressr](https://CRAN.R-project.org/package=progressr) package.
+
+- .ptype:
+
+  If `NULL`, the default, the output type is the common type of the
+  elements of the result. Otherwise, supply a "prototype" giving the
+  desired type of output.
 
 - .id:
 

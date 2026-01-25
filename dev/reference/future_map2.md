@@ -60,6 +60,17 @@ future_map2_lgl(
   .progress = FALSE
 )
 
+future_map2_vec(
+  .x,
+  .y,
+  .f,
+  ...,
+  .ptype = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+)
+
 future_map2_dfr(
   .x,
   .y,
@@ -121,6 +132,16 @@ future_pmap_lgl(
   .l,
   .f,
   ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+)
+
+future_pmap_vec(
+  .l,
+  .f,
+  ...,
+  .ptype = NULL,
   .options = furrr_options(),
   .env_globals = parent.frame(),
   .progress = FALSE
@@ -223,6 +244,12 @@ future_pwalk(
   **Warning:** The `.progress` argument will be deprecated and removed
   in a future version of furrr in favor of using the more robust
   [progressr](https://CRAN.R-project.org/package=progressr) package.
+
+- .ptype:
+
+  If `NULL`, the default, the output type is the common type of the
+  elements of the result. Otherwise, supply a "prototype" giving the
+  desired type of output.
 
 - .id:
 
