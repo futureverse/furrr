@@ -6,6 +6,7 @@
 \alias{future_map2_dbl}
 \alias{future_map2_int}
 \alias{future_map2_lgl}
+\alias{future_map2_vec}
 \alias{future_map2_dfr}
 \alias{future_map2_dfc}
 \alias{future_pmap}
@@ -13,6 +14,7 @@
 \alias{future_pmap_dbl}
 \alias{future_pmap_int}
 \alias{future_pmap_lgl}
+\alias{future_pmap_vec}
 \alias{future_pmap_dfr}
 \alias{future_pmap_dfc}
 \alias{future_walk2}
@@ -64,6 +66,17 @@ future_map2_lgl(
   .y,
   .f,
   ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+)
+
+future_map2_vec(
+  .x,
+  .y,
+  .f,
+  ...,
+  .ptype = NULL,
   .options = furrr_options(),
   .env_globals = parent.frame(),
   .progress = FALSE
@@ -130,6 +143,16 @@ future_pmap_lgl(
   .l,
   .f,
   ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+)
+
+future_pmap_vec(
+  .l,
+  .f,
+  ...,
+  .ptype = NULL,
   .options = furrr_options(),
   .env_globals = parent.frame(),
   .progress = FALSE
@@ -216,6 +239,10 @@ a progress bar will not be displayed.
 in a future version of furrr in favor of using the more robust
 \href{https://CRAN.R-project.org/package=progressr}{progressr}
 package.}
+
+\item{.ptype}{If \code{NULL}, the default, the output type is the common type of
+the elements of the result. Otherwise, supply a "prototype" giving the
+desired type of output.}
 
 \item{.id}{Either a string or \code{NULL}. If a string, the output will contain
 a variable with that name, storing either the name (if \code{.x} is named) or
