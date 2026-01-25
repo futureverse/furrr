@@ -110,6 +110,34 @@ future_pmap_lgl <- function(
 
 #' @rdname future_map2
 #' @export
+future_pmap_vec <- function(
+  .l,
+  .f,
+  ...,
+  .ptype = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
+  out <- future_pmap(
+    .l = .l,
+    .f = .f,
+    ...,
+    .options = .options,
+    .env_globals = .env_globals,
+    .progress = .progress
+  )
+
+  simplify_impl(
+    out,
+    ptype = .ptype,
+    error_arg = "<output>",
+    error_call = current_env()
+  )
+}
+
+#' @rdname future_map2
+#' @export
 future_pmap_dfr <- function(
   .l,
   .f,

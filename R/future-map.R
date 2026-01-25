@@ -55,6 +55,10 @@
 #'   [progressr](https://CRAN.R-project.org/package=progressr)
 #'   package.
 #'
+#' @param .ptype If `NULL`, the default, the output type is the common type of
+#'   the elements of the result. Otherwise, supply a "prototype" giving the
+#'   desired type of output.
+#'
 #' @return All functions return a vector the same length as `.x`.
 #'
 #' - [future_map()] returns a list
@@ -208,6 +212,34 @@ future_map_lgl <- function(
     type = "logical",
     purrr_fn_name = "map_lgl",
     env_globals = .env_globals
+  )
+}
+
+#' @rdname future_map
+#' @export
+future_map_vec <- function(
+  .x,
+  .f,
+  ...,
+  .ptype = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
+  out <- future_map(
+    .x = .x,
+    .f = .f,
+    ...,
+    .options = .options,
+    .env_globals = .env_globals,
+    .progress = .progress
+  )
+
+  simplify_impl(
+    out,
+    ptype = .ptype,
+    error_arg = "<output>",
+    error_call = current_env()
   )
 }
 

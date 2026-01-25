@@ -62,10 +62,56 @@ furrr_test_that("future_pmap_chr() works", {
   )
 })
 
+furrr_test_that("future_pmap_vec() works", {
+  x <- as.Date(c("2020-01-01", "2020-01-02", "2020-01-03"))
+  y <- 1:3
+
+  expect_identical(
+    future_pmap_vec(list(x, y), ~.x),
+    pmap_vec(list(x, y), ~.x)
+  )
+  expect_identical(
+    future_pmap_vec(list(x, y), ~1, .ptype = integer()),
+    pmap_vec(list(x, y), ~1, .ptype = integer())
+  )
+
+  expect_identical(
+    future_pmap_vec(list(integer(), integer()), identity),
+    pmap_vec(list(integer(), integer()), identity)
+  )
+  expect_identical(
+    future_pmap_vec(
+      list(set_names(integer(), character()), integer()),
+      identity
+    ),
+    pmap_vec(
+      list(set_names(integer(), character()), integer()),
+      identity
+    )
+  )
+
+  # Vector error
+  expect_snapshot(error = TRUE, {
+    future_pmap_vec(list(1:2, 1:2), ~NULL)
+  })
+  # Size error
+  expect_snapshot(error = TRUE, {
+    future_pmap_vec(list(1:2, 1:2), ~ 1:2)
+  })
+  # Type error
+  expect_snapshot(error = TRUE, {
+    future_pmap_vec(list(1:2, 1:2), ~ if (.x == 1L) 1 else "x")
+  })
+})
+
 furrr_test_that("names of `.x` are retained", {
   x <- c(a = 1, b = 2)
   y <- c(c = 1, d = 2)
   expect_named(future_pmap_dbl(list(x, y), ~1), c("a", "b"))
+
+  x <- c(a = as.Date("2020-01-01"), b = as.Date("2020-01-02"))
+  y <- c(c = 1, d = 2)
+  expect_named(future_pmap_vec(list(x, y), ~1), c("a", "b"))
 })
 
 # ------------------------------------------------------------------------------
@@ -108,6 +154,17 @@ furrr_test_that("atomic variants work with size zero input", {
   expect_identical(future_pmap_dbl(list(list(), list()), identity), double())
   expect_identical(future_pmap_int(list(list(), list()), identity), integer())
   expect_identical(future_pmap_lgl(list(list(), list()), identity), logical())
+})
+
+furrr_test_that("generic variant works with size zero input", {
+  expect_identical(
+    future_pmap_vec(list(list(), list()), identity),
+    NULL
+  )
+  expect_identical(
+    future_pmap_vec(list(list(), list()), identity, .ptype = integer()),
+    integer()
+  )
 })
 
 furrr_test_that("size one recycling works", {

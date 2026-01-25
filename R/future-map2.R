@@ -191,6 +191,36 @@ future_map2_lgl <- function(
 
 #' @rdname future_map2
 #' @export
+future_map2_vec <- function(
+  .x,
+  .y,
+  .f,
+  ...,
+  .ptype = NULL,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+) {
+  out <- future_map2(
+    .x = .x,
+    .y = .y,
+    .f = .f,
+    ...,
+    .options = .options,
+    .env_globals = .env_globals,
+    .progress = .progress
+  )
+
+  simplify_impl(
+    out,
+    ptype = .ptype,
+    error_arg = "<output>",
+    error_call = current_env()
+  )
+}
+
+#' @rdname future_map2
+#' @export
 future_map2_dfr <- function(
   .x,
   .y,

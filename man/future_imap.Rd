@@ -6,6 +6,7 @@
 \alias{future_imap_dbl}
 \alias{future_imap_int}
 \alias{future_imap_lgl}
+\alias{future_imap_vec}
 \alias{future_imap_dfr}
 \alias{future_imap_dfc}
 \alias{future_iwalk}
@@ -51,6 +52,16 @@ future_imap_lgl(
   .x,
   .f,
   ...,
+  .options = furrr_options(),
+  .env_globals = parent.frame(),
+  .progress = FALSE
+)
+
+future_imap_vec(
+  .x,
+  .f,
+  ...,
+  .ptype = NULL,
   .options = furrr_options(),
   .env_globals = parent.frame(),
   .progress = FALSE
@@ -126,6 +137,10 @@ a progress bar will not be displayed.
 in a future version of furrr in favor of using the more robust
 \href{https://CRAN.R-project.org/package=progressr}{progressr}
 package.}
+
+\item{.ptype}{If \code{NULL}, the default, the output type is the common type of
+the elements of the result. Otherwise, supply a "prototype" giving the
+desired type of output.}
 
 \item{.id}{Either a string or \code{NULL}. If a string, the output will contain
 a variable with that name, storing either the name (if \code{.x} is named) or

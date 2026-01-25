@@ -11,6 +11,9 @@
 
 ## Features / Fixes
 
+* New `future_map_vec()`, `future_map2_vec()`, `future_pmap_vec()`, and
+  `future_imap_vec()` to align with purrr (#261).
+
 * furrr now looks up the purrr mapping function on the worker itself, rather
   than sending over its own copy of the function. This avoids possible issues
   when you have, say, purrr 1.0.0 locally but purrr 0.3.5 on the worker, where

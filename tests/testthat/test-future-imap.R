@@ -4,6 +4,7 @@ furrr_test_that("imap functions work with unnamed input", {
   expect_identical(future_imap_int(1:2, ~.y), c(1L, 2L))
   expect_identical(future_imap_dbl(1:2, ~.y), c(1, 2))
   expect_identical(future_imap_lgl(1:2, ~ identical(.y, 1L)), c(TRUE, FALSE))
+  expect_identical(future_imap_vec(1:2, ~ identical(.y, 1L)), c(TRUE, FALSE))
   expect_identical(
     future_imap_dfr(1:2, ~ data.frame(x = .y)),
     data.frame(x = c(1L, 2L))
@@ -28,6 +29,10 @@ furrr_test_that("imap functions work with named input", {
   )
   expect_identical(
     future_imap_lgl(x, ~ if (.y == "x") TRUE else FALSE),
+    c(x = TRUE, y = FALSE)
+  )
+  expect_identical(
+    future_imap_vec(x, ~ if (.y == "x") TRUE else FALSE),
     c(x = TRUE, y = FALSE)
   )
   expect_identical(

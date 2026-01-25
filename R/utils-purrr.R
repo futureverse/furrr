@@ -45,4 +45,28 @@ at_selection <- function(nm, .at) {
   .at
 }
 
+# `purrr:::simplify_impl()`, but simplified (ha!) by removing `strict`,
+# since we are always `strict`
+simplify_impl <- function(x, ptype, error_arg, error_call) {
+  vctrs::obj_check_list(x, arg = error_arg, call = error_call)
+  vctrs::list_check_all_vectors(x, arg = error_arg, call = error_call)
+  vctrs::list_check_all_size(x, 1L, arg = error_arg, call = error_call)
+
+  names <- vctrs::vec_names(x)
+  x <- vctrs::vec_set_names(x, NULL)
+
+  out <- vctrs::vec_c(
+    !!!x,
+    .ptype = ptype,
+    .error_arg = error_arg,
+    .error_call = error_call
+  )
+
+  if (!is.null(out)) {
+    out <- vctrs::vec_set_names(out, names)
+  }
+
+  out
+}
+
 # nocov end

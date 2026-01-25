@@ -57,9 +57,47 @@ furrr_test_that("future_map_chr() works", {
   )
 })
 
+furrr_test_that("future_map_vec() works", {
+  x <- as.Date(c("2020-01-01", "2020-01-02", "2020-01-03"))
+
+  expect_identical(
+    future_map_vec(x, ~.x),
+    map_vec(x, ~.x)
+  )
+  expect_identical(
+    future_map_vec(x, ~1, .ptype = integer()),
+    map_vec(x, ~1, .ptype = integer())
+  )
+
+  expect_identical(
+    future_map_vec(integer(), identity),
+    map_vec(integer(), identity)
+  )
+  expect_identical(
+    future_map_vec(set_names(integer(), character()), identity),
+    map_vec(set_names(integer(), character()), identity)
+  )
+
+  # Vector error
+  expect_snapshot(error = TRUE, {
+    future_map_vec(1:2, ~NULL)
+  })
+  # Size error
+  expect_snapshot(error = TRUE, {
+    future_map_vec(1:2, ~ 1:2)
+  })
+  # Type error
+  expect_snapshot(error = TRUE, {
+    future_map_vec(1:2, ~ if (.x == 1L) 1 else "x")
+  })
+})
+
 furrr_test_that("names of `.x` are retained", {
   x <- c(a = 1, b = 2)
   expect_named(future_map_dbl(x, ~1), c("a", "b"))
+
+  x <- c(a = as.Date("2020-01-01"), b = as.Date("2020-01-02"))
+  expect_named(future_map_vec(x, ~1), c("a", "b"))
 })
 
 # ------------------------------------------------------------------------------
@@ -95,6 +133,17 @@ furrr_test_that("atomic variants work with size zero input", {
   expect_identical(future_map_dbl(list(), identity), double())
   expect_identical(future_map_int(list(), identity), integer())
   expect_identical(future_map_lgl(list(), identity), logical())
+})
+
+furrr_test_that("generic variant works with size zero input", {
+  expect_identical(
+    future_map_vec(list(), identity),
+    NULL
+  )
+  expect_identical(
+    future_map_vec(list(), identity, .ptype = integer()),
+    integer()
+  )
 })
 
 # ------------------------------------------------------------------------------
