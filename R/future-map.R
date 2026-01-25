@@ -349,7 +349,7 @@ future_map_if <- function(
   .progress = FALSE
 ) {
   sel <- probe(.x, .p)
-  out <- purrr::list_along(.x)
+  out <- vector("list", length = length(.x))
 
   out[sel] <- future_map(
     .x = .x[sel],
@@ -388,7 +388,7 @@ future_map_at <- function(
   .progress = FALSE
 ) {
   sel <- inv_which(.x, .at)
-  out <- purrr::list_along(.x)
+  out <- vector("list", length = length(.x))
 
   out[sel] <- future_map(
     .x = .x[sel],
