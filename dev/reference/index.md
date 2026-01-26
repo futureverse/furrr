@@ -15,14 +15,6 @@
   [`future_iwalk()`](https://furrr.futureverse.org/dev/reference/future_imap.md)
   : Apply a function to each element of a vector, and its index via
   futures
-- [`future_invoke_map()`](https://furrr.futureverse.org/dev/reference/future_invoke_map.md)
-  [`future_invoke_map_chr()`](https://furrr.futureverse.org/dev/reference/future_invoke_map.md)
-  [`future_invoke_map_dbl()`](https://furrr.futureverse.org/dev/reference/future_invoke_map.md)
-  [`future_invoke_map_int()`](https://furrr.futureverse.org/dev/reference/future_invoke_map.md)
-  [`future_invoke_map_lgl()`](https://furrr.futureverse.org/dev/reference/future_invoke_map.md)
-  [`future_invoke_map_dfr()`](https://furrr.futureverse.org/dev/reference/future_invoke_map.md)
-  [`future_invoke_map_dfc()`](https://furrr.futureverse.org/dev/reference/future_invoke_map.md)
-  **\[deprecated\]** : Invoke functions via futures
 - [`future_map()`](https://furrr.futureverse.org/dev/reference/future_map.md)
   [`future_map_chr()`](https://furrr.futureverse.org/dev/reference/future_map.md)
   [`future_map_dbl()`](https://furrr.futureverse.org/dev/reference/future_map.md)

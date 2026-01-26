@@ -43,7 +43,8 @@
 <h2 class="pkg-version" data-toc-text="development version" id="furrr-development-version">furrr (development version)<a class="anchor" aria-label="anchor" href="#furrr-development-version"></a></h2>
 <div class="section level3">
 <h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
-<ul><li><p>All <code>*_raw()</code> variants from purrr have been removed, such as <code>future_map_raw()</code>. purrr 1.0.0 has deprecated these, they have limited use, and as far as we can tell no packages were using them (<a href="https://github.com/futureverse/furrr/issues/298" class="external-link">#298</a>).</p></li>
+<ul><li><p>All deprecated <code>future_invoke_map_*()</code> variants have been removed.</p></li>
+<li><p>All <code>*_raw()</code> variants from purrr have been removed, such as <code>future_map_raw()</code>. purrr 1.0.0 has deprecated these, they have limited use, and as far as we can tell no packages were using them (<a href="https://github.com/futureverse/furrr/issues/298" class="external-link">#298</a>).</p></li>
 <li><p><code>future_options()</code> has been removed. It has been defunct since furrr 0.3.0 (May 2022).</p></li>
 </ul></div>
 <div class="section level3">
@@ -130,7 +131,7 @@
 <li><p><code>.x</code> is now searched for globals. Only globals found in the slice of <code>.x</code> that corresponds to worker X are exported to worker X. This is relevant if <code>.x</code> is, say, a list of functions where each has their own set of globals (<a href="https://github.com/futureverse/furrr/issues/16" class="external-link">#16</a>).</p></li>
 <li><p>The progress bar furrr creates now outputs to stderr rather than stdout.</p></li>
 <li><p>The progress bar is now only enabled for multisession, multicore, and multiprocess strategies. It has never worked for sequential futures or cluster futures using remote connections, but <code>.progress</code> is now forced to false in those cases.</p></li>
-<li><p><code><a href="../reference/future_invoke_map.html">future_invoke_map()</a></code> and its variants have been marked as retired to match <code><a href="https://purrr.tidyverse.org/reference/invoke.html" class="external-link">purrr::invoke_map()</a></code>.</p></li>
+<li><p><code>future_invoke_map()</code> and its variants have been marked as retired to match <code><a href="https://purrr.tidyverse.org/reference/invoke.html" class="external-link">purrr::invoke_map()</a></code>.</p></li>
 <li><p>The internals of furrr have been overhauled to unify the implementations of <code><a href="../reference/future_map.html">future_map()</a></code>, <code><a href="../reference/future_map2.html">future_map2()</a></code>, <code><a href="../reference/future_map2.html">future_pmap()</a></code> and all of their variants. This should make furrr much easier to maintain going forward (<a href="https://github.com/futureverse/furrr/issues/44" class="external-link">#44</a>).</p></li>
 <li><p>A MIT license is now used.</p></li>
 </ul></div>

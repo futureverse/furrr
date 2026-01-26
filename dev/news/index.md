@@ -4,6 +4,8 @@
 
 ### Breaking changes
 
+- All deprecated `future_invoke_map_*()` variants have been removed.
+
 - All `*_raw()` variants from purrr have been removed, such as
   `future_map_raw()`. purrr 1.0.0 has deprecated these, they have
   limited use, and as far as we can tell no packages were using them
@@ -287,8 +289,8 @@ CRAN release: 2020-10-12
   cluster futures using remote connections, but `.progress` is now
   forced to false in those cases.
 
-- [`future_invoke_map()`](https://furrr.futureverse.org/dev/reference/future_invoke_map.md)
-  and its variants have been marked as retired to match
+- `future_invoke_map()` and its variants have been marked as retired to
+  match
   [`purrr::invoke_map()`](https://purrr.tidyverse.org/reference/invoke.html).
 
 - The internals of furrr have been overhauled to unify the
