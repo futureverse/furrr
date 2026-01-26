@@ -2,6 +2,8 @@
 
 ## Breaking changes
 
+* All deprecated `future_invoke_map_*()` variants have been removed.
+
 * All `*_raw()` variants from purrr have been removed, such as
   `future_map_raw()`. purrr 1.0.0 has deprecated these, they have limited use,
   and as far as we can tell no packages were using them (#298).
