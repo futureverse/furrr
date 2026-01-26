@@ -256,7 +256,7 @@ than expected because it has to serialize <code>big</code>.</p>
 <span>  <span class="fu">my_slow_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.352   0.293   1.436</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.359   0.307   1.475</span></span></code></pre></div>
 <p>One way to avoid this is to use carrier to crate the function,
 isolating it from the surrounding environment.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -276,7 +276,7 @@ isolating it from the surrounding environment.</p>
 <span>  <span class="fu">my_crated_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.181   0.058   0.454</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.173   0.075   0.483</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

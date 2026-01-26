@@ -212,7 +212,7 @@ plan(sequential)
 
 t2 - t1
 #>    user  system elapsed 
-#>   1.064   0.028   5.592
+#>   1.122   0.023   5.656
 ```
 
 The issue here is that the grouped nature of the data frame prevents
@@ -259,7 +259,7 @@ plan(sequential)
 
 t2 - t1
 #>    user  system elapsed 
-#>   0.040   0.000   0.257
+#>    0.04    0.00    0.26
 ```
 
 ## Graphics devices
@@ -338,13 +338,13 @@ system.time(
   my_fast_fn()
 )
 #>    user  system elapsed 
-#>   0.025   0.000   0.237
+#>   0.024   0.000   0.239
 
 system.time(
   my_slow_fn()
 )
 #>    user  system elapsed 
-#>   0.331   0.293   1.261
+#>   0.363   0.289   1.334
 
 plan(sequential)
 ```
@@ -396,7 +396,7 @@ system.time(
   my_not_so_slow_fn()
 )
 #>    user  system elapsed 
-#>   0.172   0.079   0.467
+#>   0.175   0.076   0.468
 
 plan(sequential)
 ```
