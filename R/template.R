@@ -14,12 +14,9 @@ furrr_map_template <- function(
   assert_furrr_options(options)
   assert_progress(progress)
 
-  progress <- reconcile_progress_with_strategy(progress)
-
   expr_seed_setup <- make_expr_seed_setup(options$seed)
   expr_seed_update <- make_expr_seed_update(options$seed)
 
-  expr_progress_setup <- make_expr_progress_setup(progress)
   expr_progress_update <- make_expr_progress_update(progress)
 
   walk <- identical(purrr_fn_name, "walk")
@@ -34,13 +31,13 @@ furrr_map_template <- function(
     ...furrr_chunk_x <- ...furrr_chunk_args
 
     !!expr_seed_setup
-    !!expr_progress_setup
 
     ...furrr_fn_wrapper <- function(...) {
       !!expr_seed_update
-      !!expr_progress_update
 
       ...furrr_out <- ...furrr_fn(...)
+
+      !!expr_progress_update
 
       !!expr_out
     }
@@ -105,12 +102,9 @@ furrr_map2_template <- function(
   assert_furrr_options(options)
   assert_progress(progress)
 
-  progress <- reconcile_progress_with_strategy(progress)
-
   expr_seed_setup <- make_expr_seed_setup(options$seed)
   expr_seed_update <- make_expr_seed_update(options$seed)
 
-  expr_progress_setup <- make_expr_progress_setup(progress)
   expr_progress_update <- make_expr_progress_update(progress)
 
   walk <- identical(purrr_fn_name, "walk2")
@@ -126,13 +120,13 @@ furrr_map2_template <- function(
     ...furrr_chunk_y <- ...furrr_chunk_args[[2]]
 
     !!expr_seed_setup
-    !!expr_progress_setup
 
     ...furrr_fn_wrapper <- function(...) {
       !!expr_seed_update
-      !!expr_progress_update
 
       ...furrr_out <- ...furrr_fn(...)
+
+      !!expr_progress_update
 
       !!expr_out
     }
@@ -204,12 +198,9 @@ furrr_pmap_template <- function(
   assert_furrr_options(options)
   assert_progress(progress)
 
-  progress <- reconcile_progress_with_strategy(progress)
-
   expr_seed_setup <- make_expr_seed_setup(options$seed)
   expr_seed_update <- make_expr_seed_update(options$seed)
 
-  expr_progress_setup <- make_expr_progress_setup(progress)
   expr_progress_update <- make_expr_progress_update(progress)
 
   walk <- identical(purrr_fn_name, "pwalk")
@@ -224,13 +215,13 @@ furrr_pmap_template <- function(
     ...furrr_chunk_l <- ...furrr_chunk_args
 
     !!expr_seed_setup
-    !!expr_progress_setup
 
     ...furrr_fn_wrapper <- function(...) {
       !!expr_seed_update
-      !!expr_progress_update
 
       ...furrr_out <- ...furrr_fn(...)
+
+      !!expr_progress_update
 
       !!expr_out
     }
@@ -315,11 +306,18 @@ furrr_template <- function(
     chunks <- map(chunks, function(chunk) .subset(order, chunk))
   }
 
+  if (progress) {
+    progressor <- progressr::progressor(steps = n)
+  } else {
+    progressor <- NULL
+  }
+
   gp <- get_globals_and_packages(
     options$globals,
     options$packages,
     fn,
     dots,
+    progressor,
     env_globals
   )
 
@@ -352,24 +350,6 @@ furrr_template <- function(
     labels <- NULL
   } else {
     labels <- paste0(options$prefix, "-", seq_len(n_chunks))
-  }
-
-  if (progress) {
-    # nocov start
-    objectSize <- import_future("objectSize")
-
-    file <- tempfile(fileext = ".txt")
-
-    file.create(file)
-    on.exit(unlink(file, force = TRUE), add = TRUE)
-
-    globals_file <- list(...furrr_progress_file = file)
-    globals_file <- future::as.FutureGlobals(globals_file)
-    globals_file <- future::resolve(globals_file)
-    globals_file <- set_total_size(globals_file, objectSize(globals_file))
-
-    globals <- c(globals, globals_file)
-    # nocov end
   }
 
   scan_chunk_args_for_globals <- is_true(options$globals)
@@ -434,10 +414,6 @@ furrr_template <- function(
     )
   }
 
-  if (progress) {
-    poll_progress(futures, file, n)
-  }
-
   values <- future::value(futures)
 
   if (length(values) != length(chunks)) {
@@ -493,41 +469,12 @@ make_expr_seed_update <- function(seed) {
 
 # nocov start
 
-make_expr_progress_setup <- function(progress) {
-  if (is_false(progress)) {
-    return(NULL)
-  }
-
-  expr({
-    ...furrr_progress <- TRUE
-
-    tryCatch(
-      expr = {
-        ...furrr_progress_con <- file(...furrr_progress_file, open = "a")
-        on.exit(close(...furrr_progress_con), add = TRUE)
-      },
-      error = function(cnd) {
-        ...furrr_progress <<- FALSE
-      }
-    )
-  })
-}
-
 make_expr_progress_update <- function(progress) {
   if (is_false(progress)) {
     return(NULL)
   }
 
-  expr({
-    if (...furrr_progress) {
-      try(
-        expr = {
-          cat("+", file = ...furrr_progress_con, sep = "")
-        },
-        silent = TRUE
-      )
-    }
-  })
+  expr(...furrr_progressor())
 }
 
 # nocov end
@@ -565,8 +512,6 @@ utils::globalVariables(
     "...furrr_globals_max_size",
     "...furrr_chunk_seeds",
     "...furrr_chunk_seeds_env",
-    "...furrr_progress",
-    "...furrr_progress_file",
-    "...furrr_progress_con"
+    "...furrr_progressor"
   )
 )

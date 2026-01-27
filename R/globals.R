@@ -3,24 +3,49 @@ get_globals_and_packages <- function(
   packages,
   fn,
   dots,
+  progressor,
   env_globals
 ) {
   objectSize <- import_future("objectSize")
 
+  # Needs to be `FutureGlobals` for `future:::c.FutureGlobals` to kick in
+  globals_out <- list()
+  globals_out <- future::as.FutureGlobals(globals_out)
+  globals_out <- future::resolve(globals_out)
+  globals_out <- set_total_size(globals_out, objectSize(globals_out))
+
+  packages_out <- character()
+
   # Always need purrr on the worker
-  packages_out <- "purrr"
+  packages_out <- c(packages_out, "purrr")
 
   # Always get `.f`
   globals_fn <- list(...furrr_fn = fn)
   globals_fn <- future::as.FutureGlobals(globals_fn)
   globals_fn <- future::resolve(globals_fn)
   globals_fn <- set_total_size(globals_fn, objectSize(globals_fn))
+  globals_out <- c(globals_out, globals_fn)
 
   # Always get `...`.
   globals_dots <- list(...furrr_dots = dots)
   globals_dots <- future::as.FutureGlobals(globals_dots)
   globals_dots <- future::resolve(globals_dots)
   globals_dots <- set_total_size(globals_dots, objectSize(globals_dots))
+  globals_out <- c(globals_out, globals_dots)
+
+  # Always get `progressor` if supplied
+  if (!is.null(progressor)) {
+    globals_progressor <- list(...furrr_progressor = progressor)
+    globals_progressor <- future::as.FutureGlobals(globals_progressor)
+    globals_progressor <- future::resolve(globals_progressor)
+    globals_progressor <- set_total_size(
+      globals_progressor,
+      objectSize(globals_progressor)
+    )
+    globals_out <- c(globals_out, globals_progressor)
+
+    packages_out <- c(packages_out, "progressr")
+  }
 
   # Always get chunk specific placeholders
   globals_extra <- list(
@@ -31,12 +56,7 @@ get_globals_and_packages <- function(
   globals_extra <- future::as.FutureGlobals(globals_extra)
   globals_extra <- future::resolve(globals_extra)
   globals_extra <- set_total_size(globals_extra, objectSize(globals_extra))
-
-  globals_out <- c(
-    globals_fn,
-    globals_dots,
-    globals_extra
-  )
+  globals_out <- c(globals_out, globals_extra)
 
   # Collect all globals recursively
   # Search in the parent frame of the `future_*()` call for globals
