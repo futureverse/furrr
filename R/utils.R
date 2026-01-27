@@ -24,3 +24,11 @@ set_total_size <- function(x, total_size) {
   attr(x, "total_size") <- total_size
   x
 }
+
+assert_progress <- function(progress) {
+  if (!is_bool(progress)) {
+    abort("`.progress` must be a single logical value.")
+  }
+
+  invisible(progress)
+}

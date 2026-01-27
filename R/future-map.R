@@ -45,15 +45,35 @@
 #' @param .options The `future` specific options to use with the workers. This
 #'   must be the result from a call to [furrr_options()].
 #'
-#' @param .progress A single logical. Should a progress bar be displayed?
-#'   Only works with multisession, multicore, and multiprocess futures. Note
-#'   that if a multicore/multisession future falls back to sequential, then
-#'   a progress bar will not be displayed.
+#' @param .progress `r lifecycle::badge("experimental")`
 #'
-#'   __Warning:__ The `.progress` argument will be deprecated and removed
-#'   in a future version of furrr in favor of using the more robust
-#'   [progressr](https://CRAN.R-project.org/package=progressr)
-#'   package.
+#'   Either `TRUE` or `FALSE`.
+#'
+#'   TODO!(write this): See `vignette("progress")` for examples.
+#'
+#'   If `TRUE`, a `progressr::progressor()` is automatically created
+#'   with as many steps as there are elements to iterate over. After each
+#'   call to `.f`, progression is _signaled_ back to the main process.
+#'
+#'   Note that `.progress = TRUE` is not enough to make progress notifications
+#'   _appear_. You must also either wrap the furrr expression in
+#'   [progressr::with_progress()] or set [`progressr::handlers(global =
+#'   TRUE)`][progressr::handlers()] at the top of your script (this enables
+#'   _all_ progress notifications, which is recommended for interative work).
+#'
+#'   To customize the progress notification, set an alternative progressr
+#'   handler, such as
+#'   [`progressr::handlers(progressr::handler_cli())`][progressr::handler_cli()]
+#'   or
+#'   [`progressr::handlers(progressr::handler_rstudio())`][progressr::handler_rstudio()].
+#'
+#'   Note that progress notifications are not free, as they require
+#'   communicating a small amount of data back to the main worker after each
+#'   call to `.f`. It is recommended to only use them with long running tasks.
+#'
+#'   All core `plan()` types are supported, including `sequential`, `cluster`,
+#'   `multisession`, and `multicore`. Additionally, `future.callr::callr` and
+#'   `future.mirai::mirai_multisession` are also known to be supported.
 #'
 #' @param .ptype If `NULL`, the default, the output type is the common type of
 #'   the elements of the result. Otherwise, supply a "prototype" giving the

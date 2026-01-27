@@ -230,15 +230,34 @@ must be the result from a call to \code{\link[=furrr_options]{furrr_options()}}.
 \code{...}. Globals required by \code{.f} are looked up in the function environment
 of \code{.f}.}
 
-\item{.progress}{A single logical. Should a progress bar be displayed?
-Only works with multisession, multicore, and multiprocess futures. Note
-that if a multicore/multisession future falls back to sequential, then
-a progress bar will not be displayed.
+\item{.progress}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-\strong{Warning:} The \code{.progress} argument will be deprecated and removed
-in a future version of furrr in favor of using the more robust
-\href{https://CRAN.R-project.org/package=progressr}{progressr}
-package.}
+Either \code{TRUE} or \code{FALSE}.
+
+TODO!(write this): See \code{vignette("progress")} for examples.
+
+If \code{TRUE}, a \code{progressr::progressor()} is automatically created
+with as many steps as there are elements to iterate over. After each
+call to \code{.f}, progression is \emph{signaled} back to the main process.
+
+Note that \code{.progress = TRUE} is not enough to make progress notifications
+\emph{appear}. You must also either wrap the furrr expression in
+\code{\link[progressr:with_progress]{progressr::with_progress()}} or set \code{\link[progressr:handlers]{progressr::handlers(global = TRUE)}} at the top of your script (this enables
+\emph{all} progress notifications, which is recommended for interative work).
+
+To customize the progress notification, set an alternative progressr
+handler, such as
+\code{\link[progressr:handler_cli]{progressr::handlers(progressr::handler_cli())}}
+or
+\code{\link[progressr:handler_rstudio]{progressr::handlers(progressr::handler_rstudio())}}.
+
+Note that progress notifications are not free, as they require
+communicating a small amount of data back to the main worker after each
+call to \code{.f}. It is recommended to only use them with long running tasks.
+
+All core \code{plan()} types are supported, including \code{sequential}, \code{cluster},
+\code{multisession}, and \code{multicore}. Additionally, \code{future.callr::callr} and
+\code{future.mirai::mirai_multisession} are also known to be supported.}
 
 \item{.ptype}{If \code{NULL}, the default, the output type is the common type of
 the elements of the result. Otherwise, supply a "prototype" giving the
