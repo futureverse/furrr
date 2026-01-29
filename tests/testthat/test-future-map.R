@@ -304,3 +304,18 @@ furrr_test_that("`...` globals/packages are found", {
     list(1, 1)
   )
 })
+
+furrr_test_that("errors don't report purrr's indices (#250)", {
+  fail_on_five <- function(x) {
+    if (x == 5) {
+      stop("Failure!")
+    }
+    1L
+  }
+
+  x <- 1:20
+
+  expect_snapshot(error = TRUE, {
+    future_map(x, fail_on_five)
+  })
+})
