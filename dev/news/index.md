@@ -29,6 +29,12 @@
   confusingly reported
   ([\#250](https://github.com/futureverse/furrr/issues/250)).
 
+- [`furrr_options()`](https://furrr.futureverse.org/dev/reference/furrr_options.md)
+  no longer drops the `"ordering"` attribute when casting non-integer
+  `chunk_size` or `scheduling` to integer
+  ([\#289](https://github.com/futureverse/furrr/issues/289),
+  [\#290](https://github.com/futureverse/furrr/issues/290)).
+
 - furrr now looks up the purrr mapping function on the worker itself,
   rather than sending over its own copy of the function. This avoids
   possible issues when you have, say, purrr 1.0.0 locally but purrr
