@@ -438,7 +438,9 @@ furrr_template <- function(
     poll_progress(futures, file, n)
   }
 
-  values <- future::value(futures)
+  values <- furrr_try_catch({
+    future::value(futures)
+  })
 
   if (length(values) != length(chunks)) {
     abort("Internal error: Length of `values` not equal to length of `chunks`.")
@@ -456,6 +458,30 @@ furrr_template <- function(
   names(out) <- names
 
   out
+}
+
+# ------------------------------------------------------------------------------
+
+furrr_try_catch <- function(expr) {
+  tryCatch(
+    expr = expr,
+    purrr_error_indexed = rethrow_purrr_error_indexed
+  )
+}
+
+rethrow_purrr_error_indexed <- function(cnd) {
+  # The purrr index information doesn't align with furrr's since the
+  # input is chunked along the workers. We rethrow the parent instead,
+  # which is the original error.
+  cnd <- cnd$parent
+
+  if (!is_condition(cnd)) {
+    # If something changes in purrr and `$parent` doesn't exist, just
+    # return and let normal erroring take its course
+    return()
+  }
+
+  rlang::cnd_signal(cnd)
 }
 
 # ------------------------------------------------------------------------------
