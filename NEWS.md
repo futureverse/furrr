@@ -19,6 +19,9 @@
 * When a furrr function errors, purrr's error index is no longer confusingly
   reported (#250).
 
+* `furrr_options()` no longer drops the `"ordering"` attribute when casting
+  non-integer `chunk_size` or `scheduling` to integer (#289, #290).
+
 * furrr now looks up the purrr mapping function on the worker itself, rather
   than sending over its own copy of the function. This avoids possible issues
   when you have, say, purrr 1.0.0 locally but purrr 0.3.5 on the worker, where
