@@ -278,7 +278,11 @@ furrr_test_that("`.f` globals are only looked up in the function env of `.f` (#1
     future_map(1:2, f)
   }
 
-  expect_error(wrapper(fn), "'y' not found")
+  # TODO: Reenable this test after future issue is fixed
+  # https://github.com/futureverse/future/issues/820
+  # https://github.com/futureverse/furrr/issues/307
+  # expect_error(wrapper(fn), "'y' not found")
+
   expect_identical(wrapper(fn2), list(-1, -1))
 })
 
