@@ -396,12 +396,8 @@ validate_chunk_size <- function(x) {
     return(x)
   }
 
-  if (identical(x, Inf)) {
-    return(x)
-  }
-
-  vctrs::vec_assert(x, size = 1L, arg = "chunk_size")
-  x <- vctrs::vec_cast(x, integer(), x_arg = "chunk_size")
+  vctrs::obj_check_vector(x, arg = "chunk_size")
+  vctrs::vec_check_size(x, size = 1L, arg = "chunk_size")
 
   if (is.na(x)) {
     abort("`chunk_size` can't be `NA`.")
@@ -410,6 +406,14 @@ validate_chunk_size <- function(x) {
   if (x <= 0L) {
     abort("`chunk_size` must be greater than zero.")
   }
+
+  if (is.infinite(x)) {
+    return(x)
+  }
+
+  ordering <- attr(x, "ordering")
+  x <- vctrs::vec_cast(x, integer(), x_arg = "chunk_size")
+  attr(x, "ordering") <- ordering
 
   x
 }

@@ -282,6 +282,22 @@ test_that("validates `chunk_size`", {
   expect_error(furrr_options(chunk_size = "x"))
   expect_error(furrr_options(chunk_size = 1.5))
   expect_error(furrr_options(chunk_size = NA))
+  expect_error(furrr_options(chunk_size = -Inf))
+  expect_error(furrr_options(chunk_size = lm(1 ~ 1)))
+})
+
+test_that("`chunk_size` supports an `ordering` attribute (#290)", {
+  # Integer `chunk_size`
+  x <- furrr_options(chunk_size = structure(2L, ordering = "random"))
+  expect_identical(x$chunk_size, structure(2L, ordering = "random"))
+
+  # Double `chunk_size`
+  x <- furrr_options(chunk_size = structure(2, ordering = "random"))
+  expect_identical(x$chunk_size, structure(2L, ordering = "random"))
+
+  # Inf `chunk_size`
+  x <- furrr_options(chunk_size = structure(Inf, ordering = "random"))
+  expect_identical(x$chunk_size, structure(Inf, ordering = "random"))
 })
 
 # ------------------------------------------------------------------------------
