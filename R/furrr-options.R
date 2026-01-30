@@ -366,27 +366,28 @@ validate_seed_list <- function(x) {
 }
 
 validate_scheduling <- function(x) {
-  if (length(x) != 1L) {
-    abort("`scheduling` must be length 1.")
+  vctrs::obj_check_vector(x, arg = "scheduling")
+  vctrs::vec_check_size(x, size = 1L, arg = "scheduling")
+
+  if (is.na(x)) {
+    abort("`scheduling` can't be `NA`.")
   }
 
-  if (identical(x, Inf)) {
+  if (is_bool(x)) {
     return(x)
   }
-
-  if (is.logical(x)) {
-    if (!is_bool(x)) {
-      abort("A logical `scheduling` value can't be `NA`.")
-    }
-
-    return(x)
-  }
-
-  x <- vctrs::vec_cast(x, integer(), x_arg = "scheduling")
 
   if (x < 0L) {
     abort("`scheduling` must be greater than or equal to zero.")
   }
+
+  if (is.infinite(x)) {
+    return(x)
+  }
+
+  ordering <- attr(x, "ordering")
+  x <- vctrs::vec_cast(x, integer(), x_arg = "scheduling")
+  attr(x, "ordering") <- ordering
 
   x
 }

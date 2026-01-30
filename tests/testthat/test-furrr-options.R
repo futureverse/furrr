@@ -262,11 +262,49 @@ test_that("validates `seed`", {
 # ------------------------------------------------------------------------------
 # furrr_options(scheduling =)
 
+test_that("can specify `scheduling`", {
+  x <- furrr_options(scheduling = TRUE)
+  expect_identical(x$scheduling, TRUE)
+
+  x <- furrr_options(scheduling = FALSE)
+  expect_identical(x$scheduling, FALSE)
+
+  x <- furrr_options(scheduling = 0)
+  expect_identical(x$scheduling, 0L)
+
+  x <- furrr_options(scheduling = 5)
+  expect_identical(x$scheduling, 5L)
+
+  x <- furrr_options(scheduling = Inf)
+  expect_identical(x$scheduling, Inf)
+})
+
 test_that("validates `scheduling`", {
   expect_error(furrr_options(scheduling = c(1, 2)))
+  expect_error(furrr_options(scheduling = c(TRUE, FALSE)))
   expect_error(furrr_options(scheduling = "x"))
   expect_error(furrr_options(scheduling = 1.5))
   expect_error(furrr_options(scheduling = NA))
+  expect_error(furrr_options(scheduling = -Inf))
+  expect_error(furrr_options(scheduling = lm(1 ~ 1)))
+})
+
+test_that("`scheduling` supports an `ordering` attribute (#289)", {
+  # Integer `scheduling`
+  x <- furrr_options(scheduling = structure(2L, ordering = "random"))
+  expect_identical(x$scheduling, structure(2L, ordering = "random"))
+
+  # Double `scheduling`
+  x <- furrr_options(scheduling = structure(2, ordering = "random"))
+  expect_identical(x$scheduling, structure(2L, ordering = "random"))
+
+  # Inf `scheduling`
+  x <- furrr_options(scheduling = structure(Inf, ordering = "random"))
+  expect_identical(x$scheduling, structure(Inf, ordering = "random"))
+
+  # Logical `scheduling`
+  x <- furrr_options(scheduling = structure(TRUE, ordering = "random"))
+  expect_identical(x$scheduling, structure(TRUE, ordering = "random"))
 })
 
 # ------------------------------------------------------------------------------
@@ -275,9 +313,13 @@ test_that("validates `scheduling`", {
 test_that("can specify `chunk_size`", {
   x <- furrr_options(chunk_size = 2)
   expect_identical(x$chunk_size, 2L)
+
+  x <- furrr_options(chunk_size = Inf)
+  expect_identical(x$chunk_size, Inf)
 })
 
 test_that("validates `chunk_size`", {
+  expect_error(furrr_options(chunk_size = 0))
   expect_error(furrr_options(chunk_size = c(1, 2)))
   expect_error(furrr_options(chunk_size = "x"))
   expect_error(furrr_options(chunk_size = 1.5))

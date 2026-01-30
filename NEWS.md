@@ -20,7 +20,7 @@
   reported (#250).
 
 * `furrr_options()` no longer drops the `"ordering"` attribute when casting
-  a non-integer `chunk_size` to integer (#290).
+  non-integer `chunk_size` or `scheduling` to integer (#289, #290).
 
 * furrr now looks up the purrr mapping function on the worker itself, rather
   than sending over its own copy of the function. This avoids possible issues
