@@ -25,6 +25,10 @@
   to align with purrr
   ([\#261](https://github.com/futureverse/furrr/issues/261)).
 
+- When a furrr function errors, purrr’s error index is no longer
+  confusingly reported
+  ([\#250](https://github.com/futureverse/furrr/issues/250)).
+
 - furrr now looks up the purrr mapping function on the worker itself,
   rather than sending over its own copy of the function. This avoids
   possible issues when you have, say, purrr 1.0.0 locally but purrr
