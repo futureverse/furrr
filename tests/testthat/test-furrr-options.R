@@ -70,9 +70,12 @@ test_that("can selectively export packages on multisession", {
 
   opts <- furrr_options(packages = "dplyr")
 
-  expect_error(
-    future_map(1:2, ~ tibble(x = .x))
-  )
+  # TODO: Reenable this test after future issue is fixed
+  # https://github.com/futureverse/future/issues/820
+  # https://github.com/futureverse/furrr/issues/307
+  # expect_error(
+  #   future_map(1:2, ~ tibble(x = .x))
+  # )
 
   expect_identical(
     future_map(1:2, ~ tibble(x = .x), .options = opts),
