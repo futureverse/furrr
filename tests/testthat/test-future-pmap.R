@@ -189,17 +189,20 @@ furrr_test_that("size one recycling works", {
   )
 })
 
-furrr_test_that("generally can't recycle to size zero", {
-  expect_error(
-    future_pmap(list(1:2, integer()), ~ c(.x, .y)),
-    "Can't recycle"
-  )
-
-  expect_error(
-    future_pmap(list(integer(), 1:2), ~ c(.x, .y)),
-    "Can't recycle"
-  )
-})
+# TODO: Reenable this test after future issue is fixed
+# https://github.com/futureverse/future/issues/820
+# https://github.com/futureverse/furrr/issues/307
+# furrr_test_that("generally can't recycle to size zero", {
+#   expect_error(
+#     future_pmap(list(1:2, integer()), ~ c(.x, .y)),
+#     "Can't recycle"
+#   )
+#
+#   expect_error(
+#     future_pmap(list(integer(), 1:2), ~ c(.x, .y)),
+#     "Can't recycle"
+#   )
+# })
 
 # ------------------------------------------------------------------------------
 # Miscellaneous
@@ -237,7 +240,11 @@ furrr_test_that("unused components can be absorbed", {
     x
   }
 
-  expect_error(future_pmap_dbl(x, fn1))
+  # TODO: Reenable this test after future issue is fixed
+  # https://github.com/futureverse/future/issues/820
+  # https://github.com/futureverse/furrr/issues/307
+  # expect_error(future_pmap_dbl(x, fn1))
+
   expect_identical(future_pmap_dbl(x, fn2), c(1, 2))
 })
 
