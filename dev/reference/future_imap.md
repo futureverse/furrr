@@ -174,6 +174,6 @@ A vector the same length as .x.
 plan(multisession, workers = 2)
 
 future_imap_chr(sample(10), ~ paste0(.y, ": ", .x))
-#>  [1] "1: 5"  "2: 6"  "3: 7"  "4: 8"  "5: 4"  "6: 1"  "7: 10" "8: 9"  "9: 3" 
+#>  [1] "1: 7"  "2: 5"  "3: 6"  "4: 10" "5: 4"  "6: 1"  "7: 9"  "8: 8"  "9: 3" 
 #> [10] "10: 2"
 ```
