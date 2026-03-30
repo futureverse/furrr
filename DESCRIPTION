@@ -16,10 +16,10 @@ License: MIT + file LICENSE
 URL: https://github.com/futureverse/furrr, https://furrr.futureverse.org/
 BugReports: https://github.com/futureverse/furrr/issues
 Depends:
-    future (>= 1.69.0),
+    future (>= 1.70.0),
     R (>= 4.1.0)
 Imports:
-    globals (>= 0.18.0),
+    globals (>= 0.19.1),
     purrr (>= 1.2.1),
     rlang (>= 1.1.7),
     vctrs (>= 0.7.0)
