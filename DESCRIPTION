@@ -31,7 +31,7 @@ Suggests:
     parallelly (>= 1.46.1),
     testthat (>= 3.3.2),
     tidyselect
-Config/Needs/website:progressr
+Config/Needs/website: progressr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
