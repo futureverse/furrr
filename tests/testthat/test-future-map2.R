@@ -186,20 +186,17 @@ furrr_test_that("size one recycling works", {
   )
 })
 
-# TODO: Reenable this test after future issue is fixed
-# https://github.com/futureverse/future/issues/820
-# https://github.com/futureverse/furrr/issues/307
-# furrr_test_that("generally can't recycle to size zero", {
-#   expect_error(
-#     future_map2(1:2, integer(), ~ c(.x, .y)),
-#     "Can't recycle"
-#   )
-#
-#   expect_error(
-#     future_map2(integer(), 1:2, ~ c(.x, .y)),
-#     "Can't recycle"
-#   )
-# })
+furrr_test_that("generally can't recycle to size zero", {
+  expect_error(
+    future_map2(1:2, integer(), ~ c(.x, .y)),
+    "Can't recycle"
+  )
+
+  expect_error(
+    future_map2(integer(), 1:2, ~ c(.x, .y)),
+    "Can't recycle"
+  )
+})
 
 # ------------------------------------------------------------------------------
 # Miscellaneous
