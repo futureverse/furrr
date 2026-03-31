@@ -1,14 +1,13 @@
-pandoc: 2.14.2
-pkgdown: 2.0.6
+pandoc: 3.1.11
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
-  carrier: carrier.html
-  chunking: chunking.html
-  gotchas: gotchas.html
-  progress: progress.html
-  remote-connections: remote-connections.html
-last_built: 2022-08-15T19:37Z
+  articles/carrier: carrier.html
+  articles/chunking: chunking.html
+  articles/gotchas: gotchas.html
+  articles/progress: progress.html
+  articles/remote-connections: remote-connections.html
+last_built: 2026-03-31T17:12Z
 urls:
   reference: https://furrr.futureverse.org/reference
   article: https://furrr.futureverse.org/articles
-
