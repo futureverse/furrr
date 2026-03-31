@@ -2,6 +2,10 @@
 
 ## furrr (development version)
 
+## furrr 0.4.0
+
+CRAN release: 2026-03-31
+
 ### Breaking changes
 
 - All deprecated `future_invoke_map_*()` variants have been removed.

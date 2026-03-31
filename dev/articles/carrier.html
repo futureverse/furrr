@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">furrr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.3.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -256,7 +256,7 @@ than expected because it has to serialize <code>big</code>.</p>
 <span>  <span class="fu">my_slow_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.413   0.311   1.672</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.405   0.309   1.609</span></span></code></pre></div>
 <p>One way to avoid this is to use carrier to crate the function,
 isolating it from the surrounding environment.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -276,7 +276,7 @@ isolating it from the surrounding environment.</p>
 <span>  <span class="fu">my_crated_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.193   0.037   0.451</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.199   0.032   0.449</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
