@@ -1,6 +1,7 @@
 # Progress notifications with progressr
 
 ``` r
+
 library(furrr)
 library(progressr)
 library(dplyr)
@@ -77,6 +78,7 @@ also introduced a bit of a delay because this otherwise would run
 extremely fast.
 
 ``` r
+
 my_pkg_fn <- function(x) {
   p <- progressor(steps = length(x))
   
@@ -92,6 +94,7 @@ From the user’s side, simply calling `my_pkg_fun()` won’t display
 anything:
 
 ``` r
+
 plan(multisession, workers = 2)
 
 set.seed(123)
@@ -100,6 +103,7 @@ x <- replicate(n = 10, runif(20), simplify = FALSE)
 ```
 
 ``` r
+
 # No notifications
 result <- my_pkg_fn(x)
 ```
@@ -112,6 +116,7 @@ which creates a progress bar with
 [`utils::txtProgressBar()`](https://rdrr.io/r/utils/txtProgressBar.html).
 
 ``` r
+
 with_progress({
   result <- my_pkg_fn(x)
 })
@@ -138,6 +143,7 @@ create the function that signals progress by calling `p()`, and call
 It is easiest to show this with an example:
 
 ``` r
+
 plan(multisession, workers = 2)
 
 with_progress({
@@ -162,6 +168,7 @@ logic of `.f` up into a real function. The easiest way to do this right
 now is to have an extra argument for `p` that you can pass through.
 
 ``` r
+
 plan(multisession, workers = 2)
 
 fn <- function(x, p) {
@@ -184,6 +191,7 @@ You generally can’t create the progressor object outside of the
 call. For example, this doesn’t work:
 
 ``` r
+
 p <- progressor(steps = length(x))
 
 with_progress({
@@ -205,6 +213,7 @@ them together currently is to wrap an entire dplyr pipeline in
 [`with_progress()`](https://progressr.futureverse.org/reference/with_progress.html).
 
 ``` r
+
 cars <- mtcars |>
   group_by(carb) |>
   group_nest()
@@ -226,6 +235,7 @@ then call
 in [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html):
 
 ``` r
+
 plan(multisession, workers = 2)
 
 with_progress({
@@ -243,6 +253,7 @@ calls
 all at once:
 
 ``` r
+
 plan(multisession, workers = 2)
 
 model_mapper <- function(data) {
@@ -264,6 +275,7 @@ signals one. This means that the first call to `model_mapper()` will
 signal updates, but the second won’t.
 
 ``` r
+
 with_progress({
   cars2 <- cars |>
     mutate(
@@ -285,6 +297,7 @@ The state is maintained between
 calls so you end up with one long progress bar.
 
 ``` r
+
 plan(multisession, workers = 2)
 
 with_progress({

@@ -12,6 +12,7 @@ instances in two ways:
 2.  Running code in parallel on multiple EC2 instances
 
 ``` r
+
 library(furrr)
 library(purrr)
 library(dplyr)
@@ -58,6 +59,7 @@ simplicity, say we want to run 3 separate linear models on mtcars, split
 up by `gear`.
 
 ``` r
+
 by_gear <- mtcars |>
   group_split(gear) 
 
@@ -97,6 +99,7 @@ models
 With furrr, we can run this in parallel locally using the following:
 
 ``` r
+
 plan(multisession, workers = 2)
 
 models <- future_map(by_gear, ~lm(mpg ~ cyl + hp + wt, data = .))
@@ -155,6 +158,7 @@ finished. Then, you’ll need to:
   hopefully you know where you saved it!
 
 ``` r
+
 # A t2.micro AWS instance
 # Created from http://www.louisaslett.com/RStudio_AMI/
 public_ip <- "34.230.28.118"
@@ -173,6 +177,7 @@ worker. If the connection is successful, the code below should start
 outputting package installation messages into your local console.
 
 ``` r
+
 connect_to_ec2 <- function(public_ip, ssh_private_key_file) {
   makeClusterPSOCK(
     
@@ -258,6 +263,7 @@ connection (see
 for more info).
 
 ``` r
+
 plan(cluster, workers = cl)
 
 models <- future_map(by_gear, ~lm(mpg ~ cyl + hp + wt, data = .))
@@ -300,6 +306,7 @@ finished working with it. Don’t forget to terminate the instance as
 well!
 
 ``` r
+
 # Revert back to a sequential plan
 plan(sequential)
 
@@ -345,6 +352,7 @@ Amazon could take the instance away from you temporarily at any time
 Note that you now have a vector of public ip addresses.
 
 ``` r
+
 # Two t2.xlarge AWS instances
 # Created from http://www.louisaslett.com/RStudio_AMI/
 public_ip <- c("54.157.169.96", "18.210.19.243")
@@ -356,6 +364,7 @@ ssh_private_key_file <- "path/to/file.pem"
 Otherwise, the code remains the same to make the connection!
 
 ``` r
+
 cl_multi <- connect_to_ec2(public_ip, ssh_private_key_file)
 
 cl_multi
@@ -373,6 +382,7 @@ you also have the option to
 plan individually (which will be required to set the workers argument!).
 
 ``` r
+
 plan(list(
   # The outer plan tells future to distribute over the 2 instances
   tweak(cluster, workers = cl_multi), 
@@ -389,6 +399,7 @@ then return the instance we are on and the core we are using. In total
 this should take *16 seconds*.
 
 ``` r
+
 t1 <- proc.time()
 
 res <- map(
@@ -426,6 +437,7 @@ res
 ```
 
 ``` r
+
 t2 - t1
 #>   user  system elapsed 
 #>  0.055   0.051  16.022 
@@ -441,6 +453,7 @@ call distributes over the cores of each instance. This should take
 on each of the 8 available cores).
 
 ``` r
+
 t1 <- proc.time()
 
 res <- future_map(
@@ -471,6 +484,7 @@ t2 <- proc.time()
 ```
 
 ``` r
+
 t2 - t1
 #>   user  system elapsed 
 #>  0.075   0.018   2.728 
@@ -483,6 +497,7 @@ Don’t forget to close the connection, and then to terminate the EC2
 instance!
 
 ``` r
+
 plan(sequential)
 
 parallel::stopCluster(cl_multi)

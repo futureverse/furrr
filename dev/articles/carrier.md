@@ -1,6 +1,7 @@
 # Alternative to automatic globals detection
 
 ``` r
+
 library(furrr)
 library(carrier)
 ```
@@ -33,6 +34,7 @@ call to `function()` with
 [`crate()`](https://rdrr.io/pkg/carrier/man/crate.html).
 
 ``` r
+
 crt1 <- crate(function(x) {
   stats::var(x)
 })
@@ -45,6 +47,7 @@ You can also specify the function to crate using the anonymous function
 shorthand with `~`.
 
 ``` r
+
 crt1_anon <- crate(~stats::var(.x))
 
 crt1_anon(c(1, 5, 3))
@@ -56,6 +59,7 @@ the crated function runs in an environment where only the base package
 has been loaded.
 
 ``` r
+
 crt2 <- crate(function(x) {
   var(x)
 })
@@ -69,6 +73,7 @@ Any “outside” dependencies that you require must also be manually
 specified when creating the crate, otherwise it won’t be found.
 
 ``` r
+
 constant <- 1.67
 
 crt3 <- crate(~ .x + constant)
@@ -83,6 +88,7 @@ crate with `!!`, or by supplying them as name-value pairs to
 [`crate()`](https://rdrr.io/pkg/carrier/man/crate.html):
 
 ``` r
+
 crt4 <- crate(function(x) {
   x + !!constant
 })
@@ -92,6 +98,7 @@ crt4(2:5)
 ```
 
 ``` r
+
 crt5 <- crate(
   constant = constant,
   function(x) {
@@ -107,6 +114,7 @@ Crates have a nice print method, allowing you to see the size of the
 crate and what has been captured:
 
 ``` r
+
 crt5
 #> <crate> 1.34 kB
 #> * function: 672 B
@@ -121,6 +129,7 @@ One downside of inlining with `!!` is that it doesn’t show up as a
 separate element in the print method:
 
 ``` r
+
 crt4
 #> <crate> 1.23 kB
 #> * function: 672 B
@@ -137,6 +146,7 @@ prevents [`crate()`](https://rdrr.io/pkg/carrier/man/crate.html) from
 assigning it the correct environment.
 
 ``` r
+
 fn <- function(x) {
   x
 }
@@ -159,6 +169,7 @@ dependency object in the function’s environment. Since furrr serializes
 without the need to auto detect them.
 
 ``` r
+
 crt5
 #> <crate> 1.34 kB
 #> * function: 672 B
@@ -170,6 +181,7 @@ crt5
 ```
 
 ``` r
+
 plan(multisession, workers = 2)
 
 opts <- furrr_options(globals = FALSE)
@@ -188,12 +200,14 @@ If you crate a function with extra optional arguments, you can still
 pass those through using furrr:
 
 ``` r
+
 median_doubled <- crate(function(x, na.rm = FALSE) {
   stats::median(x, na.rm = na.rm) * 2
 })
 ```
 
 ``` r
+
 plan(multisession, workers = 2)
 
 opts <- furrr_options(globals = FALSE)
@@ -212,6 +226,7 @@ should be extremely fast, but is significantly slower than expected
 because it has to serialize `big`.
 
 ``` r
+
 my_slow_fn <- function() {
   # Massive object - but we don't want it in `.f`
   big <- 1:1e8 + 0L
@@ -221,19 +236,21 @@ my_slow_fn <- function() {
 ```
 
 ``` r
+
 plan(multisession, workers = 2)
 
 system.time({
   my_slow_fn()
 })
 #>    user  system elapsed 
-#>   0.405   0.309   1.609
+#>   0.557   0.163   1.643
 ```
 
 One way to avoid this is to use carrier to crate the function, isolating
 it from the surrounding environment.
 
 ``` r
+
 my_crated_fn <- function() {
   # Massive object - but we don't want it in `.f`
   big <- 1:1e8 + 0L
@@ -246,11 +263,12 @@ my_crated_fn <- function() {
 ```
 
 ``` r
+
 plan(multisession, workers = 2)
 
 system.time({
   my_crated_fn()
 })
 #>    user  system elapsed 
-#>   0.199   0.032   0.449
+#>   0.204   0.040   0.485
 ```

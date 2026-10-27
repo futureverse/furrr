@@ -1,6 +1,7 @@
 # Common gotchas
 
 ``` r
+
 library(furrr)
 library(purrr)
 library(dplyr)
@@ -21,6 +22,7 @@ only once, but this prevents some “lazy” behavior that is possible with
 purrr. For example:
 
 ``` r
+
 filter_for_dogs <- function(data, col) {
   filter(data, {{ col }} == "dog")
 }
@@ -44,6 +46,7 @@ where the data frame exists, so it can detect that `pets` is a column in
 the data frame.
 
 ``` r
+
 map(dfs, filter_for_dogs, col = pets)
 #> [[1]]
 #> # A tibble: 1 × 2
@@ -63,6 +66,7 @@ has to evaluate each argument early, so `pets` is evaluated in a context
 where the data frame doesn’t exist, so we get an error.
 
 ``` r
+
 future_map(dfs, filter_for_dogs, col = pets)
 #> Error:
 #> ! object 'pets' not found
@@ -72,12 +76,14 @@ One alternative is to pass the column through as a character string, and
 to use the `.data` pronoun to retrieve the column.
 
 ``` r
+
 filter_for_dogs2 <- function(data, col) {
   filter(data, .data[[col]] == "dog")
 }
 ```
 
 ``` r
+
 future_map(dfs, filter_for_dogs2, col = "pets")
 #> [[1]]
 #> # A tibble: 1 × 2
@@ -101,12 +107,14 @@ want the argument to be evaluated at each iteration, you’ll need to put
 it inside the anonymous function. For example:
 
 ``` r
+
 x <- rep(0, 3)
 
 plus <- function(x, y) x + y
 ```
 
 ``` r
+
 set.seed(123)
 
 map_dbl(x, plus, runif(1))
@@ -124,6 +132,7 @@ that to control the reproducibility, you should pass an `options`
 argument with a specified seed.
 
 ``` r
+
 plan(multisession, workers = 2)
 
 options <- furrr_options(seed = 123)
@@ -151,6 +160,7 @@ following data frame to arise naturally if you have nested a grouped
 data frame.
 
 ``` r
+
 set.seed(123)
 
 df <- tibble(
@@ -184,6 +194,7 @@ element of `x`, you might try and use
 but you’ll be surprised about how slow it can be.
 
 ``` r
+
 plan(multisession, workers = 2)
 
 t1 <- proc.time()
@@ -212,7 +223,7 @@ plan(sequential)
 
 t2 - t1
 #>    user  system elapsed 
-#>   1.287   0.031   5.840
+#>   1.529   0.022   6.101
 ```
 
 The issue here is that the grouped nature of the data frame prevents
@@ -231,6 +242,7 @@ The easy solution is to just ungroup the data frame before calling
 [`future_map_dbl()`](https://furrr.futureverse.org/dev/reference/future_map.md).
 
 ``` r
+
 plan(multisession, workers = 2)
 
 t1 <- proc.time()
@@ -259,7 +271,7 @@ plan(sequential)
 
 t2 - t1
 #>    user  system elapsed 
-#>   0.040   0.001   0.258
+#>   0.046   0.000   0.289
 ```
 
 ## Graphics devices
@@ -319,6 +331,7 @@ to get captured by the function environment of `.f` and be exported to
 the worker, even if you never used it in the function itself.
 
 ``` r
+
 my_fast_fn <- function() {
   future_map(1:5, ~.x)
 }
@@ -332,19 +345,20 @@ my_slow_fn <- function() {
 ```
 
 ``` r
+
 plan(multisession, workers = 2)
 
 system.time(
   my_fast_fn()
 )
 #>    user  system elapsed 
-#>   0.025   0.003   0.245
+#>   0.035   0.000   0.275
 
 system.time(
   my_slow_fn()
 )
 #>    user  system elapsed 
-#>   0.416   0.299   1.443
+#>   0.460   0.235   1.416
 
 plan(sequential)
 ```
@@ -358,6 +372,7 @@ that it is on the workers using
 object here, but the concept is the same.
 
 ``` r
+
 plan(multisession, workers = 2)
 
 my_slow_fn2 <- function() {
@@ -380,6 +395,7 @@ One solution to this is to create `.f` somewhere where it won’t capture
 that massive object in its surrounding environment. For example:
 
 ``` r
+
 fn <- function(x) {
   x
 }
@@ -396,7 +412,7 @@ system.time(
   my_not_so_slow_fn()
 )
 #>    user  system elapsed 
-#>   0.211   0.034   0.459
+#>   0.206   0.046   0.492
 
 plan(sequential)
 ```
@@ -410,6 +426,7 @@ package without issue.
 Again, we can prove that the object doesn’t make it onto the workers:
 
 ``` r
+
 plan(multisession, workers = 2)
 
 fn2 <- function(x) {

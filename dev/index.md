@@ -41,12 +41,14 @@ You can install the released version of furrr from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
+
 install.packages("furrr")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("futureverse/furrr")
 ```
@@ -80,6 +82,7 @@ furrr has been designed to function as identically to purrr as possible,
 so that you can immediately have familiarity with it.
 
 ``` r
+
 library(furrr)
 library(purrr)
 
@@ -104,6 +107,7 @@ one. This means that the above code will run out of the box, but it will
 change this so that your code will run in parallel.
 
 ``` r
+
 # Set a "plan" for how the code should run.
 plan(multisession, workers = 2)
 
@@ -120,6 +124,7 @@ If you are still skeptical, here is some proof that we are running in
 parallel.
 
 ``` r
+
 library(tictoc)
 
 # This should take 6 seconds in total running sequentially
@@ -132,6 +137,7 @@ toc()
 ```
 
 ``` r
+
 # This should take ~2 seconds running in parallel, with a little overhead
 # in `future_map()` from sending data to the workers. There is generally also
 # a one time cost from `plan(multisession)` setting up the workers.

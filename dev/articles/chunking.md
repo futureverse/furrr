@@ -1,6 +1,7 @@
 # Chunking input
 
 ``` r
+
 library(furrr)
 ```
 
@@ -20,6 +21,7 @@ Chunks are determined using an internal function in furrr called
 strategies.
 
 ``` r
+
 make_chunks <- furrr:::make_chunks
 ```
 
@@ -31,6 +33,7 @@ the number of workers. This is the simplest strategy, and usually works
 fairly well.
 
 ``` r
+
 # Elements 1:6 go to worker 1
 # Elements 7:12 go to worker 2
 make_chunks(n_x = 12, n_workers = 2)
@@ -85,6 +88,7 @@ With 12 elements and 2 workers, it will:
 - Send elements 10:12 off to that worker
 
 ``` r
+
 make_chunks(n_x = 12, n_workers = 2, scheduling = 2L)
 #> [[1]]
 #> [1] 1 2 3
@@ -117,6 +121,7 @@ The extreme end of `scheduling` is to set it to `Inf`, which creates
 `n_x` chunks (1 chunk per element of `.x`).
 
 ``` r
+
 make_chunks(n_x = 5, n_workers = 2, scheduling = Inf)
 #> [[1]]
 #> [1] 1
@@ -145,6 +150,7 @@ Computing chunks using `chunk_size` is independent of the number of
 workers.
 
 ``` r
+
 make_chunks(n_x = 12, n_workers = 2, chunk_size = 4)
 #> [[1]]
 #> [1] 1 2 3 4
@@ -160,6 +166,7 @@ An `Inf` `chunk_size` requests that all elements be processed in a
 single chunk.
 
 ``` r
+
 make_chunks(n_x = 5, n_workers = 3, chunk_size = Inf)
 #> [[1]]
 #> [1] 1 2 3 4 5

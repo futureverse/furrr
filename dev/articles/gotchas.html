@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Common gotchas • furrr</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Common gotchas">
 <meta name="robots" content="noindex">
@@ -256,7 +256,7 @@ can be.</p>
 <span></span>
 <span><span class="va">t2</span> <span class="op">-</span> <span class="va">t1</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   1.287   0.031   5.840</span></span></code></pre></div>
+<span><span class="co">#&gt;   1.529   0.022   6.101</span></span></code></pre></div>
 <p>The issue here is that the grouped nature of the data frame prevents
 furrr from doing what it is good at - sharding the <code>x</code> column
 into equally sized groups and sending them off to the workers to process
@@ -297,7 +297,7 @@ operate on. So <code><a href="../reference/future_map.html">future_map_dbl()</a>
 <span></span>
 <span><span class="va">t2</span> <span class="op">-</span> <span class="va">t1</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.040   0.001   0.258</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.046   0.000   0.289</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="graphics-devices">Graphics devices<a class="anchor" aria-label="anchor" href="#graphics-devices"></a>
@@ -371,13 +371,13 @@ in the function itself.</p>
 <span>  <span class="fu">my_fast_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.025   0.003   0.245</span></span>
+<span><span class="co">#&gt;   0.035   0.000   0.275</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
 <span>  <span class="fu">my_slow_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.416   0.299   1.443</span></span>
+<span><span class="co">#&gt;   0.460   0.235   1.416</span></span>
 <span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span></code></pre></div>
 <p>In the above example, <code>big</code> is captured in the function
@@ -424,7 +424,7 @@ example:</p>
 <span>  <span class="fu">my_not_so_slow_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.211   0.034   0.459</span></span>
+<span><span class="co">#&gt;   0.206   0.046   0.492</span></span>
 <span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">sequential</span><span class="op">)</span></span></code></pre></div>
 <p>Here lexical scoping is used to find <code>fn</code>, but you could
@@ -472,7 +472,7 @@ detection</em>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
