@@ -184,8 +184,12 @@ environment.</p>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/carrier/man/crate.html" class="external-link">crate</a></span><span class="op">(</span><span class="va">fn</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `crate()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> The function must be defined inside this call</span></span></code></pre></div>
+<span><span class="co">#&gt; &lt;crate&gt; 952 B</span></span>
+<span><span class="co">#&gt; * function: 392 B</span></span>
+<span><span class="co">#&gt; function (x) </span></span>
+<span><span class="co">#&gt; {</span></span>
+<span><span class="co">#&gt;     x</span></span>
+<span><span class="co">#&gt; }</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="crates-and-furrr">Crates and furrr<a class="anchor" aria-label="anchor" href="#crates-and-furrr"></a>
@@ -256,7 +260,7 @@ than expected because it has to serialize <code>big</code>.</p>
 <span>  <span class="fu">my_slow_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.557   0.163   1.643</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.441   0.588   2.384</span></span></code></pre></div>
 <p>One way to avoid this is to use carrier to crate the function,
 isolating it from the surrounding environment.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -276,7 +280,7 @@ isolating it from the surrounding environment.</p>
 <span>  <span class="fu">my_crated_fn</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.204   0.040   0.485</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.197   0.290   0.721</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

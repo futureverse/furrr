@@ -152,8 +152,12 @@ fn <- function(x) {
 }
 
 crate(fn)
-#> Error in `crate()`:
-#> ! The function must be defined inside this call
+#> <crate> 952 B
+#> * function: 392 B
+#> function (x) 
+#> {
+#>     x
+#> }
 ```
 
 ## Crates and furrr
@@ -243,7 +247,7 @@ system.time({
   my_slow_fn()
 })
 #>    user  system elapsed 
-#>   0.557   0.163   1.643
+#>   0.441   0.588   2.384
 ```
 
 One way to avoid this is to use carrier to crate the function, isolating
@@ -270,5 +274,5 @@ system.time({
   my_crated_fn()
 })
 #>    user  system elapsed 
-#>   0.204   0.040   0.485
+#>   0.197   0.290   0.721
 ```
